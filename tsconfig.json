@@ -21,8 +21,7 @@
     "strictNullChecks": true,
   },
   "include": [
-    "src"
-, "example_unit", "globalTypes.d.ts"  ],
+    "explosive_archer", "globalTypes.d.ts"  ],
   "exclude": [
     "**/*.test.ts"
   ]

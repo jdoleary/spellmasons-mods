@@ -26,6 +26,7 @@ interface SpawnParams {
 }
 import Underworld from '../../Underworld';
 import { Localizable } from '../../localization';
+export declare function registerUnit(unit: UnitSource): void;
 export declare function registerUnits(): void;
 export declare const allUnits: {
     [id: string]: UnitSource;

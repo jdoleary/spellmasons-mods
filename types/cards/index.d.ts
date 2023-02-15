@@ -32,6 +32,7 @@ export interface Spell {
 }
 export declare function registerModifiers(id: string, modifiers: Modifiers): void;
 export declare function registerEvents(id: string, events: Events): void;
+export declare function registerSpell(spell: Spell, overworld: Overworld): void;
 export declare function registerCards(overworld: Overworld): void;
 export interface EffectState {
     cardIds: string[];

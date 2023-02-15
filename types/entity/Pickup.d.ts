@@ -41,7 +41,7 @@ export declare type IPickup = HasSpace & {
     emitter?: JEmitter;
     flaggedForRemoval: boolean;
 };
-interface IPickupSource {
+export interface IPickupSource {
     name: string;
     description: Localizable;
     imagePath?: string;

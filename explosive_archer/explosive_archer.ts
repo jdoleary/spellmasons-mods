@@ -1,7 +1,7 @@
 import type { UnitSource } from '../types/entity/units';
 import type IUnit from '../types/entity/Unit';
 import type Underworld from '../types/Underworld';
-import commonTypes from '../types/types/commonTypes';
+import commonTypes, { Mod } from '../types/types/commonTypes';
 const {
   Projectile,
   rangedAction,
@@ -75,4 +75,13 @@ const unit: UnitSource = {
     }
   }
 };
-export default unit;
+const mod: Mod = {
+  modName: 'Explosive Archer',
+  author: 'Jordan O\'Leary',
+  description: 'Adds an archer to the game that shoots explosive arrows',
+  screenshot: '',
+  units: [
+    unit
+  ]
+};
+export default mod;

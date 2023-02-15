@@ -22,7 +22,7 @@
   },
   "include": [
     "src"
-  ],
+, "example_unit", "globalTypes.d.ts"  ],
   "exclude": [
     "**/*.test.ts"
   ]

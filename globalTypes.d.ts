@@ -14,7 +14,7 @@
 // import type { TutorialChecklist } from '../graphics/Explain';
 // import type * as particles from '@pixi/particle-emitter'
 // import type { PromptArgs } from '../graphics/Jprompt';
-import type ISpellmasonsAPI from '../types/api';
+import type ISpellmasonsAPI from './types/api';
 
 declare global {
     var SpellmasonsAPI: typeof ISpellmasonsAPI;

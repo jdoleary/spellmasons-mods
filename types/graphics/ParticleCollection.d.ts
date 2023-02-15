@@ -1,0 +1,13 @@
+import * as particles from '@pixi/particle-emitter';
+import { Vec2 } from '../jmath/Vec';
+import { IUnit } from '../entity/Unit';
+import Underworld from '../Underworld';
+export declare function makeBleedParticles(position: Vec2, prediction: boolean, proportion: number, resolver?: () => void): void;
+export declare function makeRisingParticles(position: Vec2, prediction: boolean, color?: string, emitterLifetime?: number): import("../types/commonTypes").JEmitter | undefined;
+export declare function makeBurstParticles(position: Vec2, finalScale: number, prediction: boolean, resolver?: () => void): void;
+export declare function makeScrollDissapearParticles(position: Vec2, prediction: boolean): void;
+export declare function makeDarkPriestAttackParticles(position: Vec2, prediction: boolean, resolver?: () => void): void;
+export declare function makeCorruptionParticles(follow: IUnit, prediction: boolean, underworld: Underworld, resolver?: () => void): void;
+export declare const RED_PORTAL_JID = "redPortal";
+export declare function makeRedPortal(position: Vec2, prediction: boolean): import("../types/commonTypes").JEmitter | undefined;
+export declare function stopAndDestroyForeverEmitter(emitter?: particles.Emitter): void;

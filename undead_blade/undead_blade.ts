@@ -95,6 +95,7 @@ const mod: Mod = {
     spells: [
         spell
     ],
+    // The spritesheet is created with TexturePacker: https://www.codeandweb.com/texturepacker
     spritesheet: 'spellmasons-mods/undead_blade/undead_blade.json'
 };
 export default mod;

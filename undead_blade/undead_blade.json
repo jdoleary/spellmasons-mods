@@ -1,0 +1,87 @@
+{"frames": {
+
+"spellUndeadBlade_1.png":
+{
+	"frame": {"x":1,"y":80,"w":14,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":14,"h":14},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_2.png":
+{
+	"frame": {"x":1,"y":1,"w":46,"h":42},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":46,"h":42},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_3.png":
+{
+	"frame": {"x":85,"y":72,"w":34,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":34,"h":32},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_4.png":
+{
+	"frame": {"x":37,"y":73,"w":34,"h":31},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":34,"h":31},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_5.png":
+{
+	"frame": {"x":1,"y":45,"w":34,"h":33},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":34,"h":33},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_6.png":
+{
+	"frame": {"x":85,"y":37,"w":34,"h":33},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":34,"h":33},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_7.png":
+{
+	"frame": {"x":49,"y":37,"w":34,"h":34},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":34,"h":34},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_8.png":
+{
+	"frame": {"x":87,"y":1,"w":34,"h":35},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":34,"h":35},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellUndeadBlade_9.png":
+{
+	"frame": {"x":49,"y":1,"w":34,"h":36},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":18,"w":34,"h":36},
+	"sourceSize": {"w":64,"h":64}
+}},
+"animations": {
+	"spellUndeadBlade": ["spellUndeadBlade_1.png","spellUndeadBlade_2.png","spellUndeadBlade_3.png","spellUndeadBlade_4.png","spellUndeadBlade_5.png","spellUndeadBlade_6.png","spellUndeadBlade_7.png","spellUndeadBlade_8.png","spellUndeadBlade_9.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "undead_blade.png",
+	"format": "RGBA8888",
+	"size": {"w":123,"h":105},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8873fae61f23631fb2aa83ba1d2f4e59:a643e170907e861892fa01863926fb1e:df18da0ae28a83f381f5f8955fd7655b$"
+}
+}

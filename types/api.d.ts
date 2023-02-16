@@ -44,6 +44,7 @@ import * as storage from './storage';
 import * as Subsprites from './Subsprites';
 import * as Underworld from './Underworld';
 import * as VisualEffects from './VisualEffects';
+import * as cardUtils from './cards/cardUtils';
 import * as commonTypes from './types/commonTypes';
 declare const SpellmasonsAPI: {
     config: typeof config;
@@ -92,6 +93,7 @@ declare const SpellmasonsAPI: {
     Subsprites: typeof Subsprites;
     Underworld: typeof Underworld;
     VisualEffects: typeof VisualEffects;
+    cardUtils: typeof cardUtils;
     commonTypes: typeof commonTypes;
 };
 export default SpellmasonsAPI;

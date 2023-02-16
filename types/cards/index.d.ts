@@ -66,6 +66,7 @@ export interface ICard {
     healthCost: number;
     probability: number;
     thumbnail: string;
+    modName?: string;
     animationPath?: string;
     effect: EffectFn;
     description: Localizable;

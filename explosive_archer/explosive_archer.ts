@@ -23,7 +23,7 @@ const unit: UnitSource = {
   id: ARCHER_ID,
   info: {
     description: 'explosive archer description',
-    image: 'test',
+    image: 'units/archerIdle',
     subtype: UnitSubType.RANGED_LOS,
   },
   unitProps: {
@@ -38,8 +38,8 @@ const unit: UnitSource = {
     unavailableUntilLevelIndex: 0,
   },
   animations: {
-    idle: 'test',
-    hit: 'test',
+    idle: 'units/archerIdle',
+    hit: 'units/archerHit',
     attack: 'units/archerAttack',
     die: 'units/archerDeath',
     walk: 'units/archerWalk',

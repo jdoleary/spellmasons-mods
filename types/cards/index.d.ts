@@ -61,12 +61,12 @@ export declare type EffectFn = {
 };
 export interface ICard {
     id: string;
+    modName?: string;
     category: CardCategory;
     manaCost: number;
     healthCost: number;
     probability: number;
     thumbnail: string;
-    modName?: string;
     animationPath?: string;
     effect: EffectFn;
     description: Localizable;

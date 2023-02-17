@@ -1,3 +1,4 @@
+import { MultiColorReplaceFilter } from '@pixi/filter-multi-color-replace';
 import * as config from './config';
 import * as Unit from './entity/Unit';
 import * as units from './entity/units';
@@ -45,8 +46,10 @@ import * as Subsprites from './Subsprites';
 import * as Underworld from './Underworld';
 import * as VisualEffects from './VisualEffects';
 import * as cardUtils from './cards/cardUtils';
+import { forcePush } from './cards/push';
 import * as commonTypes from './types/commonTypes';
 declare const SpellmasonsAPI: {
+    MultiColorReplaceFilter: typeof MultiColorReplaceFilter;
     config: typeof config;
     Unit: typeof Unit;
     units: typeof units;
@@ -95,5 +98,6 @@ declare const SpellmasonsAPI: {
     VisualEffects: typeof VisualEffects;
     cardUtils: typeof cardUtils;
     commonTypes: typeof commonTypes;
+    forcePush: typeof forcePush;
 };
 export default SpellmasonsAPI;

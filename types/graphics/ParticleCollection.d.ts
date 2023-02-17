@@ -2,6 +2,7 @@ import * as particles from '@pixi/particle-emitter';
 import { Vec2 } from '../jmath/Vec';
 import { IUnit } from '../entity/Unit';
 import Underworld from '../Underworld';
+export declare function makeBloatExplosionWithParticles(position: Vec2, size: number, prediction: boolean): void;
 export declare function makeBleedParticles(position: Vec2, prediction: boolean, proportion: number, resolver?: () => void): void;
 export declare function makeRisingParticles(position: Vec2, prediction: boolean, color?: string, emitterLifetime?: number): import("../types/commonTypes").JEmitter | undefined;
 export declare function makeBurstParticles(position: Vec2, finalScale: number, prediction: boolean, resolver?: () => void): void;

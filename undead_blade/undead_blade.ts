@@ -91,7 +91,7 @@ const mod: Mod = {
     modName: 'Undead Blade',
     author: 'Jordan O\'Leary',
     description: 'Adds a new spell',
-    screenshot: '',
+    screenshot: 'spellmasons-mods/undead_blade/spellIconUndeadBlade.png',
     spells: [
         spell
     ],

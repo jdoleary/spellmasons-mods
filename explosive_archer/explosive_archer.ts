@@ -2,15 +2,18 @@ import type { UnitSource } from '../types/entity/units';
 import type IUnit from '../types/entity/Unit';
 import type Underworld from '../types/Underworld';
 import { Mod } from '../types/types/commonTypes';
-import { MultiColorReplaceFilter } from '@pixi/filter-multi-color-replace';
-import { IPickup, IPickupSource } from '../types/entity/Pickup';
+import { IPickupSource } from '../types/entity/Pickup';
 const {
   Projectile,
   rangedAction,
   commonTypes,
   JAudio,
   config,
-  PixiUtils
+  PixiUtils,
+  ParticleCollection,
+  forcePush,
+  JPromise,
+  MultiColorReplaceFilter,
 } = globalThis.SpellmasonsAPI;
 const { createVisualLobbingProjectile } = Projectile;
 const { getBestRangedLOSTarget, rangedLOSMovement } = rangedAction;
@@ -19,6 +22,8 @@ const { addPixiSpriteAnimated, containerUnits } = PixiUtils;
 const Unit = globalThis.SpellmasonsAPI.Unit;
 
 export const ARCHER_ID = 'Explosive Archer';
+const explosionDamage = 40;
+const explosion_radius = 140;
 const unit: UnitSource = {
   id: ARCHER_ID,
   info: {
@@ -34,7 +39,7 @@ const unit: UnitSource = {
   },
   spawnParams: {
     probability: 5000,
-    budgetCost: 2,
+    budgetCost: 1,
     unavailableUntilLevelIndex: 0,
   },
   animations: {
@@ -68,6 +73,8 @@ const unit: UnitSource = {
     // Archer just checks attackTarget, not canAttackTarget to know if it can attack because getBestRangedLOSTarget() will return undefined
     // if it can't attack any targets
     const attackTarget = attackTargets && attackTargets[0];
+    // Get all targets but the first which will be hit by the explosion.  This is determined from within getUnitAttackTargets
+    const explosionTargets = attackTargets ? attackTargets.slice(1) : [];
     // Attack
     if (attackTarget) {
       // Archers attack or move, not both; so clear their existing path
@@ -81,7 +88,15 @@ const unit: UnitSource = {
         ).then(() => {
           JAudio.playSFXKey('explosiveArcherAttack');
           Unit.takeDamage(attackTarget, unit.damage, unit, underworld, false, undefined, { thinBloodLine: true });
-          // TODO make explosion
+          console.log('jtest explosion targets', explosionTargets)
+          ParticleCollection.makeBloatExplosionWithParticles(attackTarget, 1, false);
+          // Await the resolution of the forcePushes before moving on
+          return JPromise.raceTimeout(3000, 'explosive archer push', Promise.all(explosionTargets.map(u => {
+            // Deal damage to units
+            Unit.takeDamage(u, explosionDamage, u, underworld, false);
+            // Push units away from exploding unit
+            return forcePush(u, attackTarget, 10, underworld, false);
+          })));
         });
 
       });
@@ -92,9 +107,15 @@ const unit: UnitSource = {
   },
   getUnitAttackTargets: (unit: IUnit.IUnit, underworld: Underworld) => {
     const targets = getBestRangedLOSTarget(unit, underworld);
-    if (targets) {
+    const target = targets[0];
+    if (target) {
       // Normal archers can only attack one target;
-      return targets.slice(0, 1);
+      const explosionTargets = underworld.getUnitsWithinDistanceOfTarget(
+        target,
+        explosion_radius,
+        false
+      );
+      return [target, ...explosionTargets];
     } else {
       return [];
     }
@@ -158,7 +179,7 @@ const mod: Mod = {
   modName: 'Explosive Archer',
   author: 'Jordan O\'Leary',
   description: 'Adds an archer to the game that shoots explosive arrows',
-  screenshot: '',
+  screenshot: 'spellmasons-mods/explosive_archer/explosiveArcher.png',
   units: [
     unit
   ],

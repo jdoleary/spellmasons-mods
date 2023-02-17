@@ -4,6 +4,7 @@ import Underworld from './Underworld';
 import { CardCategory } from './types/commonTypes';
 export interface IUpgrade {
     title: string;
+    modName?: string;
     type: 'card' | 'special';
     cardCategory?: CardCategory;
     description: (player: IPlayer) => string;

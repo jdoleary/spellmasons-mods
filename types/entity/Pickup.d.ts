@@ -43,6 +43,7 @@ export declare type IPickup = HasSpace & {
 };
 export interface IPickupSource {
     name: string;
+    modName?: string;
     description: Localizable;
     imagePath?: string;
     animationSpeed?: number;

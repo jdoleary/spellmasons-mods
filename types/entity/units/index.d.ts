@@ -10,6 +10,7 @@ export declare type UnitAction = {
 };
 export interface UnitSource {
     id: string;
+    modName?: string;
     info: ConstructorInfo;
     init?: (unit: Unit.IUnit, underworld: Underworld) => void;
     action: UnitAction;

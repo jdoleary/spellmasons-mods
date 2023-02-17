@@ -78,6 +78,7 @@ export default class Underworld {
         emitter?: Emitter;
         target: Unit.IUnit;
     }[];
+    activeMods: string[];
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
     reportEnemyKilled(enemyKilledPos: Vec2): void;

@@ -7,4 +7,5 @@ const mods: commonTypes.Mod[] = [
     ExplosiveArcher,
     UndeadBlade
 ];
+console.log('Mods: Add mods', mods);
 globalThis.mods = mods;

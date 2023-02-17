@@ -27,7 +27,7 @@ const explosion_radius = 140;
 const unit: UnitSource = {
   id: ARCHER_ID,
   info: {
-    description: 'explosive archer description',
+    description: 'Shoot explosive arrows',
     image: 'units/archerIdle',
     subtype: UnitSubType.RANGED_LOS,
   },
@@ -175,9 +175,9 @@ const huge_trap: IPickupSource = {
   }
 };
 const mod: Mod = {
-  modName: 'Explosive Archer',
+  modName: 'Explosive Archer & Big Trap',
   author: 'Jordan O\'Leary',
-  description: 'Adds an archer to the game that shoots explosive arrows',
+  description: "Adds an archer that shoots explosive arrows and a larg trap that does more damage.",
   screenshot: 'spellmasons-mods/explosive_archer/explosiveArcher.png',
   units: [
     unit

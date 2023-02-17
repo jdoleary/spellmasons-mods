@@ -7,12 +7,12 @@ const {
   Projectile,
   rangedAction,
   commonTypes,
-  JAudio,
   config,
-  PixiUtils,
-  ParticleCollection,
   forcePush,
   JPromise,
+  JAudio,
+  PixiUtils,
+  ParticleCollection,
   MultiColorReplaceFilter,
 } = globalThis.SpellmasonsAPI;
 const { createVisualLobbingProjectile } = Projectile;
@@ -88,7 +88,6 @@ const unit: UnitSource = {
         ).then(() => {
           JAudio.playSFXKey('explosiveArcherAttack');
           Unit.takeDamage(attackTarget, unit.damage, unit, underworld, false, undefined, { thinBloodLine: true });
-          console.log('jtest explosion targets', explosionTargets)
           ParticleCollection.makeBloatExplosionWithParticles(attackTarget, 1, false);
           // Await the resolution of the forcePushes before moving on
           return JPromise.raceTimeout(3000, 'explosive archer push', Promise.all(explosionTargets.map(u => {

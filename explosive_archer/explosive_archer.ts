@@ -36,11 +36,12 @@ const unit: UnitSource = {
     manaMax: 0,
     damage: 10,
     healthMax: 40,
+    bloodColor: 0x432164
   },
   spawnParams: {
-    probability: 5000,
+    probability: 50,
     budgetCost: 1,
-    unavailableUntilLevelIndex: 0,
+    unavailableUntilLevelIndex: 7,
   },
   animations: {
     idle: 'units/archerIdle',
@@ -108,7 +109,6 @@ const unit: UnitSource = {
     const targets = getBestRangedLOSTarget(unit, underworld);
     const target = targets[0];
     if (target) {
-      // Normal archers can only attack one target;
       const explosionTargets = underworld.getUnitsWithinDistanceOfTarget(
         target,
         explosion_radius,
@@ -121,16 +121,16 @@ const unit: UnitSource = {
   }
 };
 
-const spike_damage = 30;
+const spike_damage = 80;
 
-const example_pickup: IPickupSource = {
+const huge_trap: IPickupSource = {
   imagePath: 'pickups/trap',
   animationSpeed: -config.DEFAULT_ANIMATION_SPEED,
   playerOnly: false,
   singleUse: true,
-  name: 'example_mod_pickup',
-  probability: 7000,
-  scale: 1,
+  name: 'Huge Trap',
+  probability: 70,
+  scale: 1.5,
   description: ['Deals 🍞 to any unit that touches it', spike_damage.toString()],
   willTrigger: ({ unit, player, pickup, underworld }) => {
     return !!unit;
@@ -183,7 +183,7 @@ const mod: Mod = {
     unit
   ],
   pickups: [
-    example_pickup
+    huge_trap
   ],
   sfx: {
     'explosiveArcherAttack': ['./spellmasons-mods/explosive_archer/RPG3_FireMagic_Impact01.mp3']

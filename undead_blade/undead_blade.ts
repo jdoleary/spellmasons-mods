@@ -6,15 +6,17 @@ const {
     rand,
     cardUtils,
     commonTypes,
+    cards
 } = globalThis.SpellmasonsAPI;
 const { randFloat } = rand;
+const { refundLastSpell } = cards;
 const { containerSpells } = PixiUtils;
 const Unit = globalThis.SpellmasonsAPI.Unit;
 const { oneOffImage, playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const cardId = 'Undead Blade';
-const damageDone = 40;
+const damageDone = 60;
 export interface UnitDamage {
     id: number;
     x: number;
@@ -37,11 +39,11 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/undead_blade/spellIconUndeadBlade.png',
         animationPath,
         sfx: 'hurt',
-        description: ['spell_slash', damageDone.toString()],
+        description: [`Deals ${damageDone} to summoned units and resurrected units only.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             let animationDelaySum = 0;
             // .filter: only target living units
-            const targets = state.targetedUnits.filter(u => u.alive)
+            const targets = state.targetedUnits.filter(u => u.alive && !u.originalLife);
             animationDelaySum = 0;
             let delayBetweenAnimations = delayBetweenAnimationsStart;
             // Note: quantity loop should always be INSIDE of the targetedUnits loop
@@ -76,6 +78,9 @@ const spell: Spell = {
                         Unit.takeDamage(unit, damageDone, state.casterUnit, underworld, prediction, state);
                     }
                 }
+            }
+            if (targets.length == 0) {
+                refundLastSpell(state, prediction, 'no target, mana refunded')
             }
             if (!prediction && !globalThis.headless) {
                 await new Promise((resolve) => {

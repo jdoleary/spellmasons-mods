@@ -21,5 +21,6 @@ export declare enum MESSAGE_TYPES {
     SET_PHASE = 19,
     SYNC_PLAYERS = 20,
     PLAYER_THINKING = 21,
-    JOIN_GAME_AS_PLAYER = 22
+    JOIN_GAME_AS_PLAYER = 22,
+    SET_MODS = 23
 }

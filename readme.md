@@ -13,3 +13,9 @@ If you want to create a mod that isn't currently supported, please let me know i
 
 I will be adding new videos to this series over time:
 [Spellmasons Mods Youtube Series](https://youtube.com/playlist?list=PLrNoNMIiNc_E7L-n4GGboHXQJq-cP2Cs1)
+
+## Contributing
+
+If you want your mod to be included in Community Servers, just open a PR with your commits.
+
+Commit messages should be in the format: "Mod Name: Description"

@@ -95,7 +95,7 @@ const spell: Spell = {
 const mod: Mod = {
     modName: 'Undead Blade',
     author: 'Jordan O\'Leary',
-    description: 'Adds a new spell',
+    description: 'A spell that does lots of damage to summons and resurrected units',
     screenshot: 'spellmasons-mods/undead_blade/spellIconUndeadBlade.png',
     spells: [
         spell

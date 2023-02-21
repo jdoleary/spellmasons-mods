@@ -19,7 +19,6 @@ const {
 const { createVisualLobbingProjectile } = Projectile;
 const { getBestRangedLOSTarget, rangedLOSMovement } = rangedAction;
 const { UnitSubType } = commonTypes;
-const { addPixiSpriteAnimated, containerUnits } = PixiUtils;
 const Unit = globalThis.SpellmasonsAPI.Unit;
 
 export const ARCHER_ID = 'Explosive Archer';
@@ -122,69 +121,16 @@ const unit: UnitSource = {
   }
 };
 
-const spike_damage = 80;
 
-const huge_trap: IPickupSource = {
-  imagePath: 'pickups/trap',
-  animationSpeed: -config.DEFAULT_ANIMATION_SPEED,
-  playerOnly: false,
-  singleUse: true,
-  name: 'Huge Trap',
-  probability: 70,
-  scale: 1.5,
-  description: ['Deals 🍞 to any unit that touches it', spike_damage.toString()],
-  willTrigger: ({ unit, player, pickup, underworld }) => {
-    return !!unit;
-  },
-  effect: ({ unit, player, pickup, prediction, underworld }) => {
-    if (unit) {
-      // Play trap spring animation
-      if (!prediction) {
-        const animationSprite = addPixiSpriteAnimated('pickups/trapAttack', containerUnits, {
-          loop: false,
-          animationSpeed: 0.2,
-          onComplete: () => {
-            if (animationSprite?.parent) {
-              animationSprite.parent.removeChild(animationSprite);
-            }
-          }
-        });
-        if (animationSprite) {
-
-          animationSprite.anchor.set(0.5);
-          animationSprite.x = pickup.x;
-          animationSprite.y = pickup.y;
-        }
-        const animationSprite2 = addPixiSpriteAnimated('pickups/trapAttackMagic', containerUnits, {
-          loop: false,
-          animationSpeed: 0.2,
-          onComplete: () => {
-            if (animationSprite2?.parent) {
-              animationSprite2.parent.removeChild(animationSprite2);
-            }
-          }
-        });
-        if (animationSprite2) {
-          animationSprite2.anchor.set(0.5);
-          animationSprite2.x = pickup.x;
-          animationSprite2.y = pickup.y;
-        }
-
-      }
-      Unit.takeDamage(unit, spike_damage, unit, underworld, prediction)
-    }
-  }
-};
 const mod: Mod = {
-  modName: 'Explosive Archer & Big Trap',
+  modName: 'Explosive Archer',
   author: 'Jordan O\'Leary',
-  description: "Adds an archer that shoots explosive arrows and a larg trap that does more damage.",
+  description: "Adds an archer that shoots explosive arrows.",
   screenshot: 'spellmasons-mods/explosive_archer/explosiveArcher.png',
   units: [
     unit
   ],
   pickups: [
-    huge_trap
   ],
   sfx: {
     'explosiveArcherAttack': ['./spellmasons-mods/explosive_archer/RPG3_FireMagic_Impact01.mp3']

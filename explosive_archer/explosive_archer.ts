@@ -177,7 +177,7 @@ const huge_trap: IPickupSource = {
 const mod: Mod = {
   modName: 'Explosive Archer & Big Trap',
   author: 'Jordan O\'Leary',
-  description: "Adds an archer that shoots explosive arrows and a larg trap that does more damage.",
+  description: "Adds an archer that shoots explosive arrows and a large trap that does more damage.",
   screenshot: 'spellmasons-mods/explosive_archer/explosiveArcher.png',
   units: [
     unit

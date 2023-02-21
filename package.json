@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jdoleary/spellmasons-mods#readme",
   "devDependencies": {
+    "typescript": "^4.9.5",
     "vite": "^4.1.3"
   }
 }

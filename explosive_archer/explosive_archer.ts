@@ -1,3 +1,4 @@
+/// <reference path="../globalTypes.d.ts" />
 import type { UnitSource } from '../types/entity/units';
 import type IUnit from '../types/entity/Unit';
 import type Underworld from '../types/Underworld';

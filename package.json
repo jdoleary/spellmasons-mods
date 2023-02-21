@@ -1,0 +1,23 @@
+{
+  "name": "spellmasons-mods",
+  "version": "1.0.0",
+  "description": "- Custom Units\r - Custom Spells\r - Custom Pickups\r - Custom Art\r - Custom Sound effects",
+  "main": "vite.config.js",
+  "scripts": {
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdoleary/spellmasons-mods.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdoleary/spellmasons-mods/issues"
+  },
+  "homepage": "https://github.com/jdoleary/spellmasons-mods#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "vite": "^4.1.3"
+  }
+}

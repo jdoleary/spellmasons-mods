@@ -1,3 +1,4 @@
+/// <reference path="../globalTypes.d.ts" />
 import type { Spell } from '../types/cards/index';
 import { Mod } from '../types/types/commonTypes';
 

@@ -1,4 +1,4 @@
-
+/// <reference path="../globalTypes.d.ts" />
 import { IPickupSource } from '../types/entity/Pickup';
 import { Mod } from '../types/types/commonTypes';
 
@@ -25,7 +25,7 @@ const huge_trap: IPickupSource = {
     effect: ({ unit, player, pickup, prediction, underworld }) => {
         if (unit) {
             // Play trap spring animation
-            if (!prediction) {
+            if (!prediction && !globalThis.headless) {
                 const animationSprite = addPixiSpriteAnimated('pickups/trapAttack', containerUnits, {
                     loop: false,
                     animationSpeed: 0.2,
@@ -67,10 +67,8 @@ const mod: Mod = {
     author: 'Jordan O\'Leary',
     description: "A large trap that does more damage than the normal sized trap.",
     screenshot: 'spellmasons-mods/big_trap/bigTrapScreenshot.png',
-    units: [],
     pickups: [
         huge_trap
     ],
-    sfx: {},
 };
 export default mod;

@@ -3,7 +3,6 @@ import type { UnitSource } from '../types/entity/units';
 import type IUnit from '../types/entity/Unit';
 import type Underworld from '../types/Underworld';
 import { Mod } from '../types/types/commonTypes';
-import { IPickupSource } from '../types/entity/Pickup';
 const {
   Projectile,
   rangedAction,
@@ -129,8 +128,6 @@ const mod: Mod = {
   screenshot: 'spellmasons-mods/explosive_archer/explosiveArcher.png',
   units: [
     unit
-  ],
-  pickups: [
   ],
   sfx: {
     'explosiveArcherAttack': ['./spellmasons-mods/explosive_archer/RPG3_FireMagic_Impact01.mp3']

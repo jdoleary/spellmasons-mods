@@ -18,14 +18,6 @@ const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const cardId = 'Undead Blade';
 const damageDone = 60;
-export interface UnitDamage {
-    id: number;
-    x: number;
-    y: number;
-    health: number;
-    damageTaken: number;
-
-}
 const animationPath = 'spellUndeadBlade';
 const delayBetweenAnimationsStart = 400;
 const spell: Spell = {

@@ -73,6 +73,7 @@ export interface ICard {
     requiresFollowingCard?: boolean;
     expenseScaling: number;
     allowNonUnitTarget?: boolean;
+    noInitialTarget?: boolean;
     supportQuantity?: boolean;
     onlySelectDeadUnits?: boolean;
     sfx?: string;

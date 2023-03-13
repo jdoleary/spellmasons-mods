@@ -20,7 +20,7 @@ export declare const containerUIFixed: PIXI.Container | undefined;
 export declare const containerFloatingText: PIXI.Container | undefined;
 export declare const graphicsBloodSmear: PIXI.Graphics | undefined;
 export declare const containerBloodParticles: PIXI.ParticleContainer | undefined;
-export declare function cleanBlood(): void;
+export declare function cleanBlood(underworld?: Underworld): void;
 export declare function cacheBlood(): void;
 export declare function setupLiquidFilter(): void;
 export declare function cleanUpLiquidFilter(): void;

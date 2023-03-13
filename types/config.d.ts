@@ -42,3 +42,4 @@ export declare const PIXI_TEXT_DROP_SHADOW: {
 };
 export declare const NUMBER_OF_PLAYERS_BEFORE_BUDGET_INCREASES = 3;
 export declare const LAST_LEVEL_INDEX = 11;
+export declare const NUMBER_OF_UNITS_TO_MERGE = 5;

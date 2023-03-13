@@ -10,12 +10,17 @@ import { JEmitter } from '../types/commonTypes';
 export declare const PICKUP_RADIUS = 36;
 export declare const PICKUP_IMAGE_PATH = "pickups/scroll";
 export declare const RED_PORTAL = "Red Portal";
+export declare const CURSED_MANA_POTION = "Cursed Mana Potion";
 declare type IPickupEffect = ({ unit, player, pickup, prediction }: {
     unit?: IUnit;
     player?: Player.IPlayer;
     pickup: IPickup;
     underworld: Underworld;
     prediction: boolean;
+}) => void;
+declare type IPickupInit = ({ pickup, underworld }: {
+    pickup: IPickup;
+    underworld: Underworld;
 }) => void;
 declare type IPickupWillTrigger = ({ unit, player, pickup }: {
     unit?: IUnit;
@@ -32,7 +37,6 @@ export declare type IPickup = HasSpace & {
     imagePath?: string;
     image?: Image.IImageAnimated;
     real?: IPickup;
-    singleUse: boolean;
     playerOnly: boolean;
     turnsLeftToGrab?: number;
     text?: PIXI.Text;
@@ -47,11 +51,11 @@ export interface IPickupSource {
     description: Localizable;
     imagePath?: string;
     animationSpeed?: number;
-    singleUse: boolean;
     playerOnly?: boolean;
     turnsLeftToGrab?: number;
     scale: number;
     probability: number;
+    init?: IPickupInit;
     effect: IPickupEffect;
     willTrigger: IPickupWillTrigger;
 }

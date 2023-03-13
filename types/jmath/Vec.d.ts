@@ -8,6 +8,7 @@ export declare function getAngleBetweenVec2sYInverted(origin: Vec2, point: Vec2)
 export declare function multiply(scalar: number, p2: Vec2): Vec2;
 export declare function add(p1: Vec2, p2: Vec2): Vec2;
 export declare function subtract(p1: Vec2, p2: Vec2): Vec2;
+export declare function lerpVec2(p1: Vec2, p2: Vec2, t: number): Vec2;
 export declare function jitter(pos: Vec2, maxJitter: number, random?: prng): Vec2;
 export declare function random(min: number, max: number, random?: prng): Vec2;
 export declare function crossproduct(p1: Vec2, p2: Vec2): number;

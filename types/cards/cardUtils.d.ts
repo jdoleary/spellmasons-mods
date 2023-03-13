@@ -3,10 +3,12 @@ import type { CardUsage } from "../entity/Player";
 import { Vec2 } from "../jmath/Vec";
 import * as Image from '../graphics/Image';
 import { Container } from "pixi.js";
+import Underworld from "../Underworld";
 export interface CardCost {
     manaCost: number;
     healthCost: number;
 }
+export declare function levelsUntilCardIsEnabled(cardId: string, underworld?: Underworld): number;
 export declare function playSpellSFX(sfxKey: string, prediction: boolean): void;
 export declare function playDefaultSpellSFX(card: ICard, prediction: boolean): void;
 export declare function playDefaultSpellAnimation(card: ICard, targets: Vec2[], prediction: boolean): Promise<void | void[]>;

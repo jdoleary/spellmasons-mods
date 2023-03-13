@@ -64,6 +64,8 @@ export default class Underworld {
     playerThoughts: {
         [clientId: string]: {
             target: Vec2;
+            currentDrawLocation?: Vec2;
+            lerp: number;
             cardIds: string[];
             ellipsis: boolean;
         };
@@ -79,6 +81,7 @@ export default class Underworld {
         target: Unit.IUnit;
     }[];
     activeMods: string[];
+    generatingLevel: boolean;
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
     reportEnemyKilled(enemyKilledPos: Vec2): void;
@@ -118,7 +121,7 @@ export default class Underworld {
     createLevelSyncronous(levelData: LevelData): void;
     createLevel(levelData: LevelData): Promise<void>;
     generateLevelDataSyncronous(levelIndex: number): LevelData;
-    generateLevelData(levelIndex: number): Promise<LevelData>;
+    generateLevelData(levelIndex: number): Promise<void>;
     checkPickupCollisions(unit: Unit.IUnit, prediction: boolean): void;
     isCoordOnWallTile(coord: Vec2): boolean;
     getMousePos(): Vec2;
@@ -132,6 +135,8 @@ export default class Underworld {
     endMyTurn(): Promise<void>;
     endPlayerTurn(clientId: string): Promise<void>;
     chooseUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade): void;
+    perksLeftToChoose(player: Player.IPlayer): number;
+    upgradesLeftToChoose(player: Player.IPlayer): number;
     showUpgrades(): void;
     addRerollButton(player: Player.IPlayer): void;
     checkForEndOfLevel(): boolean;
@@ -165,6 +170,8 @@ export default class Underworld {
     syncPlayers(players: Player.IPlayerSerialized[]): void;
     pickupIsIdentical(pickup: Pickup.IPickup, serialized: Pickup.IPickupSerialized): boolean;
     syncPickups(pickups: Pickup.IPickupSerialized[]): void;
+    mergeExcessUnits(): Promise<void>;
+    merge(unit: Unit.IUnit, mergeUnits: Unit.IUnit[]): Promise<boolean>;
     serializeForHash(): any;
     serializeForSaving(): IUnderworldSerialized;
     serializeForSyncronize(): IUnderworldSerializedForSyncronize;

@@ -9,6 +9,7 @@ export declare function makeBurstParticles(position: Vec2, finalScale: number, p
 export declare function makeScrollDissapearParticles(position: Vec2, prediction: boolean): void;
 export declare function makeDarkPriestAttackParticles(position: Vec2, prediction: boolean, resolver?: () => void): void;
 export declare function makeCorruptionParticles(follow: IUnit, prediction: boolean, underworld: Underworld, resolver?: () => void): void;
+export declare function makeCursedEmitter(position: Vec2, prediction: boolean): import("../types/commonTypes").JEmitter | undefined;
 export declare const RED_PORTAL_JID = "redPortal";
 export declare function makeRedPortal(position: Vec2, prediction: boolean): import("../types/commonTypes").JEmitter | undefined;
 export declare function stopAndDestroyForeverEmitter(emitter?: particles.Emitter): void;

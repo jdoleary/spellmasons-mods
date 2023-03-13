@@ -28,6 +28,7 @@ export interface IPlayer {
     clientId: string;
     clientConnected: boolean;
     unit: Unit.IUnit;
+    awaitingSpawn: boolean;
     isSpawned: boolean;
     cards: string[];
     inventory: string[];
@@ -35,11 +36,14 @@ export interface IPlayer {
     upgradesLeftToChoose: number;
     perksLeftToChoose: number;
     cardUsageCounts: CardUsage;
-    diedDuringLevel: boolean;
     lobbyReady: boolean;
     reroll: number;
     attributePerks: AttributePerk[];
+    spellState: {
+        [spellId: string]: any;
+    };
     stats: Stats;
+    cursesChosen: number;
 }
 export declare function inPortal(player: IPlayer): boolean;
 export declare function create(clientId: string, underworld: Underworld): IPlayer;

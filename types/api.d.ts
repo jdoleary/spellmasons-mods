@@ -47,6 +47,7 @@ import * as Subsprites from './Subsprites';
 import * as Underworld from './Underworld';
 import * as cardUtils from './cards/cardUtils';
 import * as cards from './cards/index';
+import * as cardsUtil from './cards/util';
 import { forcePush } from './cards/push';
 import * as commonTypes from './types/commonTypes';
 declare const SpellmasonsAPI: {
@@ -82,6 +83,7 @@ declare const SpellmasonsAPI: {
     Underworld: typeof Underworld;
     cardUtils: typeof cardUtils;
     cards: typeof cards;
+    cardsUtil: typeof cardsUtil;
     commonTypes: typeof commonTypes;
     forcePush: typeof forcePush;
     MultiColorReplaceFilter: typeof MultiColorReplaceFilter;

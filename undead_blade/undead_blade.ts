@@ -37,7 +37,9 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 1,
         probability: probabilityMap[CardRarity.COMMON],
-        thumbnail: 'spellmasons-mods/undead_blade/spellIconUndeadBlade.png',
+        // Note: if a thumbnail is not inside the directory images/spells/ (and for mods it never will be), it
+        // should start with a leading slash (/)
+        thumbnail: '/spellmasons-mods/undead_blade/spellIconUndeadBlade.png',
         animationPath,
         sfx: 'hurt',
         description: [`Deals ${damageDone} to summoned units and resurrected units only.`],

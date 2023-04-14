@@ -72,6 +72,7 @@ export interface ICard {
     description: Localizable;
     requiresFollowingCard?: boolean;
     expenseScaling: number;
+    cooldown?: number;
     allowNonUnitTarget?: boolean;
     noInitialTarget?: boolean;
     supportQuantity?: boolean;

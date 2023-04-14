@@ -20,5 +20,6 @@ export declare function cardRarityAsString(content: {
 export declare function getCardRarityColor(content: {
     probability: number;
 }): string;
+export declare function getSpellThumbnailPath(path?: string): string;
 export declare function updateCardBadges(underworld: Underworld): void;
 export declare function cardListToImages(cardIds: string[]): string;

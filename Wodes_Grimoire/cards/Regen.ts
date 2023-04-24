@@ -9,12 +9,10 @@ const {
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { oneOffImage, playDefaultSpellSFX } = cardUtils;
+const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const cardId = 'Regenerate';
-//const animationPath = 'owoWIP'; //TODO
-//const imageName = 'spellmasons-mods/Wodes_grimoire/spelliconRegen.png'; //TODO
 const spell: Spell = {
     card: {
         id: cardId,
@@ -24,33 +22,22 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 2,
         probability: probabilityMap[CardRarity.SPECIAL], 
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconRegen.png', //TODO
-        //animationPath,
+        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconRegen.png',
         sfx: 'heal', //TODO
         description: [`Heals the target for 10 health at the end of their turn for 5 turns. Stacks increase the amount and refresh the duration.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive
             const targets = state.targetedUnits.filter(u => u.alive);
-            //Play for client
-            if (targets.length) {
-                if (!prediction && !globalThis.headless) {
-                    setTimeout(() => {
-                        playDefaultSpellSFX(card, prediction);
-                        for (let unit of targets) {
-                            //TODO: check if oneOffImage is even right, took from undead blade. but addOneOffAnimation might fit better
-                            //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells);
-                            Unit.addModifier(unit, card.id, underworld, prediction, 5, {amount: quantity});
-                        }
-                    }, 100) //TODO when animation is determined
-                } else {
-                    for (let unit of targets) {
-                        Unit.addModifier(unit, card.id, underworld, prediction, 5, {amount: quantity}); //Duration is 5 rounds regardless of quantity
-                    }
-                }
-            }
-            //Refund if targets no one that can attack
+            //Refund if there are no targets
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No target, mana refunded')
+            } else {
+                if (!prediction){
+                    playDefaultSpellSFX(card, prediction);
+                }
+                for (let unit of targets) {
+                    Unit.addModifier(unit, card.id, underworld, prediction, 5, {amount: quantity});
+                }
             }
             if (!prediction && !globalThis.headless) {
                 await new Promise((resolve) => {
@@ -62,58 +49,39 @@ const spell: Spell = {
     },
     modifiers: {
         add,
-        remove,
-        /*subsprite: {
-            imageName,
-            alpha: 1.0,
-            anchor: {
-                x: 0.5,
-                y: 0.5,
-            },
-            scale: {
-                x: 0.25, //TODO: change back to 1 after WIP is changed. WIP is huge, i think
-                y: 0.25,
-            },
-        },*/
-
     },
     events: {
         onTurnEnd: async (unit, underworld) => {
             // Heal unit and decremit modifier
             const modifier = unit.modifiers[cardId];
                 if (modifier) {
-                    Unit.takeDamage(unit, modifier.toHeal, undefined, underworld, false);
+                    Unit.takeDamage(unit, healingAmount(modifier.regenCounter), undefined, underworld, false);
                     modifier.quantity--;
                     updateTooltip(unit);
-                    if (modifier.quantity <= 0){
-                        Unit.removeModifier(unit, cardId, underworld);
-                    }
-                }         
+                if (modifier.quantity <= 0){
+                    Unit.removeModifier(unit, cardId, underworld);
+                }
+            }         
         },
     }
 };
-let castingRegencounter = 0;
 function add(unit, underworld, prediction, quantity, extra) {
     const modifier = cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: false, quantity, persistBetweenLevels: false,
-        toHeal: healingAmount(extra.amount), 
     }, () => {
-        //Adds event
+        //Register onTurnEndEvents
         if (!unit.onTurnEndEvents.includes(cardId)) {
             unit.onTurnEndEvents.push(cardId);
         }
-        castingRegencounter = extra.amount;
-        //Adds subsprite, also TODO
-        //JImage.addSubSprite(unit.image, imageName);        
     }); 
     if (modifier.quantity > 5){
         modifier.quantity = 5; //All casts give 5 turns, the max duration. When over 5, a new cast was done so update stacks
-        if (extra.amount > 0 && !prediction){
-            castingRegencounter += extra.amount;  
-            modifier.toHeal = healingAmount(castingRegencounter); //check how many stacks there are, then give new healing value
-        }
     }
+    //if (extra.amount > 0 && !prediction){
+    //    modifier.regenCounter = (modifier.regenCounter || 0) + extra.amount;
+    //}
     if(!prediction){
+        modifier.regenCounter = (modifier.regenCounter || 0) + extra.amount;
         updateTooltip(unit);
     }
 }
@@ -124,12 +92,10 @@ function healingAmount(castquantity: number){
     }
     return healing;
 }
-function remove(){
-    castingRegencounter = 0;
-}
 function updateTooltip(unit){
-    if (unit.modifiers[cardId]){
-        unit.modifiers[cardId].tooltip = `Healing ${-unit.modifiers[cardId].toHeal} over ${unit.modifiers[cardId].quantity} turns`
+    const modifier = unit.modifiers && unit.modifiers[cardId];
+    if (modifier){
+        modifier.tooltip = `Healing ${-healingAmount(modifier.regenCounter)} over ${modifier.quantity} turns`
     }
 }
 export default spell;

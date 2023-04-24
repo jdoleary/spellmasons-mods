@@ -12,12 +12,10 @@ const {
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const {  playDefaultSpellSFX } = cardUtils;
+const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const cardId = 'Decay';
-//const animationPath = 'owoWIP'; //TODO
-//const imageName = 'spellmasons-mods/Wodes_grimoire/IconWIP.png'; //TODO
 const spell: Spell = {
     card: {
         id: cardId,
@@ -28,32 +26,21 @@ const spell: Spell = {
         expenseScaling: 2,
         probability: probabilityMap[CardRarity.RARE], 
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconDecay.png',
-        //animationPath,
         sfx: 'poison',
         description: [`Causes the target to take damage equal to the number of decay stacks squared at the start of their turn. The target then gains another stack.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive
             const targets = state.targetedUnits.filter(u => u.alive);
-            //Play for client
-            if (targets.length) {
-                if (!prediction && !globalThis.headless) {
-                    setTimeout(() => {
-                        playDefaultSpellSFX(card, prediction);
-                        for (let unit of targets) {
-                            //TODO: check if oneOffImage is even right, took from undead blade. but addOneOffAnimation might fit better
-                            //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells);
-                            Unit.addModifier(unit, card.id, underworld, prediction, quantity);
-                        }
-                    }, 100)
-                } else {
-                    for (let unit of targets) {
-                        Unit.addModifier(unit, card.id, underworld, prediction, quantity);
-                    }
-                }
-            }
             //Refund if targets no one that can attack
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No target, mana refunded')
+            } else {
+                if (!prediction){
+                    playDefaultSpellSFX(card, prediction);
+                }
+                for (let unit of targets) {
+                    Unit.addModifier(unit, card.id, underworld, prediction, quantity);
+                }
             }
             if (!prediction && !globalThis.headless) {
                 await new Promise((resolve) => {
@@ -65,19 +52,6 @@ const spell: Spell = {
     },
     modifiers: {
         add,
-        /*subsprite: {
-            imageName,
-            alpha: 1.0,
-            anchor: {
-                x: 0.5,
-                y: 0.5,
-            },
-            scale: {
-                x: 1,
-                y: 1,
-            },
-        },*/
-
     },
     events: {
         onTurnStart: async (unit, prediction, underworld) => {

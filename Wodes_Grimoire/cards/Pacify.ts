@@ -9,12 +9,10 @@ const {
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { oneOffImage, playDefaultSpellSFX } = cardUtils;
+const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const cardId = 'Pacify';
-//const animationPath = 'owoWIP'; //TODO
-//const imageName = 'spellmasons-mods/Wodes_grimoire/IconWIP.png'; //TODO
 const spell: Spell = {
     card: {
         id: cardId,
@@ -25,31 +23,21 @@ const spell: Spell = {
         expenseScaling: 2,
         probability: probabilityMap[CardRarity.SPECIAL], 
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconPacify.png', 
-        //animationPath,
         sfx: '', //TODO
         description: [`Prevents the target from attacking. Furthur casts increase duration.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive and can attack. u.unitSubType[3] presumed SUPPORT_CLASS, cant effect summoners, prists dont attack
             const targets = state.targetedUnits.filter(u => u.alive && !(u.unitSubType == 3));
-            //Play for client
-            if (targets.length) {
-                if (!prediction && !globalThis.headless) {
-                    setTimeout(() => {
-                        playDefaultSpellSFX(card, prediction);
-                        for (let unit of targets) {
-                            //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells);
-                            Unit.addModifier(unit, card.id, underworld, prediction, quantity);
-                        }
-                    }, 100)
-                } else {
-                    for (let unit of targets) {
-                        Unit.addModifier(unit, card.id, underworld, prediction, quantity);
-                    }
-                }
-            }
             //Refund if targets no one that can attack
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No target, mana refunded')
+            } else {
+                if (!prediction){
+                    playDefaultSpellSFX(card, prediction);
+                }
+                for (let unit of targets) {
+                    Unit.addModifier(unit, card.id, underworld, prediction, quantity);
+                }
             }
             if (!prediction && !globalThis.headless) {
                 await new Promise((resolve) => {
@@ -57,25 +45,13 @@ const spell: Spell = {
                 })
             }
             return state;
-        }
-    },
-    modifiers: {
-        add,
-        remove,
-        /*subsprite: {
-            imageName,
-            alpha: 1.0,
-            anchor: {
-                x: 0.5,
-                y: 0.5,
-            },
-            scale: {
-                x: 0.25, 
-                y: 0.25,
-            },
-        },*/
+            }
+        },
+        modifiers: {
+            add,
+            remove,
 
-    },
+        },
     events: {
         onTurnEnd: async (unit, underworld) => {
             // Decrement how many turns left the unit is for pacify
@@ -95,14 +71,10 @@ function add(unit, underworld, prediction, quantity) {
         isCurse: true, quantity, persistBetweenLevels: false,
         originalstat: unit.attackRange,
     }, () => {
-        //Adds event
+        //Register onTurnEndEvents
         if (!unit.onTurnEndEvents.includes(cardId)) {
             unit.onTurnEndEvents.push(cardId);
         }
-        //Adds subsprite, also TODO
-        //JImage.addSubSprite(unit.image, imageName);
-        //Removes ability to attack, TODO: find a better way
-        //attackTarget / attackTargets seems better, but function is invoked during action so it gets overwritten?
         unit.attackRange = 0;
     }); 
 }

@@ -4,17 +4,17 @@ import type { Spell } from '../../types/cards/index';
 const {
     cardUtils,
     commonTypes,
-    cards
+    cards,
+    Particles,
+    FloatingText,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { oneOffImage, playDefaultSpellSFX } = cardUtils;
+const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const cardId = 'Harvest';
-//const animationPath = 'owoWIP'; //TODO
-//const imageName = 'spellmasons-mods/Wodes_grimoire/IconWIP.png'; //TODO
 const manaRegain = 20;
 const spell: Spell = {
     card: {
@@ -26,11 +26,11 @@ const spell: Spell = {
         expenseScaling: 1,
         probability: probabilityMap[CardRarity.UNCOMMON],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconHarvest.png',
-        //animationPath,
         sfx: 'sacrifice',
-        description: [`Consumes target corpse for ${manaRegain} mana.\nTastes like chicken.`],
+        description: [`Consumes target corpse for ${manaRegain} mana.\n\nTastes like chicken.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             let animationDelaySum = 0;
+            let promises: any[] = [];
             let totalManaHarvested = 0;
             //Corpses only
             const targets = state.targetedUnits.filter(u => !u.alive);
@@ -39,12 +39,19 @@ const spell: Spell = {
             // but sequentially within themselves (on a single target, e.g. multiple hurts over and over)
             for (let unit of targets){
                 totalManaHarvested += (manaRegain * quantity);
+                const manaTrailPromises: any[] = [];
+                if (!prediction) {
+                  for (let i = 0; i < quantity; i++) {
+                    manaTrailPromises.push(Particles.makeManaTrail(unit, state.casterUnit, underworld, '#e4ffee', '#40ff66')); //Light green means souls :)
+                  }
+                }
+                promises.push((prediction ? Promise.resolve() : Promise.all(manaTrailPromises)));
             }
-            if (!prediction && !globalThis.headless) {
+            await Promise.all(promises).then(() => { 
+                if (!prediction && !globalThis.headless) {
                 setTimeout(() => {
                     playDefaultSpellSFX(card, prediction);
                     for (let unit of targets) {
-                        //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells); //figure this out
                         setTimeout(() => {
                             //Does spell effect for client
                             Unit.cleanup(unit);
@@ -52,26 +59,27 @@ const spell: Spell = {
                     }
                     state.casterUnit.mana += totalManaHarvested;
                 }, animationDelaySum)
-            } else {
-                for (let unit of targets) {
-                    //Does spell effect for underworld
-                    Unit.cleanup(unit);
+                } else {
+                    for (let unit of targets) {
+                        //Does spell effect for underworld
+                        Unit.cleanup(unit);
+                    }
+                    state.casterUnit.mana += totalManaHarvested;
                 }
-                state.casterUnit.mana += totalManaHarvested;
-            }
+            });
             //Refund if no targets
-            if (targets.length == 0) {
+            if (targets.length == 0 && !totalManaHarvested) {
                 refundLastSpell(state, prediction, 'No corpses, health refunded');
             }
-            //Resolves animations for client
-            if (!prediction && !globalThis.headless) {
-                await new Promise((resolve) => {
-                    setTimeout(resolve, animationDelaySum);
-                })
-            }
+            if (!prediction && !!totalManaHarvested) {
+                FloatingText.default({
+                  coords: state.casterUnit,
+                  text: `${totalManaHarvested} Mana Harvested`,
+                  style: { fill: 'blue', strokeThickness: 1}
+                });
+              }
             return state;
         },
-
     },
 };
 export default spell;

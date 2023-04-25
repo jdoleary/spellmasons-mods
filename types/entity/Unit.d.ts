@@ -38,6 +38,7 @@ export declare type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     name?: string;
     isMiniboss: boolean;
     predictionScale?: number;
+    isPrediction?: boolean;
     faction: Faction;
     UITargetCircleOffsetY: number;
     defaultImagePath: string;

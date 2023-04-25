@@ -8,7 +8,7 @@ export declare function recalcPositionForCards(player: Player.IPlayer | undefine
 export declare const openInvClass = "open-inventory";
 export declare function syncInventory(slotModifyingIndex: number | undefined, underworld: Underworld): void;
 export declare function toggleInventory(toolbarIndex: number | undefined, forceState: boolean | undefined, underworld: Underworld): void;
-export declare function deselectLastCard(underworld?: Underworld): void;
+export declare function deselectLastCard(underworld: Underworld): void;
 export declare function selectCardByIndex(index: number, underworld?: Underworld): void;
 export declare function areAnyCardsSelected(): boolean;
 export declare function getSelectedCardIds(): string[];

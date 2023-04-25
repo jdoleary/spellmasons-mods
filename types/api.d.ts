@@ -51,6 +51,7 @@ import * as cardsUtil from './cards/util';
 import * as Events from './Events';
 import { forcePush } from './cards/push';
 import * as commonTypes from './types/commonTypes';
+import * as particleEmitter from '@pixi/particle-emitter';
 declare const SpellmasonsAPI: {
     Angle: typeof Angle;
     AnimationCombos: typeof AnimationCombos;
@@ -84,6 +85,7 @@ declare const SpellmasonsAPI: {
     MultiColorReplaceFilter: typeof MultiColorReplaceFilter;
     Overworld: typeof Overworld;
     ParticleCollection: typeof ParticleCollection;
+    particleEmitter: typeof particleEmitter;
     Particles: typeof Particles;
     Pathfinding: typeof Pathfinding;
     Perk: typeof Perk;

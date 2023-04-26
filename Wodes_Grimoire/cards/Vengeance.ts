@@ -4,69 +4,69 @@ import type { Spell } from '../../types/cards/index';
 const {
     cardUtils,
     commonTypes,
-    cards
+    cards,
+    Particles,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { oneOffImage, playDefaultSpellSFX } = cardUtils;
+const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const cardId = 'Vengeance';
-//const animationPath = 'owoWIP'; //TODO
-//const imageName = 'spellmasons-mods/Wodes_grimoire/IconWIP.png'; //TODO
 const spell: Spell = {
     card: {
         id: cardId,
         category: CardCategory.Damage,
-        supportQuantity: false,
+        supportQuantity: true,
         manaCost: 15,
         healthCost: 0,
         expenseScaling: 1.5,
         probability: probabilityMap[CardRarity.UNCOMMON],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconVengeance.png',
-        //animationPath,
-        sfx: 'hurt', //TODO
-        description: [`Deals damage equal to your missing health.`],
+        sfx: 'hurt',
+        description: [`Deals damage equal to your missing health. This harms you first if you are targeted, then enemies.`],
         effect: async (state, card, quantity, underworld, prediction) => {
-            let animationDelaySum = 0;
-            let delayBetweenAnimations = 400;
+            let promises: any[] = [];
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);
-            // Note: quantity loop should always be INSIDE of the targetedUnits loop
-            // so that any quantity-based animations will play simultaneously on multiple targets
-            // but sequentially within themselves (on a single target, e.g. multiple hurts over and over)
-            for (let q = 0; q < quantity; q++) {
-                if (!prediction && !globalThis.headless) {
-                    setTimeout(() => {
-                        playDefaultSpellSFX(card, prediction);
-                        for (let unit of targets) {
-                            //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells); //figure this out
-                            setTimeout(() => {
-                                //Does spell effect for client
-                                Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
-                            }, 100)
-                        }
-                    }, animationDelaySum)
-                    //This exsists soley for the fact itll make the effect state wait for code to finish before moving on.
-                    animationDelaySum += delayBetweenAnimations;
-                } else {
-                    for (let unit of targets) {
-                        //Does spell effect for underworld
-                        Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
-                    }
-                }
+            //Pushes caster to the front if they are a target, so it gives best vengancing (most damage)
+            let [potentialCaster] = targets.filter(u => u == state.casterUnit);
+            if (!!potentialCaster && targets[0] != state.casterUnit){
+              targets.splice(targets.indexOf(state.casterUnit), 1);
+              targets.unshift(state.casterUnit);
             }
-            //Refund if no targets
+            //Refund if no targets, this is before mana trails to help save time
             if (targets.length == 0 || (state.casterUnit.health == state.casterUnit.healthMax)) {
                 refundLastSpell(state, prediction, 'No targets damaged, mana refunded');
+                return state;
             }
-            //Resolves animations for client
-            if (!prediction && !globalThis.headless) {
-                await new Promise((resolve) => {
-                    setTimeout(resolve, animationDelaySum);
-                })
+            //Attaches particles to be carried out
+            for (let unit of targets){
+                const manaTrailPromises: any[] = [];
+                if (!prediction) {
+                    for (let i = 0; i < quantity; i++) {
+                        manaTrailPromises.push(Particles.makeManaTrail(state.casterUnit, unit, underworld, '#ef4242', '#400d0d'));
+                    }
+                }
+                promises.push((prediction ? Promise.resolve() : Promise.all(manaTrailPromises)));
             }
+            //Happens when animations are done
+            await Promise.all(promises).then(() => {
+                for (let q = 0; q < quantity; q++) {
+                    if (!prediction && !globalThis.headless) {
+                        playDefaultSpellSFX(card, prediction);
+                        for (let unit of targets) {
+                            Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
+                        }
+                    } else {
+                        for (let unit of targets) {
+                            //Does spell effect for underworld
+                            Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
+                        }
+                    }
+                }
+            });
             return state;
         },
     },

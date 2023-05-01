@@ -68,8 +68,6 @@ const spell: Spell = {
                             const damage = t == unit ? quantityAdjustedDamageMain : quantityAdjustedDamageSplash;
                             Unit.takeDamage(t, damage, undefined, underworld, prediction, state);
                         });
-                    }
-                    if (prediction) {
                         resolve();
                     }
                 }

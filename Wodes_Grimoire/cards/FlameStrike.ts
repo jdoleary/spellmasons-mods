@@ -36,48 +36,45 @@ const spell: Spell = {
             //Flamestrike to finish before continue to the next spell.
             //There MUST be a resolve for the spell to continue
             await new Promise<void>((resolve) => {
-            //Living units
-            const targets = state.targetedUnits.filter(u => u.alive);
-            const adjustedRadius = splashRadius + state.aggregator.radius;
-            if (targets.length == 0) {
-                refundLastSpell(state, prediction);
-                resolve();
-            } 
-            for (let q = 0; q < quantity; q++) {
-                if (!prediction && !globalThis.headless) {
-                    //Does spell effect for client
-                    playDefaultSpellSFX(card, prediction);
-                    for (let unit of targets) {
-                        const explosionTargets = underworld.getUnitsWithinDistanceOfTarget(unit, adjustedRadius, prediction);
-                        setTimeout(() =>{
+                //Living units
+                const targets = state.targetedUnits.filter(u => u.alive);
+                const adjustedRadius = splashRadius + state.aggregator.radius;
+                if (targets.length == 0) {
+                    refundLastSpell(state, prediction);
+                    resolve();
+                }
+                for (let unit of targets) {
+                    const explosionTargets = underworld.getUnitsWithinDistanceOfTarget(unit, adjustedRadius, prediction);
+                    const quantityAdjustedDamageMain = damageMain * quantity;
+                    const quantityAdjustedDamageSplash = damageSplash * quantity;
+                    if (!prediction && !globalThis.headless) {
+                        //Does spell effect for client
+                        playDefaultSpellSFX(card, prediction);
+                        setTimeout(() => {
                             //This setTimoue exsist to delay the damage dealt until it matches more with animation
-                            Unit.takeDamage(unit, damageMain, state.casterUnit, underworld, prediction, state);
+                            Unit.takeDamage(unit, quantityAdjustedDamageMain, state.casterUnit, underworld, prediction, state);
                             explosionTargets.splice(1).forEach(unit => {
-                            Unit.takeDamage(unit, damageSplash, undefined, underworld, prediction, state);
+                                Unit.takeDamage(unit, quantityAdjustedDamageSplash, undefined, underworld, prediction, state);
                             });
                         }, 400);
                         //This lasts 2.5 seconds
                         makeFlameStrikeWithParticles(unit, prediction, resolve);
-                    }
-                } else {
-                    for (let unit of targets) {
+                    } else {
                         //Does spell effect for underworld
-                        const explosionTargets = underworld.getUnitsWithinDistanceOfTarget(unit, adjustedRadius, prediction);
-                        if(prediction){
+                        if (prediction) {
                             drawUICircle(unit, adjustedRadius, 13981270); //13981270 is healthRed from color ui
                         }
-                        Unit.takeDamage(unit, damageMain, state.casterUnit, underworld, prediction, state);
+                        Unit.takeDamage(unit, quantityAdjustedDamageMain, state.casterUnit, underworld, prediction, state);
                         explosionTargets.splice(1).forEach(unit => {
-                            Unit.takeDamage(unit, damageSplash, undefined, underworld, prediction, state);
+                            Unit.takeDamage(unit, quantityAdjustedDamageSplash, undefined, underworld, prediction, state);
                         });
                     }
+                    if (prediction) {
+                        resolve();
+                    }
                 }
-            }
-            if (prediction){
-                resolve();
-            }
             });
-        return state;
+            return state;
         },
     },
 };

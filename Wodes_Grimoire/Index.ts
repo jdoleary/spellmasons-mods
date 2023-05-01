@@ -32,8 +32,8 @@ const mod: Mod = {
         Pacify,
         //Stasis, //Not working as intended, can still be pushed
         Vengeance,
-        
-
     ],
+    // This spritesheet allows spell icons to be used in player thought bubbles in multiplayer
+    spritesheet: 'spellmasons-mods/Wodes_Grimoire/graphics/wodes_grimoire_spritesheet.json'
 };
 export default mod;

@@ -5,6 +5,7 @@ const {
     commonTypes,
     cards,
     cardsUtil,
+    FloatingText,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
@@ -21,7 +22,7 @@ const spell: Spell = {
         manaCost: 20,
         healthCost: 0,
         expenseScaling: 2,
-        probability: probabilityMap[CardRarity.SPECIAL], 
+        probability: probabilityMap[CardRarity.SPECIAL],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconRegen.png',
         sfx: 'heal', //TODO
         description: [`Heals the target for 10 health at the end of their turn for 5 turns. Stacks increase the amount and refresh the duration.`],
@@ -32,11 +33,11 @@ const spell: Spell = {
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No target, mana refunded')
             } else {
-                if (!prediction){
+                if (!prediction) {
                     playDefaultSpellSFX(card, prediction);
                 }
                 for (let unit of targets) {
-                    Unit.addModifier(unit, card.id, underworld, prediction, 5, {amount: quantity});
+                    Unit.addModifier(unit, card.id, underworld, prediction, 5, { amount: quantity });
                 }
             }
             if (!prediction && !globalThis.headless) {
@@ -54,14 +55,20 @@ const spell: Spell = {
         onTurnEnd: async (unit, underworld) => {
             // Heal unit and decremit modifier
             const modifier = unit.modifiers[cardId];
-                if (modifier) {
-                    Unit.takeDamage(unit, healingAmount(modifier.regenCounter), undefined, underworld, false);
-                    modifier.quantity--;
-                    updateTooltip(unit);
-                if (modifier.quantity <= 0){
+            if (modifier) {
+                const healing = healingAmount(modifier.regenCounter)
+                Unit.takeDamage(unit, healing, undefined, underworld, false);
+                modifier.quantity--;
+                updateTooltip(unit);
+                FloatingText.default({
+                    coords: unit,
+                    text: `Regenerate +${-healing} health`,
+                    style: { fill: '#40a058', strokeThickness: 1 }
+                });
+                if (modifier.quantity <= 0) {
                     Unit.removeModifier(unit, cardId, underworld);
                 }
-            }         
+            }
         },
     }
 };
@@ -73,28 +80,28 @@ function add(unit, underworld, prediction, quantity, extra) {
         if (!unit.onTurnEndEvents.includes(cardId)) {
             unit.onTurnEndEvents.push(cardId);
         }
-    }); 
-    if (modifier.quantity > 5){
+    });
+    if (modifier.quantity > 5) {
         modifier.quantity = 5; //All casts give 5 turns, the max duration. When over 5, a new cast was done so update stacks
     }
     //if (extra.amount > 0 && !prediction){
     //    modifier.regenCounter = (modifier.regenCounter || 0) + extra.amount;
     //}
-    if(!prediction){
+    if (!prediction) {
         modifier.regenCounter = (modifier.regenCounter || 0) + extra.amount;
         updateTooltip(unit);
     }
 }
-function healingAmount(castquantity: number){
+function healingAmount(castquantity: number) {
     let healing = -10;
-    if (castquantity > 0){
+    if (castquantity > 0) {
         healing = castquantity * -10;
     }
     return healing;
 }
-function updateTooltip(unit){
+function updateTooltip(unit) {
     const modifier = unit.modifiers && unit.modifiers[cardId];
-    if (modifier){
+    if (modifier) {
         modifier.tooltip = `Healing ${-healingAmount(modifier.regenCounter)} over ${modifier.quantity} turns`
     }
 }

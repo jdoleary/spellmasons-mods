@@ -6,7 +6,8 @@ const {
     cards,
     cardsUtil,
     JImage,
-    JAudio
+    JAudio,
+    FloatingText
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
@@ -56,8 +57,14 @@ const spell: Spell = {
                 modifier.graceCountdown--;
                 updateTooltip(unit);
                 if (modifier.graceCountdown <= 0) {
-                    Unit.takeDamage(unit, calculateGraceHealing(modifier.graceQuantity), undefined, underworld, false);
+                    let healing = calculateGraceHealing(modifier.graceQuantity);
+                    Unit.takeDamage(unit, healing, undefined, underworld, false);
                     if (!prediction) {
+                        FloatingText.default({
+                            coords: unit,
+                            text: `Grace +${-healing} health`,
+                            style: { fill: '#40a058', strokeThickness: 1 }
+                        });
                         JImage.addOneOffAnimation(unit, 'spell-effects/potionPickup', {}, { animationSpeed: 0.3, loop: false });
                         JAudio.playSFXKey('potionPickupHealth');
                     }

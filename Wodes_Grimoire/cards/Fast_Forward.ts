@@ -6,6 +6,7 @@ const {
     cardUtils,
     commonTypes,
     cards,
+    FloatingText
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
@@ -47,6 +48,15 @@ const spell: Spell = {
             if (!prediction && !globalThis.headless) {
                 playDefaultSpellSFX(card, prediction);
                 for (let unit of targets) {
+                    // Delay floating text so it doesn't overlap with
+                    // any floating text triggered when procEvents is invoked
+                    setTimeout(() => {
+                        FloatingText.default({
+                            coords: unit,
+                            text: `Fast Forward`,
+                            style: { fill: '#ff0000', strokeThickness: 1 }
+                        });
+                    }, 200);
                     //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells); //figure this out
                     procEvents(unit, prediction, underworld);
                 }

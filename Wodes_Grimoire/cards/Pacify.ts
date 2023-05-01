@@ -21,10 +21,10 @@ const spell: Spell = {
         manaCost: 20,
         healthCost: 0,
         expenseScaling: 2,
-        probability: probabilityMap[CardRarity.SPECIAL], 
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconPacify.png', 
+        probability: probabilityMap[CardRarity.SPECIAL],
+        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconPacify.png',
         sfx: '', //TODO
-        description: [`Prevents the target from attacking. Furthur casts increase duration.`],
+        description: [`Prevents the target from attacking. Stacks increase duration.  Does not affect Support Class units such as summoners or priests.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive and can attack. u.unitSubType[3] presumed SUPPORT_CLASS, cant effect summoners, prists dont attack
             const targets = state.targetedUnits.filter(u => u.alive && !(u.unitSubType == 3));
@@ -32,7 +32,7 @@ const spell: Spell = {
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No target, mana refunded')
             } else {
-                if (!prediction){
+                if (!prediction) {
                     playDefaultSpellSFX(card, prediction);
                 }
                 for (let unit of targets) {
@@ -41,21 +41,21 @@ const spell: Spell = {
             }
             if (!prediction && !globalThis.headless) {
                 await new Promise((resolve) => {
-                    setTimeout(resolve, 100); 
+                    setTimeout(resolve, 100);
                 })
             }
             return state;
-            }
-        },
-        modifiers: {
-            add,
-            remove,
+        }
+    },
+    modifiers: {
+        add,
+        remove,
 
-        },
+    },
     events: {
         onTurnEnd: async (unit, underworld) => {
             // Decrement how many turns left the unit is for pacify
-            const modifier = unit.modifiers[cardId]; 
+            const modifier = unit.modifiers[cardId];
             if (modifier) {
                 modifier.quantity--;
                 if (modifier.quantity <= 0) {
@@ -76,13 +76,13 @@ function add(unit, underworld, prediction, quantity) {
             unit.onTurnEndEvents.push(cardId);
         }
         unit.attackRange = 0;
-    }); 
+    });
 }
 function remove(unit, underworld) {
     //Give back ability to attack when debuff is gone
     if (unit.modifiers && unit.modifiers[cardId]) {
         const originalRange = unit.modifiers[cardId].originalstat;
-        if (originalRange && unit.attackRange == 0){
+        if (originalRange && unit.attackRange == 0) {
             unit.attackRange = originalRange;
         }
     }

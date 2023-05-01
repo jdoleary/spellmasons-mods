@@ -37,28 +37,28 @@ const spell: Spell = {
             // Note: quantity loop should always be INSIDE of the targetedUnits loop
             // so that any quantity-based animations will play simultaneously on multiple targets
             // but sequentially within themselves (on a single target, e.g. multiple hurts over and over)
-            for (let unit of targets){
+            for (let unit of targets) {
                 totalManaHarvested += (manaRegain * quantity);
                 const manaTrailPromises: any[] = [];
                 if (!prediction) {
-                  for (let i = 0; i < quantity; i++) {
-                    manaTrailPromises.push(Particles.makeManaTrail(unit, state.casterUnit, underworld, '#e4ffee', '#40ff66')); //Light green means souls :)
-                  }
+                    for (let i = 0; i < quantity; i++) {
+                        manaTrailPromises.push(Particles.makeManaTrail(unit, state.casterUnit, underworld, '#e4ffee', '#40ff66')); //Light green means souls :)
+                    }
                 }
                 promises.push((prediction ? Promise.resolve() : Promise.all(manaTrailPromises)));
             }
-            await Promise.all(promises).then(() => { 
+            await Promise.all(promises).then(() => {
                 if (!prediction && !globalThis.headless) {
-                setTimeout(() => {
-                    playDefaultSpellSFX(card, prediction);
-                    for (let unit of targets) {
-                        setTimeout(() => {
-                            //Does spell effect for client
-                            Unit.cleanup(unit);
-                        }, 100)
-                    }
-                    state.casterUnit.mana += totalManaHarvested;
-                }, animationDelaySum)
+                    setTimeout(() => {
+                        playDefaultSpellSFX(card, prediction);
+                        for (let unit of targets) {
+                            setTimeout(() => {
+                                //Does spell effect for client
+                                Unit.cleanup(unit);
+                            }, 100)
+                        }
+                        state.casterUnit.mana += totalManaHarvested;
+                    }, animationDelaySum)
                 } else {
                     for (let unit of targets) {
                         //Does spell effect for underworld
@@ -73,11 +73,11 @@ const spell: Spell = {
             }
             if (!prediction && !!totalManaHarvested) {
                 FloatingText.default({
-                  coords: state.casterUnit,
-                  text: `${totalManaHarvested} Mana Harvested`,
-                  style: { fill: 'blue', strokeThickness: 1}
+                    coords: state.casterUnit,
+                    text: `${totalManaHarvested} Mana Harvested`,
+                    style: { fill: 'blue', strokeThickness: 1 }
                 });
-              }
+            }
             return state;
         },
     },

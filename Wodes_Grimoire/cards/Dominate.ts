@@ -24,23 +24,16 @@ const spell: Spell = {
         probability: probabilityMap[CardRarity.RARE],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconDominate.png',
         sfx: 'suffocate',
-        description: [`Converts an enemy to fight for you if they are below ${healthThreshhold*100}% health.`], //Wololo
+        description: [`Converts an enemy to fight for you if they are below ${healthThreshhold * 100}% health.`], //Wololo
         effect: async (state, card, quantity, underworld, prediction) => {
             //Living units, Units below threshhold, and units that are in your faction
-            const targets = state.targetedUnits.filter(u => u.alive && u.health <= u.healthMax * healthThreshhold && !(u.faction = state.casterUnit.faction));
+            const targets = state.targetedUnits.filter(u => u.alive && u.health <= u.healthMax * healthThreshhold && u.faction !== state.casterUnit.faction);
+            if (!prediction && !globalThis.headless) {
+                playDefaultSpellSFX(card, prediction);
+            }
             for (let unit of targets) {
-                if (!prediction && !globalThis.headless) {
-                        playDefaultSpellSFX(card, prediction);
-                        for (let unit of targets) {
-                                //Does spell effect for client
-                                Unit.changeFaction(unit, state.casterUnit.faction);
-                        }
-                } else {
-                    for (let unit of targets) {
-                        //Does spell effect for underworld
-                        Unit.changeFaction(unit, state.casterUnit.faction);
-                    }
-                }
+                //Does spell effect for underworld
+                Unit.changeFaction(unit, state.casterUnit.faction);
             }
             //Refund if no targets
             if (targets.length == 0) {

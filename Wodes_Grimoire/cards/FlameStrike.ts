@@ -52,9 +52,9 @@ const spell: Spell = {
                         playDefaultSpellSFX(card, prediction);
                         setTimeout(() => {
                             //This setTimoue exsist to delay the damage dealt until it matches more with animation
-                            Unit.takeDamage(unit, quantityAdjustedDamageMain, state.casterUnit, underworld, prediction, state);
-                            explosionTargets.splice(1).forEach(unit => {
-                                Unit.takeDamage(unit, quantityAdjustedDamageSplash, undefined, underworld, prediction, state);
+                            explosionTargets.forEach(t => {
+                                const damage = t == unit ? quantityAdjustedDamageMain : quantityAdjustedDamageSplash;
+                                Unit.takeDamage(t, damage, undefined, underworld, prediction, state);
                             });
                         }, 400);
                         //This lasts 2.5 seconds
@@ -64,9 +64,9 @@ const spell: Spell = {
                         if (prediction) {
                             drawUICircle(unit, adjustedRadius, 13981270); //13981270 is healthRed from color ui
                         }
-                        Unit.takeDamage(unit, quantityAdjustedDamageMain, state.casterUnit, underworld, prediction, state);
-                        explosionTargets.splice(1).forEach(unit => {
-                            Unit.takeDamage(unit, quantityAdjustedDamageSplash, undefined, underworld, prediction, state);
+                        explosionTargets.forEach(t => {
+                            const damage = t == unit ? quantityAdjustedDamageMain : quantityAdjustedDamageSplash;
+                            Unit.takeDamage(t, damage, undefined, underworld, prediction, state);
                         });
                     }
                     if (prediction) {

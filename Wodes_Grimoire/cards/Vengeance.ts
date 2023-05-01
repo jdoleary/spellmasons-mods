@@ -32,9 +32,9 @@ const spell: Spell = {
             const targets = state.targetedUnits.filter(u => u.alive);
             //Pushes caster to the front if they are a target, so it gives best vengancing (most damage)
             let [potentialCaster] = targets.filter(u => u == state.casterUnit);
-            if (!!potentialCaster && targets[0] != state.casterUnit){
-              targets.splice(targets.indexOf(state.casterUnit), 1);
-              targets.unshift(state.casterUnit);
+            if (!!potentialCaster && targets[0] != state.casterUnit) {
+                targets.splice(targets.indexOf(state.casterUnit), 1);
+                targets.unshift(state.casterUnit);
             }
             //Refund if no targets, this is before mana trails to help save time
             if (targets.length == 0 || (state.casterUnit.health == state.casterUnit.healthMax)) {
@@ -42,10 +42,11 @@ const spell: Spell = {
                 return state;
             }
             //Attaches particles to be carried out
-            for (let unit of targets){
+            for (let unit of targets) {
                 const manaTrailPromises: any[] = [];
                 if (!prediction) {
                     for (let i = 0; i < quantity; i++) {
+                        // Red vengance particle trail
                         manaTrailPromises.push(Particles.makeManaTrail(state.casterUnit, unit, underworld, '#ef4242', '#400d0d'));
                     }
                 }
@@ -53,28 +54,22 @@ const spell: Spell = {
             }
             //Happens when animations are done
             await Promise.all(promises).then(() => {
-                for (let q = 0; q < quantity; q++) {
-                    if (!prediction && !globalThis.headless) {
-                        playDefaultSpellSFX(card, prediction);
-                        for (let unit of targets) {
-                            Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
-                        }
-                    } else {
-                        for (let unit of targets) {
-                            //Does spell effect for underworld
-                            Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
-                        }
-                    }
+                if (!prediction && !globalThis.headless) {
+                    playDefaultSpellSFX(card, prediction);
+                }
+                for (let unit of targets) {
+                    //Does spell effect for underworld
+                    Unit.takeDamage(unit, damageDone(state, quantity), state.casterUnit, underworld, prediction, state);
                 }
             });
             return state;
         },
     },
 };
-function damageDone(state) {
+function damageDone(state, quantity) {
     //This is made into a function so it also changes damage mid cast.
     let damageMain = state.casterUnit.healthMax - state.casterUnit.health;
     damageMain = Math.max(0, damageMain); //Prevents healing
-    return damageMain;
+    return damageMain * quantity;
 }
 export default spell;

@@ -39,67 +39,56 @@ const spell: Spell = {
         sfx: 'push', //TODO
         description: [`Shunt the target forward through time. Causes progression of modifiers but does not effect cooldowns.`], //TODO: better deffinition
         effect: async (state, card, quantity, underworld, prediction) => {
-            let animationDelaySum = 0;
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);
             // Note: quantity loop should always be INSIDE of the targetedUnits loop
             // so that any quantity-based animations will play simultaneously on multiple targets
             // but sequentially within themselves (on a single target, e.g. multiple hurts over and over)
             if (!prediction && !globalThis.headless) {
-                setTimeout(() => {
-                    playDefaultSpellSFX(card, prediction);
-                    for (let unit of targets) {
-                        //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells); //figure this out
-                        procEvents(unit, prediction, underworld);//.finally(() => {clientResolved = true});
-                        return state;
-                    }
-                }, animationDelaySum)
+                playDefaultSpellSFX(card, prediction);
+                for (let unit of targets) {
+                    //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells); //figure this out
+                    procEvents(unit, prediction, underworld);
+                }
             } else {
                 for (let unit of targets) {
-                        //Does spell effect for underworld
-                            procEvents(unit, prediction, underworld);//.finally(() => {serverResolved = true});
-                            return state;
-                        
+                    //Does spell effect for underworld
+                    procEvents(unit, prediction, underworld);
+
                 }
             }
             //Refund if no targets
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No targets chosen, mana refunded');
             }
-            //Resolves animations for client
-            if (!prediction && !globalThis.headless) {
-                await new Promise((resolve) => {
-                    setTimeout(resolve, animationDelaySum);
-                })
-            }
             return state;
         },
 
     },
 };
-async function procEvents(unit, prediction, underworld){
+async function procEvents(unit, prediction, underworld) {
     //onTurnStart events first for order.
-    for (let i = 0; i < unit.onTurnStartEvents.length; i++){
+    for (let i = 0; i < unit.onTurnStartEvents.length; i++) {
         const eventName = unit.onTurnStartEvents[i];
         if (eventName) {
             //Made into function because eventName points to a modifier (probably) whose arguments need to be pass in.
             const fns = Events.default.onTurnStartSource[eventName];
-            if (fns){
+            if (fns) {
                 await fns(unit, prediction, underworld); //Returns boolean, but ignored.
             }
         }
     }
     //TurnEndEvents dont have prediction, 
     //if (!prediction){
-        for (let i = 0; i < unit.onTurnEndEvents.length; i++){
-            const eventName = unit.onTurnEndEvents[i];
-            if (eventName) {
-                const fne = Events.default.onTurnEndSource[eventName];
-                if (fne){
-                    await fne(unit, underworld);
-                }
+    for (let i = 0; i < unit.onTurnEndEvents.length; i++) {
+        const eventName = unit.onTurnEndEvents[i];
+        if (eventName) {
+            const fne = Events.default.onTurnEndSource[eventName];
+            if (fne) {
+                await fne(unit, underworld);
             }
         }
+    }
     //}
 }
 export default spell;

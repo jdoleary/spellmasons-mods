@@ -21,10 +21,10 @@ const spell: Spell = {
         manaCost: 20,
         healthCost: 0,
         expenseScaling: 1.5,
-        probability: probabilityMap[CardRarity.SPECIAL], 
+        probability: probabilityMap[CardRarity.SPECIAL],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconEnsnare.png', //TODO
         sfx: '', //TODO
-        description: [`Prevents the target from moving. Furthur casts increase duration.`],
+        description: [`Prevents the target from moving for one turn. Furthur casts increase duration.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive.
             const targets = state.targetedUnits.filter(u => u.alive);
@@ -32,7 +32,7 @@ const spell: Spell = {
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No target, mana refunded')
             } else {
-                if (!prediction){
+                if (!prediction) {
                     playDefaultSpellSFX(card, prediction);
                 }
                 for (let unit of targets) {
@@ -55,7 +55,7 @@ const spell: Spell = {
     events: {
         onTurnEnd: async (unit, underworld) => {
             // Decrement how many turns left the unit is for pacify
-            const modifier = unit.modifiers[cardId]; 
+            const modifier = unit.modifiers[cardId];
             if (modifier) {
                 modifier.quantity--;
                 if (modifier.quantity <= 0) {
@@ -77,13 +77,13 @@ function add(unit, underworld, prediction, quantity) {
         }
         unit.stamina = 0;
         unit.staminaMax = 0;
-    }); 
+    });
 }
 function remove(unit, underworld) {
     //Give back ability to attack when debuff is gone
     if (unit.modifiers && unit.modifiers[cardId]) {
         const originalStamina = unit.modifiers[cardId].originalstat;
-        if (originalStamina && unit.staminaMax == 0){
+        if (originalStamina && unit.staminaMax == 0) {
             unit.staminaMax = originalStamina;
         }
     }

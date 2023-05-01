@@ -5,9 +5,12 @@ const {
     particleEmitter,
 } = globalThis.SpellmasonsAPI;
 
-export function makeFlameStrikeWithParticles(position: Vec2, prediction: boolean, resolver?: () => void){
+export function makeFlameStrikeWithParticles(position: Vec2, prediction: boolean, resolver?: () => void) {
     if (prediction || globalThis.headless) {
         // Don't show if just a prediction
+        if (resolver) {
+            resolver();
+        }
         return;
     }
     const texture = Particles.createParticleTexture();
@@ -29,7 +32,7 @@ export function makeFlameStrikeWithParticles(position: Vec2, prediction: boolean
             },
             "color": {
                 "start": "#ebc323",
-                "end": "#e63e1c" 
+                "end": "#e63e1c"
             },
             "speed": {
                 "start": 400,
@@ -38,7 +41,7 @@ export function makeFlameStrikeWithParticles(position: Vec2, prediction: boolean
             },
             "acceleration": {
                 "x": 0,
-                "y": -500 
+                "y": -500
             },
             "maxSpeed": 0,
             "startRotation": {
@@ -56,7 +59,7 @@ export function makeFlameStrikeWithParticles(position: Vec2, prediction: boolean
             },
             "blendMode": "normal",
             "frequency": 0.004,
-            "emitterLifetime": 1.2, 
+            "emitterLifetime": 1.2,
             "maxParticles": 230,
             "pos": {
                 "x": 0,

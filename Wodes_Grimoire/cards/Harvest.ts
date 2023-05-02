@@ -27,16 +27,12 @@ const spell: Spell = {
         probability: probabilityMap[CardRarity.UNCOMMON],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconHarvest.png',
         sfx: 'sacrifice',
-        description: [`Consumes target corpse for ${manaRegain} mana.\n\nTastes like chicken.`],
+        description: [`Consumes target corpse for ${manaRegain} mana. Does not work on player corpses.\n\nTastes like chicken.`],
         effect: async (state, card, quantity, underworld, prediction) => {
-            let animationDelaySum = 0;
             let promises: any[] = [];
             let totalManaHarvested = 0;
-            //Corpses only
-            const targets = state.targetedUnits.filter(u => !u.alive);
-            // Note: quantity loop should always be INSIDE of the targetedUnits loop
-            // so that any quantity-based animations will play simultaneously on multiple targets
-            // but sequentially within themselves (on a single target, e.g. multiple hurts over and over)
+            //Corpses only. Cleaning up another player causes a crash, all players need some unit. Can't move player corpse to OoB either cause they could be res'ed in same chain
+            const targets = state.targetedUnits.filter(u => !u.alive && !underworld.players.find(p => p.unit == u));
             for (let unit of targets) {
                 totalManaHarvested += (manaRegain * quantity);
                 const manaTrailPromises: any[] = [];
@@ -49,23 +45,13 @@ const spell: Spell = {
             }
             await Promise.all(promises).then(() => {
                 if (!prediction && !globalThis.headless) {
-                    setTimeout(() => {
-                        playDefaultSpellSFX(card, prediction);
-                        for (let unit of targets) {
-                            setTimeout(() => {
-                                //Does spell effect for client
-                                Unit.cleanup(unit);
-                            }, 100)
-                        }
-                        state.casterUnit.mana += totalManaHarvested;
-                    }, animationDelaySum)
-                } else {
-                    for (let unit of targets) {
-                        //Does spell effect for underworld
-                        Unit.cleanup(unit);
-                    }
-                    state.casterUnit.mana += totalManaHarvested;
+                    playDefaultSpellSFX(card, prediction);
                 }
+                for (let unit of targets) {
+                    //Does spell effect for client
+                    Unit.cleanup(unit);
+                }
+                state.casterUnit.mana += totalManaHarvested;
             });
             //Refund if no targets
             if (targets.length == 0 && !totalManaHarvested) {

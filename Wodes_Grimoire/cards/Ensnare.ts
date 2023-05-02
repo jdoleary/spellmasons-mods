@@ -18,12 +18,12 @@ const spell: Spell = {
         id: cardId,
         category: CardCategory.Curses,
         supportQuantity: true,
-        manaCost: 20,
+        manaCost: 25,
         healthCost: 0,
-        expenseScaling: 1.5,
+        expenseScaling: 2,
         probability: probabilityMap[CardRarity.SPECIAL],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconEnsnare.png', //TODO
-        sfx: '', //TODO
+        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconEnsnare.png',
+        sfx: '',
         description: [`Prevents the target from moving for one turn. Furthur casts increase duration.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive.

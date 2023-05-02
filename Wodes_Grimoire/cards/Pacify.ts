@@ -18,13 +18,13 @@ const spell: Spell = {
         id: cardId,
         category: CardCategory.Curses,
         supportQuantity: true,
-        manaCost: 20,
+        manaCost: 30,
         healthCost: 0,
         expenseScaling: 2,
         probability: probabilityMap[CardRarity.SPECIAL],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconPacify.png',
-        sfx: '', //TODO
-        description: [`Prevents the target from attacking for one turn. Stacks increase duration.  Does not affect Support Class units such as summoners or priests.`],
+        sfx: '',
+        description: [`Prevents the target from attacking for one turn. Stacks increase duration. Does not affect Support Class units such as summoners or priests.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive and can attack. u.unitSubType[3] presumed SUPPORT_CLASS, cant effect summoners, prists dont attack
             const targets = state.targetedUnits.filter(u => u.alive && !(u.unitSubType == 3));

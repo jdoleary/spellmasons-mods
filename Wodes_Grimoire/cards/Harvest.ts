@@ -1,5 +1,6 @@
 /// <reference path="../../globalTypes.d.ts" />
 import type { Spell } from '../../types/cards/index';
+import { UnitSubType, UnitType } from '../../types/types/commonTypes';
 
 const {
     cardUtils,
@@ -32,7 +33,7 @@ const spell: Spell = {
             let promises: any[] = [];
             let totalManaHarvested = 0;
             //Corpses only. Cleaning up another player causes a crash, all players need some unit. Can't move player corpse to OoB either cause they could be res'ed in same chain
-            const targets = state.targetedUnits.filter(u => !u.alive && !underworld.players.find(p => p.unit == u));
+            const targets = state.targetedUnits.filter(u => !u.alive && u.unitType != UnitType.PLAYER_CONTROLLED);
             for (let unit of targets) {
                 totalManaHarvested += (manaRegain * quantity);
                 const manaTrailPromises: any[] = [];

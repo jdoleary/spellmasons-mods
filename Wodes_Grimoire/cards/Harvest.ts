@@ -1,6 +1,5 @@
 /// <reference path="../../globalTypes.d.ts" />
 import type { Spell } from '../../types/cards/index';
-import { UnitSubType, UnitType } from '../../types/types/commonTypes';
 
 const {
     cardUtils,
@@ -13,7 +12,7 @@ const {
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
 const { playDefaultSpellSFX } = cardUtils;
-const { CardCategory, probabilityMap, CardRarity } = commonTypes;
+const { CardCategory, probabilityMap, CardRarity, UnitType } = commonTypes;
 
 const cardId = 'Harvest';
 const manaRegain = 20;

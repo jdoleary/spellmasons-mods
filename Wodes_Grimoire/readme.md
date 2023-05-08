@@ -25,6 +25,10 @@ Uninstall:
     If you installed this mod manually, you can uninstall by validating you steam files or by removing the lines you added in spellmasons-mods/index.ts, removing Wodes_Grimoire folder, and running "npm run build" again
 
 Changelog:
+v1.0.1:
+    Balance: Increased costs of ensnare and Pacify
+    Fix: Harvest no longer targets other player corpses which causes a crash in multiplayer
+    Fix: Vengance will now recalculate damage mid-spellcast
 
-v0.1 Initial release:
+v1 Initial release:
     Added new spells: Flamestrike, Decay, Ensnare, Grace, Harvest, Pacify, Regen, Vengance.

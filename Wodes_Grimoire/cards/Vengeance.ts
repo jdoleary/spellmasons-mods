@@ -57,19 +57,22 @@ const spell: Spell = {
                 if (!prediction && !globalThis.headless) {
                     playDefaultSpellSFX(card, prediction);
                 }
-                for (let unit of targets) {
-                    //Does spell effect for underworld
-                    Unit.takeDamage(unit, damageDone(state, quantity), state.casterUnit, underworld, prediction, state);
+                //Quantity is not passed into the function so that vengance can change its damage mid cast (ex. vengance hits self, second vengange then does more)
+                for (let q = 0; q < quantity; q++){
+                    for (let unit of targets) {
+                        //Does spell effect for underworld
+                        Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
+                    }
                 }
             });
             return state;
         },
     },
 };
-function damageDone(state, quantity) {
+function damageDone(state) {
     //This is made into a function so it also changes damage mid cast.
     let damageMain = state.casterUnit.healthMax - state.casterUnit.health;
     damageMain = Math.max(0, damageMain); //Prevents healing
-    return damageMain * quantity;
+    return damageMain;
 }
 export default spell;

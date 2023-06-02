@@ -6,6 +6,8 @@ import Vampire_bite from './cards/Vampire_bite';
 import Summon_trap from './cards/Summon_trap';
 import Sadism from './cards/Sadism'
 import Burning_Rage from './cards/Burning_rage'
+// import Thorns from './cards/Thorns'
+import Caltrops from './cards/Caltrops'
 
 const mod: Mod = {
     modName: 'Rene\s gimmicks',
@@ -18,6 +20,8 @@ const mod: Mod = {
         Summon_trap,
         Sadism,
         Burning_Rage,
+        Caltrops, //OnMove doesnt seem to be implemented
+        //Thorns,//composeOnDamageEvents do not pass argument damageDealer right now
     ],
 };
 export default mod;

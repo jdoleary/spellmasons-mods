@@ -1,3 +1,4 @@
+import { playSFX } from '../../types/Audio';
 import type { Spell } from '../../types/cards/index';
 import { getOrInitModifier } from '../../types/cards/util';
 import * as Pickup from '../../types/entity/Pickup';
@@ -8,7 +9,7 @@ const {
     cardUtils,
     commonTypes,
     cards,
-    Particles,
+    VisualEffects,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
@@ -28,7 +29,7 @@ const spell: Spell = {
         probability: probabilityMap[CardRarity.UNCOMMON],
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/SummonTrap.png',
         sfx: 'hurt',
-        description: [`Deals damage equal to your missing health. This harms you first if you are targeted, then enemies.`],
+        description: [`Summons a trap that does 30 damage when stepped on`],
         allowNonUnitTarget: true,
     effect: async (state, card, quantity, underworld, prediction) => {
           const summonLocation = {
@@ -48,11 +49,8 @@ const spell: Spell = {
         const index  = 0;
         //const index = Pickup.pickups.findIndex((p) => p.name === Pickup.PICKUP_SPIKES_NAME);
           if (!prediction) {
-            //skyBeam(summonLocation)
-            setTimeout(() => {
-              underworld.spawnPickup(index, summonLocation, prediction);
-              //playSFXKey('spawnPotion');
-            }, 1300);
+            VisualEffects.skyBeam(summonLocation)
+            underworld.spawnPickup(index, summonLocation, prediction);
           } else {
             underworld.spawnPickup(index, summonLocation, prediction);
 

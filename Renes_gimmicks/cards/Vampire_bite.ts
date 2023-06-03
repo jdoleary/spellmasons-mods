@@ -2,16 +2,20 @@
 import type { Spell } from '../../types/cards/index';
 
 const {
+    PixiUtils,
     cardUtils,
     commonTypes,
     cards,
-    Particles,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
+const { containerSpells } = PixiUtils;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { playDefaultSpellSFX } = cardUtils;
+const { oneOffImage } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
+
+const animationPath = 'VampBite';
+//const delayBetweenAnimationsStart = 400;
 
 const cardId = 'Vampire Bite';
 const spell: Spell = {
@@ -24,10 +28,10 @@ const spell: Spell = {
         expenseScaling: 1.5,
         probability: probabilityMap[CardRarity.UNCOMMON],
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/VampireBite.png',
+        animationPath,
         sfx: 'hurt',
         description: [`Deals 10 and drains up to 5 health (not affected by blood curse)`],
         effect: async (state, card, quantity, underworld, prediction) => {
-            let promises: any[] = [];
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);
 
@@ -36,6 +40,10 @@ const spell: Spell = {
                 refundLastSpell(state, prediction, 'No targets damaged, mana refunded');
                 return state;
             }
+
+            // let animationDelaySum = 0;
+            // let delayBetweenAnimations = delayBetweenAnimationsStart;
+
             for (let unit of targets) {
                 if (state.casterUnit.health < state.casterUnit.healthMax){
                     if (unit.health < 10 * quantity){
@@ -48,10 +56,20 @@ const spell: Spell = {
                         state.casterUnit.health = state.casterUnit.healthMax
                     }
                 }
+                if (!prediction){
+                    const spellEffectImage = oneOffImage(unit, animationPath, containerSpells);
+                    spellEffectImage
+                };
+                // setTimeout(() => {
                 Unit.takeDamage(unit, 10 * quantity, state.casterUnit, underworld, prediction, state);
-                //Unit.takeDamage(unit, heal, undefined, underworld, prediction, state);
+                // }, 100);
             }
             state.casterUnit.health -= state.casterUnit.health%1
+            if (!prediction && !globalThis.headless) {
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 400);
+                })
+            }
             return state;
         },
     },

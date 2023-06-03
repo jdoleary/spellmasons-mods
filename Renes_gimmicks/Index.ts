@@ -23,5 +23,6 @@ const mod: Mod = {
         Caltrops, //OnMove doesnt seem to be implemented
         //Thorns,//composeOnDamageEvents do not pass argument damageDealer right now
     ],
+    spritesheet: 'spellmasons-mods/Renes_gimmicks/graphics/icons/VampireBiteAnimation.json'
 };
 export default mod;

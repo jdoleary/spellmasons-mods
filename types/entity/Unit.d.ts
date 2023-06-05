@@ -6,6 +6,7 @@ import { EffectState } from '../cards';
 import Underworld from '../Underworld';
 import { HasLife, HasMana, HasSpace, HasStamina } from './Type';
 import { Modifier } from '../cards/util';
+import { StatCalamity } from '../Perk';
 export interface UnitPath {
     points: Vec2[];
     lastOwnPosition: Vec2;
@@ -64,6 +65,7 @@ export declare type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     };
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean): IUnit;
+export declare function adjustUnitStatsByUnderworldCalamity(unit: IUnit, statCalamity: StatCalamity): void;
 export declare function adjustUnitDifficulty(unit: IUnit, difficulty: number): void;
 export declare function addModifier(unit: IUnit, key: string, underworld: Underworld, prediction: boolean, quantity?: number, extra?: object): void;
 export declare function removeModifier(unit: IUnit, key: string, underworld: Underworld): void;
@@ -105,3 +107,4 @@ export declare function isUnitsTurnPhase(unit: IUnit, underworld: Underworld): b
 export declare function subTypeToAttentionMarkerImage(unit: IUnit): string;
 export declare function findLOSLocation(unit: IUnit, target: Vec2, underworld: Underworld): Vec2[];
 export declare function demoAnimations(unit: IUnit): Promise<void>;
+export declare function resetUnitStats(unit: IUnit, underworld: Underworld): void;

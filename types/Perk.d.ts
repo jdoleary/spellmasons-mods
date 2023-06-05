@@ -3,7 +3,16 @@ import seedrandom from "seedrandom";
 import { IPlayer } from "./entity/Player";
 export declare function cleanUpPerkList(): void;
 export declare function getPerkText(perk: AttributePerk, omitWhen?: boolean): string;
-export declare function createCursePerkElement(cardId: string, underworld: Underworld): HTMLDivElement | undefined;
+export interface StatCalamity {
+    unitId: string;
+    stat: string;
+    percent: number;
+}
+export declare function generateRandomStatCalamity(underworld: Underworld, index: number): StatCalamity | undefined;
+export declare function createCursePerkElement({ cardId, statCalamity }: {
+    cardId?: string;
+    statCalamity?: StatCalamity;
+}, underworld: Underworld): HTMLDivElement | undefined;
 export declare function createPerkElement(perk: AttributePerk, player: IPlayer, underworld: Underworld): HTMLDivElement | undefined;
 export declare type UpgradableAttribute = 'staminaMax' | 'stamina' | 'healthMax' | 'health' | 'manaMax' | 'mana' | 'attackRange';
 export declare type WhenUpgrade = 'immediately' | 'everyLevel' | 'everyTurn';

@@ -20,6 +20,7 @@ import { DisplayObject, TilingSprite } from 'pixi.js';
 import { HasSpace } from './entity/Type';
 import { Overworld } from './Overworld';
 import { Emitter } from '@pixi/particle-emitter';
+import { StatCalamity } from './Perk';
 export declare enum turn_phase {
     Stalled = 0,
     PlayerTurns = 1,
@@ -30,6 +31,7 @@ export declare const elUpgradePickerContent: HTMLElement | undefined;
 export declare const showUpgradesClassName = "showUpgrades";
 export default class Underworld {
     seed: string;
+    gameMode?: string;
     localUnderworldNumber: number;
     overworld: Overworld;
     random: prng;
@@ -60,6 +62,7 @@ export default class Underworld {
     enemiesKilled: number;
     forceMove: ForceMove[];
     forceMovePrediction: ForceMove[];
+    forceMovePromise: Promise<void> | undefined;
     lastThoughtsHash: string;
     playerThoughts: {
         [clientId: string]: {
@@ -82,6 +85,8 @@ export default class Underworld {
     }[];
     activeMods: string[];
     generatingLevel: boolean;
+    statCalamities: StatCalamity[];
+    simulatingMovePredictions: boolean;
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
     reportEnemyKilled(enemyKilledPos: Vec2): void;
@@ -93,6 +98,7 @@ export default class Underworld {
     queueGameLoop: () => void;
     gameLoopForceMove: () => boolean;
     gameLoopUnit: (u: Unit.IUnit, aliveNPCs: Unit.IUnit[], deltaTime: number) => boolean;
+    awaitForceMoves: () => Promise<void>;
     triggerGameLoopHeadless: () => void;
     _gameLoopHeadless: () => boolean;
     gameLoop: (timestamp: number) => void;
@@ -119,8 +125,9 @@ export default class Underworld {
     cleanUpLevel(): void;
     postSetupLevel(): void;
     createLevelSyncronous(levelData: LevelData): void;
-    createLevel(levelData: LevelData): Promise<void>;
-    generateLevelDataSyncronous(levelIndex: number): LevelData;
+    getLevelText(): string;
+    createLevel(levelData: LevelData, gameMode?: string): Promise<void>;
+    generateLevelDataSyncronous(levelIndex: number, gameMode?: string): LevelData;
     generateLevelData(levelIndex: number): Promise<void>;
     checkPickupCollisions(unit: Unit.IUnit, prediction: boolean): void;
     isCoordOnWallTile(coord: Vec2): boolean;
@@ -136,6 +143,7 @@ export default class Underworld {
     endPlayerTurn(clientId: string): Promise<void>;
     chooseUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade): void;
     perksLeftToChoose(player: Player.IPlayer): number;
+    cursesLeftToChoose(player: Player.IPlayer): number;
     upgradesLeftToChoose(player: Player.IPlayer): number;
     showUpgrades(): void;
     addRerollButton(player: Player.IPlayer): void;
@@ -162,7 +170,7 @@ export default class Underworld {
     hasLineOfSight(seer: Vec2, target: Vec2): boolean;
     dev_shuffleUnits(): Unit.IUnit[];
     unitIsIdentical(unit: Unit.IUnit, serialized: Unit.IUnitSerialized): boolean;
-    syncUnits(units: Unit.IUnitSerialized[]): void;
+    syncUnits(units: Unit.IUnitSerialized[], excludePlayerUnits?: boolean): void;
     sendPlayerThinking(thoughts: {
         target?: Vec2;
         cardIds: string[];

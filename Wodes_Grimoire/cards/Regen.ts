@@ -52,19 +52,21 @@ const spell: Spell = {
         add,
     },
     events: {
-        onTurnEnd: async (unit, underworld) => {
+        onTurnEnd: async (unit, underworld, prediction) => {
             // Heal unit and decremit modifier
             const modifier = unit.modifiers[cardId];
             if (modifier) {
                 const healing = healingAmount(modifier.regenCounter)
-                Unit.takeDamage(unit, healing, undefined, underworld, false);
+                Unit.takeDamage(unit, healing, undefined, underworld, prediction);
                 modifier.quantity--;
-                updateTooltip(unit);
-                FloatingText.default({
-                    coords: unit,
-                    text: `Regenerate +${-healing} health`,
-                    style: { fill: '#40a058', strokeThickness: 1 }
-                });
+                if (!prediction) {
+                    updateTooltip(unit);
+                    FloatingText.default({
+                        coords: unit,
+                        text: `Regenerate +${-healing} health`,
+                        style: { fill: '#40a058', strokeThickness: 1 }
+                    });
+                }
                 if (modifier.quantity <= 0) {
                     Unit.removeModifier(unit, cardId, underworld);
                 }

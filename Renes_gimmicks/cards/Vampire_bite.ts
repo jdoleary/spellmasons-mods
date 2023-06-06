@@ -30,7 +30,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/VampireBite.png',
         animationPath,
         sfx: 'hurt',
-        description: [`Deals 10 and drains up to 5 health (not affected by blood curse)`],
+        description: [`Deals 10 to the target and heals you for up to 50% damage done. Healing is not affected by modifiers, including blood curse`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);

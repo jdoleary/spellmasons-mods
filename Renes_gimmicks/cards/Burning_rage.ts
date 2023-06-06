@@ -115,7 +115,7 @@ const spell: Spell = {
         probability: probabilityMap[CardRarity.RARE], 
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/Burninig_rage.png',
         sfx: 'poison',
-        description: [`Each stack causes target to take ${damageMultiplier} damage, but also increases damage done by ${attackMultiplier}. Staks increase each turn`],
+        description: [`Each stack causes target to take ${damageMultiplier} damage, but also increases the target's damage by ${attackMultiplier}. Staks increase each turn`],
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive
             const targets = state.targetedUnits.filter(u => u.alive);
@@ -151,7 +151,7 @@ const spell: Spell = {
                 Unit.takeDamage(unit, modifier.quantity * damageMultiplier, undefined, underworld, prediction);
                 FloatingText.default({
                     coords: unit, 
-                    text: `${Math.pow(modifier.quantity, 2)} rage damage`,
+                    text: `${modifier.quantity * damageMultiplier} rage damage`,
                     style: {fill: 'red', strokeThickness: 1}
                 });
                 unit.damage += attackMultiplier;

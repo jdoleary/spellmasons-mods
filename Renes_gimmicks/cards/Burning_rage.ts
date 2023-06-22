@@ -10,7 +10,9 @@ const {
     cards,
     cardsUtil,
     FloatingText,
+    ParticleCollection
 } = globalThis.SpellmasonsAPI;
+const BURNING_RAGE_PARTICLE_EMITTER_NAME = 'BURNING_RAGE';
 
 function makeBurningRageParticles(follow, prediction: boolean, underworld) {
     if (prediction || globalThis.headless) {
@@ -81,6 +83,8 @@ function makeBurningRageParticles(follow, prediction: boolean, underworld) {
         const wrapped = Particles.wrappedEmitter(particleConfig, PixiUtils.containerUnits);
         if (wrapped) {
             const { container, emitter } = wrapped;
+            // @ts-ignore adding name prop to identify emitter for later removal
+            emitter.name = BURNING_RAGE_PARTICLE_EMITTER_NAME;
             underworld.particleFollowers.push({
                 displayObject: container,
                 emitter,
@@ -101,7 +105,7 @@ const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const damageMultiplier = 8;
-const attackMultiplier =5;
+const attackMultiplier = 5;
 
 const cardId = 'Burning Rage';
 const spell: Spell = {
@@ -112,7 +116,7 @@ const spell: Spell = {
         manaCost: 35,
         healthCost: 0,
         expenseScaling: 2,
-        probability: probabilityMap[CardRarity.RARE], 
+        probability: probabilityMap[CardRarity.RARE],
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/Burninig_rage.png',
         sfx: 'poison',
         description: [`Each stack causes target to take ${damageMultiplier} damage, but also increases the target's damage by ${attackMultiplier}. Staks increase each turn`],
@@ -123,7 +127,7 @@ const spell: Spell = {
             if (targets.length == 0) {
                 refundLastSpell(state, prediction, 'No target, mana refunded')
             } else {
-                if (!prediction){
+                if (!prediction) {
                     playDefaultSpellSFX(card, prediction);
                 }
                 for (let unit of targets) {
@@ -133,7 +137,7 @@ const spell: Spell = {
             }
             if (!prediction && !globalThis.headless) {
                 await new Promise((resolve) => {
-                    setTimeout(resolve, 100);  
+                    setTimeout(resolve, 100);
                 })
             }
             return state;
@@ -146,13 +150,13 @@ const spell: Spell = {
     events: {
         onTurnStart: async (unit, prediction, underworld) => {
             // Damage unit and increment modifier counter
-            const modifier = unit.modifiers[cardId]; 
+            const modifier = unit.modifiers[cardId];
             if (modifier && !prediction) {
                 Unit.takeDamage(unit, modifier.quantity * damageMultiplier, undefined, underworld, prediction);
                 FloatingText.default({
-                    coords: unit, 
+                    coords: unit,
                     text: `${modifier.quantity * damageMultiplier} rage damage`,
-                    style: {fill: 'red', strokeThickness: 1}
+                    style: { fill: 'red', strokeThickness: 1 }
                 });
                 unit.damage += attackMultiplier;
                 modifier.quantity++;
@@ -170,10 +174,23 @@ function add(unit, underworld, prediction, quantity) {
             unit.onTurnStartEvents.push(cardId);
         }
         makeBurningRageParticles(unit, prediction, underworld);
-    }); 
+    });
 }
 function remove(unit, underworld) {
-    unit.damage -= unit.modifiers[cardId].quantity*attackMultiplier;
-    unit.damage = Math.max(unit.damage,0);
+    unit.damage -= unit.modifiers[cardId].quantity * attackMultiplier;
+    unit.damage = Math.max(unit.damage, 0);
+    let removeFollower = undefined;
+    for (let follower of underworld.particleFollowers) {
+        if (follower.emitter.name === BURNING_RAGE_PARTICLE_EMITTER_NAME && follower.target == unit) {
+            // Remove emitter
+            ParticleCollection.stopAndDestroyForeverEmitter(follower.emitter);
+            removeFollower = follower;
+            break;
+        }
+    }
+    if (removeFollower) {
+        underworld.particleFollowers = underworld.particleFollowers.filter(pf => pf !== removeFollower);
+    }
+    // console.log('jtest', underworld.particleEmitter)
 }
 export default spell;

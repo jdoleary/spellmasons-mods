@@ -13,7 +13,7 @@ export declare function endTurnBtnListener(overworld: Overworld, e: MouseEvent):
 export declare function useMousePosition(underworld: Underworld, e?: MouseEvent): void;
 export declare function contextmenuHandler(overworld: Overworld, e: MouseEvent): void;
 export declare function mouseDownHandler(overworld: Overworld, e: MouseEvent): void;
-export declare function mouseUpHandler(overworld: Overworld, e: MouseEvent): void;
+export declare function mouseUpHandler(overworld: Overworld, e: Pick<MouseEvent, "button" | "preventDefault">): void;
 export declare function mouseOverHandler(_overworld: Overworld, e: MouseEvent): void;
 export declare function onWindowBlur(_overworld: Overworld): void;
 export declare function clickHandler(overworld: Overworld, e: MouseEvent): void;

@@ -19,6 +19,7 @@ declare const mapping: {
     cameraDown: string[];
     cameraLeft: string[];
     cameraRight: string[];
+    touchPadMoveCharacter: string[];
 };
 export default mapping;
 export declare function fullyUpdateControls(newMapping: any): void;

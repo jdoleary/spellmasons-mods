@@ -153,6 +153,8 @@ export default class Underworld {
     broadcastTurnPhase(p: turn_phase): Promise<void>;
     setTurnPhase(p: turn_phase): void;
     initializeTurnPhase(p: turn_phase): Promise<void>;
+    clearPredictedNextTurnDamage(): void;
+    incrementTargetsNextTurnDamage(targets: Unit.IUnit[], damage: number, canAttack: boolean): void;
     executeNPCTurn(faction: Faction): Promise<void>;
     canUnitAttackTarget(u: Unit.IUnit, attackTarget?: Unit.IUnit): boolean;
     getEntitiesWithinDistanceOfTarget(target: Vec2, distance: number, prediction: boolean): HasSpace[];

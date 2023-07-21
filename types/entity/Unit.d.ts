@@ -63,6 +63,7 @@ export declare type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     modifiers: {
         [key: string]: Modifier;
     };
+    predictedNextTurnDamage: number;
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean): IUnit;
 export declare function adjustUnitStatsByUnderworldCalamity(unit: IUnit, statCalamity: StatCalamity): void;
@@ -89,6 +90,7 @@ export declare function livingUnitsInDifferentFaction(unit: IUnit, underworld: U
 export declare function livingUnitsInSameFaction(unit: IUnit, underworld: Underworld): IUnit[];
 export declare function closestInListOfUnits(sourceUnit: IUnit, units: IUnit[]): IUnit | undefined;
 export declare function findClosestUnitInDifferentFaction(unit: IUnit, underworld: Underworld): IUnit | undefined;
+export declare function filterSmartTarget(u: IUnit): boolean;
 export declare function findClosestUnitInSameFaction(unit: IUnit, underworld: Underworld): IUnit | undefined;
 export declare function orient(unit: IUnit, faceTarget: Vec2): void;
 export declare function _moveTowards(unit: IUnit, target: Vec2, underworld: Underworld): void;

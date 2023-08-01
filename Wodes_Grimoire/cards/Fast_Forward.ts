@@ -88,17 +88,14 @@ async function procEvents(unit, prediction, underworld) {
             }
         }
     }
-    //TurnEndEvents dont have prediction, 
-    //if (!prediction){
     for (let i = 0; i < unit.onTurnEndEvents.length; i++) {
         const eventName = unit.onTurnEndEvents[i];
         if (eventName) {
             const fne = Events.default.onTurnEndSource[eventName];
             if (fne) {
-                await fne(unit, underworld);
+                await fne(unit, underworld, prediction);
             }
         }
     }
-    //}
 }
 export default spell;

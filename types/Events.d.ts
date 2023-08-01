@@ -17,7 +17,7 @@ export declare type onTurnStart = {
     (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<boolean>;
 };
 export declare type onTurnEnd = {
-    (unit: IUnit, underworld: Underworld): Promise<void>;
+    (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
 declare const _default: {
     onAgroSource: {

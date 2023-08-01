@@ -50,6 +50,7 @@ const spell: Spell = {
     },
     modifiers: {
         add,
+        remove
     },
     events: {
         onTurnEnd: async (unit, underworld) => {
@@ -72,6 +73,13 @@ const spell: Spell = {
         },
     }
 };
+function remove(unit, underworld) {
+    console.log('jtest remove')
+    const modifier = unit.modifiers[cardId];
+    if (modifier) {
+        modifier.regenCounter = 0;
+    }
+}
 function add(unit, underworld, prediction, quantity, extra) {
     const modifier = cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: false, quantity, persistBetweenLevels: false,
@@ -102,7 +110,7 @@ function healingAmount(castquantity: number) {
 function updateTooltip(unit) {
     const modifier = unit.modifiers && unit.modifiers[cardId];
     if (modifier) {
-        modifier.tooltip = `Healing ${-healingAmount(modifier.regenCounter)} over ${modifier.quantity} turns`
+        modifier.tooltip = `Healing ${-healingAmount(modifier.regenCounter)} every ${modifier.quantity} turns`
     }
 }
 export default spell;

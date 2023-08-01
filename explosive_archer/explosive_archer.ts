@@ -128,7 +128,6 @@ const huge_trap: IPickupSource = {
   imagePath: 'pickups/trap',
   animationSpeed: -config.DEFAULT_ANIMATION_SPEED,
   playerOnly: false,
-  singleUse: true,
   name: 'Huge Trap',
   probability: 70,
   scale: 1.5,

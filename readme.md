@@ -4,6 +4,10 @@ The [Spellmasons Mods Youtube Series](https://youtube.com/playlist?list=PLrNoNMI
 
 You'll need a basic working knowledge of Typescript and Git to mod Spellmasons.
 
+To get your changes running in game, run `npm run build` then 
+    if you're developing off of the Spellmasons repo: copy the entire folder into `Spellmasons/public/spellmasons-mods`
+    if you're just modifying your Steam Spellmasons's local files: copy the entire fold into `steamapps\common\Spellmasons\resources\app\src\build\spellmasons-mods`
+
 ## Supported Modding
 - Custom Units
 - Custom Spells

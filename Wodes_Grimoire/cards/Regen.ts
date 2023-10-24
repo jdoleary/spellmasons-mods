@@ -76,7 +76,6 @@ const spell: Spell = {
     }
 };
 function remove(unit, underworld) {
-    console.log('jtest remove')
     const modifier = unit.modifiers[cardId];
     if (modifier) {
         modifier.regenCounter = 0;

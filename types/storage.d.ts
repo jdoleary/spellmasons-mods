@@ -1,3 +1,4 @@
+import { MageType } from "./entity/Player";
 export declare const STORAGE_OPTIONS = "OPTIONS";
 export declare const STORAGE_LANGUAGE_CODE_KEY = "language";
 export declare const STORAGE_ID_PLAYER_COLOR = "player-color";
@@ -6,8 +7,11 @@ export declare const STORAGE_ID_PLAYER_NAME = "player-name";
 export declare const STORAGE_ID_UI_ZOOM = "uiZoom";
 export declare const STORAGE_CONTROLS_KEY = "controls";
 export declare const ENEMY_ENCOUNTERED_STORAGE_KEY = "enemyEncountered";
+export declare const SPELLS_DISCOVERED_STORAGE_KEY = "spellsDiscovered";
 export declare function getSavedData(): void;
 export declare function remove(key: string): void;
 export declare function set(key: string, value: any): void;
 export declare function assign(key: string, value: object): void;
 export declare function get(key: string): string | null;
+export declare function getStoredMageTypeWinsKey(mageType: MageType): string;
+export declare function getStoredMageTypeFarthestLevelKey(mageType: MageType): string;

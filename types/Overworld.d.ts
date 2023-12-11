@@ -7,5 +7,5 @@ export interface Overworld {
     underworld?: Underworld;
 }
 export default function makeOverworld(pie: PieClient | IHostApp): Overworld;
-export declare function ensureAllClientsHaveAssociatedPlayers(overworld: Overworld, clients: string[]): void;
+export declare function ensureAllClientsHaveAssociatedPlayers(overworld: Overworld, clients: string[], defaultLobbyReady?: boolean): void;
 export declare function recalculateGameDifficulty(underworld: Underworld): void;

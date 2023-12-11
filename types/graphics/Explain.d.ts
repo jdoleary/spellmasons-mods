@@ -10,8 +10,6 @@ export declare const EXPLAIN_ATTENTION_MARKER_MELEE = "Melee Agro";
 export declare const EXPLAIN_ATTENTION_MARKER_RANGED = "Ranged Agro";
 export declare const EXPLAIN_CAMERA = "Camera Movement";
 export declare const EXPLAIN_INVENTORY = "Inventory";
-export declare const EXPLAIN_SCROLL = "Getting New Spells";
-export declare const EXPLAIN_MISSED_SCROLL = "Missing Scroll Pickups";
 export declare const EXPLAIN_LIQUID_DAMAGE = "Liquid Damage";
 export declare const EXPLAIN_BLESSINGS = "Blessings";
 export declare const EXPLAIN_REMOVE_SPELLS = "Remove Spells";
@@ -37,7 +35,6 @@ export interface TutorialChecklist {
     castMultipleInOneTurn: TutorialChecklistItem;
     camera: TutorialChecklistItem;
     recenterCamera: TutorialChecklistItem;
-    pickupScroll: TutorialChecklistItem;
 }
 export declare function updateTutorialChecklist(): void;
 export declare function tutorialCompleteTask(key: keyof TutorialChecklist, condition?: () => boolean): void;

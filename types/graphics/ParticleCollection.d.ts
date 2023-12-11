@@ -12,5 +12,6 @@ export declare function makeDarkPriestAttackParticles(position: Vec2, prediction
 export declare function makeCorruptionParticles(follow: IUnit, prediction: boolean, underworld: Underworld, resolver?: () => void): void;
 export declare function makeCursedEmitter(position: Vec2, prediction: boolean): import("../types/commonTypes").JEmitter | undefined;
 export declare const RED_PORTAL_JID = "redPortal";
-export declare function makeRedPortal(position: Vec2, prediction: boolean): import("../types/commonTypes").JEmitter | undefined;
+export declare const BLUE_PORTAL_JID = "bluePortal";
+export declare function makeDeathmasonPortal(position: Vec2, prediction: boolean, colorStart: string, colorEnd: string): import("../types/commonTypes").JEmitter | undefined;
 export declare function stopAndDestroyForeverEmitter(emitter?: particles.Emitter): void;

@@ -2,6 +2,7 @@ import type * as particles from '@pixi/particle-emitter';
 import { Spell } from '../cards';
 import { IPickupSource } from '../entity/Pickup';
 import { UnitSource } from '../entity/units';
+export type GameMode = 'tutorial' | 'hard' | 'impossible';
 export declare enum UnitType {
     PLAYER_CONTROLLED = 0,
     AI = 1
@@ -11,7 +12,8 @@ export declare enum UnitSubType {
     RANGED_LOS = 1,
     RANGED_RADIUS = 2,
     SUPPORT_CLASS = 3,
-    SPECIAL_LOS = 4
+    SPECIAL_LOS = 4,
+    DOODAD = 5
 }
 export declare enum Faction {
     ALLY = 0,
@@ -34,7 +36,7 @@ export declare enum CardRarity {
     FORBIDDEN = "FORBIDDEN"
 }
 export declare const probabilityMap: Record<CardRarity, number>;
-export declare type JEmitter = particles.Emitter & {
+export type JEmitter = particles.Emitter & {
     cleanAfterTurn?: boolean;
 };
 export interface Mod {

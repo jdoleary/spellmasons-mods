@@ -1,23 +1,23 @@
 import type { Vec2 } from './jmath/Vec';
 import type { IUnit } from './entity/Unit';
 import Underworld from './Underworld';
-export declare type onDamage = {
+export type onDamage = {
     (unit: IUnit, amount: number, underworld: Underworld, prediction: boolean, damageDealer?: IUnit): number;
 };
-export declare type onDeath = {
+export type onDeath = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
-export declare type onMove = {
+export type onMove = {
     (unit: IUnit, newLocation: Vec2): Vec2;
 };
-export declare type onAgro = {
+export type onAgro = {
     (agroer: IUnit, agroTarget: IUnit): IUnit;
 };
-export declare type onTurnStart = {
+export type onTurnStart = {
     (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<boolean>;
 };
-export declare type onTurnEnd = {
-    (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
+export type onTurnEnd = {
+    (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;
 };
 declare const _default: {
     onAgroSource: {

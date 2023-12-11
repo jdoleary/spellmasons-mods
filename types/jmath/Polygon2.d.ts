@@ -3,10 +3,10 @@ import { Vec2 } from "./Vec";
 import * as Vec from "./Vec";
 export declare function getLoopableIndex(index: number, array: any[]): number;
 export declare function getPointNormalVector(point: Vec2, prevPoint: Vec2, nextPoint: Vec2): Vec2;
-export declare type Polygon2LineSegment = LineSegment.LineSegment & {
+export type Polygon2LineSegment = LineSegment.LineSegment & {
     polygon: Polygon2;
 };
-export declare type Polygon2 = Vec2[];
+export type Polygon2 = Vec2[];
 export declare function mergeCollinearOverlappingSameDirectionLines(lines: LineSegment.LineSegment[]): LineSegment.LineSegment[];
 export declare function splitIntersectingLineSegments(line: LineSegment.LineSegment, lineSegments: LineSegment.LineSegment[]): LineSegment.LineSegment[];
 export declare function splitIntersectingPolygon2LineSegments(lineSegments: Polygon2LineSegment[]): Polygon2LineSegment[];

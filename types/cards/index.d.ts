@@ -34,6 +34,7 @@ export declare function registerModifiers(id: string, modifiers: Modifiers): voi
 export declare function registerEvents(id: string, events: Events): void;
 export declare function registerSpell(spell: Spell, overworld: Overworld): void;
 export declare function registerCards(overworld: Overworld): void;
+export declare function refreshSummonCardDescriptions(underworld: Underworld): void;
 export interface EffectState {
     cardIds: string[];
     shouldRefundLastSpell: boolean;
@@ -56,11 +57,13 @@ export declare function refundLastSpell(state: EffectState, prediction: boolean,
 export declare function hasTargetAtPosition(position: Vec2, underworld: Underworld): boolean;
 export declare function defaultTargetsForAllowNonUnitTargetTargetingSpell(targets: Vec2[], castLocation: Vec2, card: ICard): Vec2[];
 export declare function getCurrentTargets(state: EffectState): HasSpace[];
-export declare type EffectFn = {
+export type EffectFn = {
     (state: EffectState, card: ICard, quantity: number, underworld: Underworld, prediction: boolean, outOfRange?: boolean): Promise<EffectState>;
 };
 export interface ICard {
     id: string;
+    replaces?: string[];
+    requires?: string[];
     modName?: string;
     category: CardCategory;
     manaCost: number;

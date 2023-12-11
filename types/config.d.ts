@@ -14,7 +14,7 @@ export declare const UNIT_BASE_HEALTH = 40;
 export declare const UNIT_BASE_MANA = 60;
 export declare const UNIT_BASE_STAMINA = 300;
 export declare const PLAYER_BASE_ATTACK_RANGE: number;
-export declare const PLAYER_BASE_STAMINA: number;
+export declare const PLAYER_BASE_STAMINA = 200;
 export declare const UNIT_BASE_DAMAGE = 30;
 export declare const NON_HEAVY_UNIT_SCALE = 1;
 export declare const STARTING_CARD_COUNT = 3;
@@ -43,3 +43,4 @@ export declare const PIXI_TEXT_DROP_SHADOW: {
 export declare const NUMBER_OF_PLAYERS_BEFORE_BUDGET_INCREASES = 2;
 export declare const LAST_LEVEL_INDEX = 11;
 export declare const NUMBER_OF_UNITS_TO_MERGE = 5;
+export declare const TIMEMASON_PERCENT_DRAIN = 1;

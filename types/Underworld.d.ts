@@ -7,7 +7,7 @@ import * as Player from './entity/Player';
 import * as Upgrade from './Upgrade';
 import * as Cards from './cards';
 import { BloodParticle } from './graphics/PixiUtils';
-import { Faction } from './types/commonTypes';
+import { Faction, GameMode } from './types/commonTypes';
 import type { Vec2 } from "./jmath/Vec";
 import { prng, SeedrandomState } from './jmath/rand';
 import { LineSegment } from './jmath/lineSegment';
@@ -31,12 +31,13 @@ export declare const elUpgradePickerContent: HTMLElement | undefined;
 export declare const showUpgradesClassName = "showUpgrades";
 export default class Underworld {
     seed: string;
-    gameMode?: string;
+    gameMode?: GameMode;
     localUnderworldNumber: number;
     overworld: Overworld;
     random: prng;
     pie: PieClient | IHostApp;
     levelIndex: number;
+    wave: number;
     RNGState?: SeedrandomState;
     turn_phase: turn_phase;
     lastUnitId: number;
@@ -81,14 +82,25 @@ export default class Underworld {
     particleFollowers: {
         displayObject: DisplayObject;
         emitter?: Emitter;
-        target: Unit.IUnit;
+        target: Vec2;
     }[];
     activeMods: string[];
     generatingLevel: boolean;
     statCalamities: StatCalamity[];
     simulatingMovePredictions: boolean;
+    allyNPCAttemptWinKillSwitch: number;
+    aquirePickupQueue: {
+        pickupId: number;
+        unitId: number;
+        timeout: number;
+        flaggedForRemoval: boolean;
+    }[];
+    startTime: number | undefined;
+    winTime: number | undefined;
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
+    calculateKillsNeededForLevel(level: number): number;
+    getNumberOfEnemyKillsNeededForNextLevelUp(): number;
     reportEnemyKilled(enemyKilledPos: Vec2): void;
     syncPlayerPredictionUnitOnly(): void;
     syncPredictionEntities(): void;
@@ -125,9 +137,10 @@ export default class Underworld {
     cleanUpLevel(): void;
     postSetupLevel(): void;
     createLevelSyncronous(levelData: LevelData): void;
+    _getLevelText(levelIndex: number): string;
     getLevelText(): string;
-    createLevel(levelData: LevelData, gameMode?: string): Promise<void>;
-    generateLevelDataSyncronous(levelIndex: number, gameMode?: string): LevelData;
+    createLevel(levelData: LevelData, gameMode?: GameMode): Promise<void>;
+    generateLevelDataSyncronous(levelIndex: number, gameMode?: GameMode): LevelData;
     generateLevelData(levelIndex: number): Promise<void>;
     checkPickupCollisions(unit: Unit.IUnit, prediction: boolean): void;
     isCoordOnWallTile(coord: Vec2): boolean;
@@ -139,12 +152,14 @@ export default class Underworld {
     endFullTurnCycle(): Promise<void>;
     syncTurnMessage(): void;
     initializePlayerTurns(): Promise<void>;
-    endMyTurn(): Promise<void>;
+    endMyTurnButtonHandler(): Promise<void>;
     endPlayerTurn(clientId: string): Promise<void>;
     chooseUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade): void;
     perksLeftToChoose(player: Player.IPlayer): number;
     cursesLeftToChoose(player: Player.IPlayer): number;
     upgradesLeftToChoose(player: Player.IPlayer): number;
+    spendStatPoint(stat: string, player: Player.IPlayer): void;
+    adminShowMageTypeSelect(): void;
     showUpgrades(): void;
     addRerollButton(player: Player.IPlayer): void;
     checkForEndOfLevel(): boolean;
@@ -155,6 +170,7 @@ export default class Underworld {
     initializeTurnPhase(p: turn_phase): Promise<void>;
     clearPredictedNextTurnDamage(): void;
     incrementTargetsNextTurnDamage(targets: Unit.IUnit[], damage: number, canAttack: boolean): void;
+    redPortalBehavior(faction: Faction): void;
     executeNPCTurn(faction: Faction): Promise<void>;
     canUnitAttackTarget(u: Unit.IUnit, attackTarget?: Unit.IUnit): boolean;
     getEntitiesWithinDistanceOfTarget(target: Vec2, distance: number, prediction: boolean): HasSpace[];
@@ -186,18 +202,18 @@ export default class Underworld {
     serializeForSaving(): IUnderworldSerialized;
     serializeForSyncronize(): IUnderworldSerializedForSyncronize;
 }
-declare type IUnderworldSerialized = Omit<typeof Underworld, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "doodads" | "doodadsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
+type IUnderworldSerialized = Omit<typeof Underworld, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "doodads" | "doodadsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
     players: Player.IPlayerSerialized[];
     units: Unit.IUnitSerialized[];
     pickups: Pickup.IPickupSerialized[];
     doodads: Doodad.IDoodadSerialized[];
 };
-declare type NonFunctionPropertyNames<T> = {
+type NonFunctionPropertyNames<T> = {
     [K in keyof T]: T[K] extends Function ? never : K;
 }[keyof T];
-declare type UnderworldNonFunctionProperties = Exclude<NonFunctionPropertyNames<Underworld>, null | undefined>;
-export declare type IUnderworldSerializedForSyncronize = Omit<Pick<Underworld, UnderworldNonFunctionProperties>, "pie" | "overworld" | "debugGraphics" | "players" | "units" | "pickups" | "obstacles" | "random" | "gameLoop" | "particleFollowers">;
-export declare type Biome = 'water' | 'lava' | 'blood' | 'ghost';
+type UnderworldNonFunctionProperties = Exclude<NonFunctionPropertyNames<Underworld>, null | undefined>;
+export type IUnderworldSerializedForSyncronize = Omit<Pick<Underworld, UnderworldNonFunctionProperties>, "pie" | "overworld" | "debugGraphics" | "players" | "units" | "pickups" | "obstacles" | "random" | "gameLoop" | "particleFollowers">;
+export type Biome = 'water' | 'lava' | 'blood' | 'ghost';
 export declare function biomeTextColor(biome?: Biome): number | string;
 export interface LevelData {
     levelIndex: number;

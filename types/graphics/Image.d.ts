@@ -5,7 +5,7 @@ export interface HasImage {
     image: IImageAnimated;
 }
 export declare function hasImage(maybe: any): maybe is HasImage;
-export declare type IImageAnimatedSerialized = {
+export type IImageAnimatedSerialized = {
     sprite: {
         x: number;
         y: number;
@@ -19,7 +19,7 @@ export declare type IImageAnimatedSerialized = {
     };
     mask?: string;
 };
-export declare type JSpriteAnimated = PIXI.AnimatedSprite & {
+export type JSpriteAnimated = PIXI.AnimatedSprite & {
     imagePath: string;
     doRemoveWhenPrimaryAnimationChanges: boolean;
 };

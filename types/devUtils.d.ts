@@ -7,3 +7,4 @@ export default function devUtils(graphics: PIXI.Graphics): {
     debugDrawVec2s: (points: Vec2[]) => void;
 };
 export declare function setupDevGlobalFunctions(overworld: Overworld): void;
+export declare function measureInvokationsPerSecond(label: string): void;

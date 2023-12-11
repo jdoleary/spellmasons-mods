@@ -8,8 +8,10 @@ interface FloatingTextInsructions {
     container?: PIXI.Container;
     style?: Partial<PIXI.ITextStyle>;
     keepWithinCameraBounds?: boolean;
+    valpha?: number;
+    aalpha?: number;
 }
-export default function floatingText({ coords, text, container, style, keepWithinCameraBounds }: FloatingTextInsructions): Promise<void>;
+export default function floatingText({ coords, text, container, style, keepWithinCameraBounds, valpha, aalpha, }: FloatingTextInsructions): Promise<void>;
 export declare const elPIXIHolder: HTMLElement;
 export declare function queueCenteredFloatingText(text: Localizable, fill?: string | number): void;
 export declare function centeredFloatingText(text: Localizable, fill?: string | number): void;

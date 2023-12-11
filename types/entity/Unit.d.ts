@@ -2,6 +2,7 @@ import * as Image from '../graphics/Image';
 import { PixiSpriteOptions } from '../graphics/PixiUtils';
 import { UnitSubType, UnitType, Faction } from '../types/commonTypes';
 import type { Vec2 } from '../jmath/Vec';
+import { UnitSource } from './units';
 import { EffectState } from '../cards';
 import Underworld from '../Underworld';
 import { HasLife, HasMana, HasSpace, HasStamina } from './Type';
@@ -12,7 +13,7 @@ export interface UnitPath {
     lastOwnPosition: Vec2;
     targetPosition: Vec2;
 }
-export declare type IUnitSerialized = Omit<IUnit, "resolveDoneMoving" | "image" | "animations" | "sfx"> & {
+export type IUnitSerialized = Omit<IUnit, "resolveDoneMoving" | "image" | "animations" | "sfx"> & {
     image?: Image.IImageAnimatedSerialized;
 };
 export interface UnitAnimations {
@@ -27,10 +28,11 @@ export interface UnitSFX {
     damage: string;
 }
 export declare function isUnit(maybeUnit: any): maybeUnit is IUnit;
-export declare type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
+export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     type: 'unit';
     id: number;
     unitSourceId: string;
+    strength: number;
     originalLife: boolean;
     path?: UnitPath;
     moveSpeed: number;
@@ -67,10 +69,15 @@ export declare type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean): IUnit;
 export declare function adjustUnitStatsByUnderworldCalamity(unit: IUnit, statCalamity: StatCalamity): void;
+interface DifficultyAdjustedUnitStats {
+    healthMax: number;
+    manaMax: number;
+}
+export declare function adjustUnitPropsDueToDifficulty(source: Partial<UnitSource>, difficulty: number): DifficultyAdjustedUnitStats;
 export declare function adjustUnitDifficulty(unit: IUnit, difficulty: number): void;
 export declare function addModifier(unit: IUnit, key: string, underworld: Underworld, prediction: boolean, quantity?: number, extra?: object): void;
 export declare function removeModifier(unit: IUnit, key: string, underworld: Underworld): void;
-export declare function cleanup(unit: IUnit): void;
+export declare function cleanup(unit: IUnit, maintainPosition?: boolean): void;
 export declare function serialize(unit: IUnit): IUnitSerialized;
 export declare function load(unit: IUnitSerialized, underworld: Underworld, prediction: boolean): IUnit;
 export declare function syncronize(unitSerialized: IUnitSerialized, originalUnit: IUnit): void;
@@ -110,3 +117,4 @@ export declare function subTypeToAttentionMarkerImage(unit: IUnit): string;
 export declare function findLOSLocation(unit: IUnit, target: Vec2, underworld: Underworld): Vec2[];
 export declare function demoAnimations(unit: IUnit): Promise<void>;
 export declare function resetUnitStats(unit: IUnit, underworld: Underworld): void;
+export {};

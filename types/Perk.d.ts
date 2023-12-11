@@ -14,8 +14,8 @@ export declare function createCursePerkElement({ cardId, statCalamity }: {
     statCalamity?: StatCalamity;
 }, underworld: Underworld): HTMLDivElement | undefined;
 export declare function createPerkElement(perk: AttributePerk, player: IPlayer, underworld: Underworld): HTMLDivElement | undefined;
-export declare type UpgradableAttribute = 'staminaMax' | 'stamina' | 'healthMax' | 'health' | 'manaMax' | 'mana' | 'attackRange';
-export declare type WhenUpgrade = 'immediately' | 'everyLevel' | 'everyTurn';
+export type UpgradableAttribute = 'staminaMax' | 'stamina' | 'healthMax' | 'health' | 'manaMax' | 'mana' | 'attackRange';
+export type WhenUpgrade = 'immediately' | 'everyLevel' | 'everyTurn';
 export declare function generatePerks(number: number, underworld: Underworld): AttributePerk[];
 export declare function choosePerk(perk: AttributePerk, player: IPlayer, underworld: Underworld): void;
 export declare function hidePerkList(): void;

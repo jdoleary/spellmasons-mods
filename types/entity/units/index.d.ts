@@ -5,7 +5,7 @@ interface ConstructorInfo {
     image: string;
     subtype: UnitSubType;
 }
-export declare type UnitAction = {
+export type UnitAction = {
     (self: Unit.IUnit, attackTargets: Unit.IUnit[], underworld: Underworld, canAttackTarget: boolean): Promise<void>;
 };
 export interface UnitSource {
@@ -24,6 +24,7 @@ interface SpawnParams {
     probability: number;
     budgetCost: number;
     unavailableUntilLevelIndex: number;
+    excludeMiniboss?: boolean;
 }
 import Underworld from '../../Underworld';
 import { Localizable } from '../../localization';

@@ -59,7 +59,7 @@ export declare function addPixiSpriteAnimated(imagePath: string, parent: PIXI.Co
 export declare function addPixiTilingSprite(imagePath: string, parent: PIXI.Container | undefined): PIXI.TilingSprite | undefined;
 export declare function addPixiSprite(imagePath: string, parent: PIXI.Container | undefined): PIXI.Sprite | undefined;
 export declare function pixiText(text: string, style: Partial<PIXI.ITextStyle>): PIXI.Text | undefined;
-export declare type BloodParticle = {
+export type BloodParticle = {
     x: number;
     y: number;
     dx: number;

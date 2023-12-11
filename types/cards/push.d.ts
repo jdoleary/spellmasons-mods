@@ -3,7 +3,7 @@ import { Spell } from './index';
 import type { ForceMove } from '../jmath/moveWithCollision';
 import Underworld from '../Underworld';
 import { HasSpace } from '../entity/Type';
-export declare const id = "push";
+export declare const pushId = "push";
 export declare const velocityStartMagnitude = 10;
 declare const spell: Spell;
 interface forcePushArgs {

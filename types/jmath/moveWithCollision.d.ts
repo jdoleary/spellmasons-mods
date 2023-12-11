@@ -11,7 +11,7 @@ export interface ForceMove {
     alreadyCollided: HasSpace[];
     resolve: () => void;
 }
-export declare type Circle = {
+export type Circle = {
     radius: number;
 } & Vec2;
 export declare function isVecIntersectingVecWithCustomRadius(c1: Vec2, c2: Vec2, radius: number): boolean;

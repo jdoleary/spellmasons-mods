@@ -24,7 +24,7 @@ export declare function generateCave(params: CaveParams, biome: Biome, underworl
 };
 export declare function convertBaseTilesToFinalTiles(map: Map): void;
 export declare function getLimits(points: Vec.Vec2[]): Limits;
-export declare type Tile = {
+export type Tile = {
     image: string;
 } & Vec.Vec2;
 export interface Map {

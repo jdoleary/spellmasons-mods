@@ -10,26 +10,27 @@ import { JEmitter } from '../types/commonTypes';
 export declare const PICKUP_RADIUS = 36;
 export declare const PICKUP_IMAGE_PATH = "pickups/scroll";
 export declare const RED_PORTAL = "Red Portal";
+export declare const BLUE_PORTAL = "Blue Portal";
 export declare const CURSED_MANA_POTION = "Cursed Mana Potion";
-declare type IPickupEffect = ({ unit, player, pickup, prediction }: {
+type IPickupEffect = ({ unit, player, pickup, prediction }: {
     unit?: IUnit;
     player?: Player.IPlayer;
     pickup: IPickup;
     underworld: Underworld;
     prediction: boolean;
 }) => void;
-declare type IPickupInit = ({ pickup, underworld }: {
+type IPickupInit = ({ pickup, underworld }: {
     pickup: IPickup;
     underworld: Underworld;
 }) => void;
-declare type IPickupWillTrigger = ({ unit, player, pickup }: {
+type IPickupWillTrigger = ({ unit, player, pickup }: {
     unit?: IUnit;
     player?: Player.IPlayer;
     pickup: IPickup;
     underworld: Underworld;
 }) => boolean;
 export declare function isPickup(maybePickup: any): maybePickup is IPickup;
-export declare type IPickup = HasSpace & {
+export type IPickup = HasSpace & {
     type: 'pickup';
     id: number;
     name: string;
@@ -43,6 +44,7 @@ export declare type IPickup = HasSpace & {
     effect: IPickupEffect;
     willTrigger: IPickupWillTrigger;
     emitter?: JEmitter;
+    emitterJID?: string;
     flaggedForRemoval: boolean;
 };
 export interface IPickupSource {
@@ -61,14 +63,15 @@ export interface IPickupSource {
 }
 export declare function copyForPredictionPickup(p: IPickup): IPickup;
 export declare const TIME_CIRCLE_JID = "timeCircle";
-export declare function create({ pos, pickupSource, idOverride }: {
+export declare function create({ pos, pickupSource, idOverride, logSource }: {
     pos: Vec2;
     pickupSource: IPickupSource;
     idOverride?: number;
+    logSource?: string;
 }, underworld: Underworld, prediction: boolean): IPickup;
 export declare function sync(pickup: IPickup): void;
 export declare function setPosition(pickup: IPickup, x: number, y: number): void;
-export declare type IPickupSerialized = Omit<IPickup, "image" | "effect" | "text" | "real" | "emitter"> & {
+export type IPickupSerialized = Omit<IPickup, "image" | "effect" | "text" | "real" | "emitter"> & {
     image?: Image.IImageAnimatedSerialized;
     emitter?: string;
 };

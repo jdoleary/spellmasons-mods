@@ -3,7 +3,7 @@ import * as Image from '../graphics/Image';
 import Underworld from "../Underworld";
 import { Vec2 } from "../jmath/Vec";
 export declare function isDoodad(maybeDoodad: any): maybeDoodad is IDoodad;
-export declare type IDoodad = HasSpace & {
+export type IDoodad = HasSpace & {
     name: string;
     type: 'doodad';
     imagePath: string;
@@ -21,7 +21,7 @@ interface IDoodadSource {
 }
 export declare const DOODAD_ROCK_NAME = "rock";
 export declare const doodads: IDoodadSource[];
-export declare type IDoodadSerialized = Omit<IDoodad, "image" | "real"> & {
+export type IDoodadSerialized = Omit<IDoodad, "image" | "real"> & {
     image?: Image.IImageAnimatedSerialized;
 };
 export declare function serialize(p: IDoodad): IDoodadSerialized;

@@ -1,5 +1,5 @@
 import { Vec2 } from './Vec';
-export declare function lerp(start: number, end: number, time: number): number;
+export declare function lerp(start: number, end: number, time: number, goBeyondEnd?: boolean): number;
 export declare function similarTriangles(X: number, Y: number, D: number, d: number): Vec2;
 export declare function getCoordsAtDistanceTowardsTarget(start: Vec2, target: Vec2, travelDist: number, allowMoveBeyondTarget?: boolean): Vec2;
 export declare function distance(coords1: Vec2, coords2: Vec2): number;

@@ -1,2 +1,2 @@
 export declare const impendingDoomId = "impendingDoom";
-export default function registerSummoningSickness(): void;
+export default function registerImpendingDoom(): void;

@@ -3,6 +3,7 @@ import { Vec2 } from '../jmath/Vec';
 import { IUnit } from '../entity/Unit';
 import Underworld from '../Underworld';
 export declare function makeAncientParticles(position: Vec2, prediction: boolean): void;
+export declare function makeParticleExplosion(position: Vec2, size: number, prediction: boolean, colorStart: string, colorEnd: string): void;
 export declare function makeBloatExplosionWithParticles(position: Vec2, size: number, prediction: boolean): void;
 export declare function makeBleedParticles(position: Vec2, prediction: boolean, proportion: number, resolver?: () => void): void;
 export declare function makeRisingParticles(position: Vec2, prediction: boolean, color?: string, emitterLifetime?: number): import("../types/commonTypes").JEmitter | undefined;

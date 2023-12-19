@@ -1,6 +1,5 @@
 /// <reference types="node" />
 import * as Unit from './entity/Unit';
-import * as Doodad from './entity/Doodad';
 import * as Pickup from './entity/Pickup';
 import * as Obstacle from './entity/Obstacle';
 import * as Player from './entity/Player';
@@ -49,8 +48,6 @@ export default class Underworld {
     unitsPrediction: Unit.IUnit[];
     pickups: Pickup.IPickup[];
     pickupsPrediction: Pickup.IPickup[];
-    doodads: Doodad.IDoodad[];
-    doodadsPrediction: Doodad.IDoodad[];
     imageOnlyTiles: Tile[];
     liquidSprites: TilingSprite[];
     walls: LineSegment[];
@@ -97,6 +94,7 @@ export default class Underworld {
     }[];
     startTime: number | undefined;
     winTime: number | undefined;
+    hotseatCurrentPlayerIndex: number;
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
     calculateKillsNeededForLevel(level: number): number;
@@ -154,6 +152,8 @@ export default class Underworld {
     initializePlayerTurns(): Promise<void>;
     endMyTurnButtonHandler(): Promise<void>;
     endPlayerTurn(clientId: string): Promise<void>;
+    changeToNextHotseatPlayer(): Promise<void>;
+    getFreeUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade): void;
     chooseUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade): void;
     perksLeftToChoose(player: Player.IPlayer): number;
     cursesLeftToChoose(player: Player.IPlayer): number;
@@ -179,8 +179,6 @@ export default class Underworld {
     getUnitsAt(coords: Vec2, prediction?: boolean): Unit.IUnit[];
     getUnitAt(coords: Vec2, prediction?: boolean): Unit.IUnit | undefined;
     getPickupAt(coords: Vec2, prediction?: boolean): Pickup.IPickup | undefined;
-    getDoodadAt(coords: Vec2, prediction?: boolean): Doodad.IDoodad | undefined;
-    addDoodadToArray(doodad: Doodad.IDoodad, prediction: boolean): void;
     addUnitToArray(unit: Unit.IUnit, prediction: boolean): Unit.IUnit;
     addPickupToArray(pickup: Pickup.IPickup, prediction: boolean): void;
     castCards(args: CastCardsArgs): Promise<Cards.EffectState>;
@@ -193,7 +191,7 @@ export default class Underworld {
         target?: Vec2;
         cardIds: string[];
     }): void;
-    syncPlayers(players: Player.IPlayerSerialized[]): void;
+    syncPlayers(players: Player.IPlayerSerialized[], isClientPlayerSourceOfTruth: boolean): void;
     pickupIsIdentical(pickup: Pickup.IPickup, serialized: Pickup.IPickupSerialized): boolean;
     syncPickups(pickups: Pickup.IPickupSerialized[]): void;
     mergeExcessUnits(): Promise<void>;
@@ -202,11 +200,10 @@ export default class Underworld {
     serializeForSaving(): IUnderworldSerialized;
     serializeForSyncronize(): IUnderworldSerializedForSyncronize;
 }
-type IUnderworldSerialized = Omit<typeof Underworld, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "doodads" | "doodadsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
+export type IUnderworldSerialized = Omit<typeof Underworld, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "doodads" | "doodadsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
     players: Player.IPlayerSerialized[];
     units: Unit.IUnitSerialized[];
     pickups: Pickup.IPickupSerialized[];
-    doodads: Doodad.IDoodadSerialized[];
 };
 type NonFunctionPropertyNames<T> = {
     [K in keyof T]: T[K] extends Function ? never : K;

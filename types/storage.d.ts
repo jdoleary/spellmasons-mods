@@ -8,6 +8,7 @@ export declare const STORAGE_ID_UI_ZOOM = "uiZoom";
 export declare const STORAGE_CONTROLS_KEY = "controls";
 export declare const ENEMY_ENCOUNTERED_STORAGE_KEY = "enemyEncountered";
 export declare const SPELLS_DISCOVERED_STORAGE_KEY = "spellsDiscovered";
+export declare const STORAGE_PIE_CLIENTID_KEY = "clientId";
 export declare function getSavedData(): void;
 export declare function remove(key: string): void;
 export declare function set(key: string, value: any): void;

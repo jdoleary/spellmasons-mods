@@ -1,9 +1,8 @@
 import type * as Player from '../entity/Player';
 import * as Unit from '../entity/Unit';
 import * as Pickup from '../entity/Pickup';
-import * as Doodad from '../entity/Doodad';
 import type { Vec2 } from '../jmath/Vec';
-import Events, { onDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd } from '../Events';
+import Events, { onDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected } from '../Events';
 import { Subsprite } from '../Subsprites';
 import { UnitDamage } from './slash';
 import Underworld from '../Underworld';
@@ -24,6 +23,7 @@ interface Events {
     onAgro?: onAgro;
     onTurnStart?: onTurnStart;
     onTurnEnd?: onTurnEnd;
+    onDrawSelected?: onDrawSelected;
 }
 export interface Spell {
     card: ICard;
@@ -44,7 +44,6 @@ export interface EffectState {
     casterPlayer?: Player.IPlayer;
     targetedUnits: Unit.IUnit[];
     targetedPickups: Pickup.IPickup[];
-    targetedDoodads: Doodad.IDoodad[];
     castLocation: Vec2;
     aggregator: {
         unitDamage: UnitDamage[];
@@ -92,5 +91,4 @@ export declare function getCardsFromIds(cardIds: string[]): ICard[];
 export declare function addTarget(target: any, effectState: EffectState): void;
 export declare function addUnitTarget(unit: Unit.IUnit, effectState: EffectState): void;
 export declare function addPickupTarget(pickup: Pickup.IPickup, effectState: EffectState): void;
-export declare function addDoodadTarget(doodad: Doodad.IDoodad, effectState: EffectState): void;
 export {};

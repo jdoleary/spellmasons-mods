@@ -52,4 +52,3 @@ export interface Mod {
     pickups?: IPickupSource[];
     spells?: Spell[];
 }
-export declare function isSinglePlayer(clientId: string | undefined): boolean;

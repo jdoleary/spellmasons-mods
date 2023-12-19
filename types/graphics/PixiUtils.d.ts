@@ -26,7 +26,7 @@ export declare function setupLiquidFilter(): void;
 export declare function cleanUpLiquidFilter(): void;
 export declare function resizePixi(): void;
 export declare function setAbyssColor(biome: Biome): void;
-export declare function withinCameraBounds(position: Vec2, marginHoriz?: number): Vec2;
+export declare function withinCameraBounds(position: Vec2, marginHorizontal?: number, marginVertical?: number): Vec2;
 export declare function runCinematicLevelCamera(underworld: Underworld): Promise<void>;
 export declare function moveCamera(x: number, y: number): void;
 export declare function getCameraCenterInGameSpace(): Vec2;

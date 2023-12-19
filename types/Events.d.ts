@@ -19,6 +19,9 @@ export type onTurnStart = {
 export type onTurnEnd = {
     (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;
 };
+export type onDrawSelected = {
+    (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;
+};
 declare const _default: {
     onAgroSource: {
         [name: string]: onAgro;
@@ -37,6 +40,9 @@ declare const _default: {
     };
     onTurnEndSource: {
         [name: string]: onTurnEnd;
+    };
+    onDrawSelectedSource: {
+        [name: string]: onDrawSelected;
     };
 };
 export default _default;

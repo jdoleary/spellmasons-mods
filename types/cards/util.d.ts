@@ -3,6 +3,7 @@ export interface Modifier {
     [key: string]: any;
     isCurse: boolean;
     quantity: number;
-    persistBetweenLevels: boolean;
+    keepOnDeath?: boolean;
+    keepBetweenLevels?: boolean;
 }
-export declare function getOrInitModifier(unit: IUnit, key: string, { isCurse, quantity, persistBetweenLevels, ...rest }: Modifier, firstTimeSetup: () => void): Modifier;
+export declare function getOrInitModifier(unit: IUnit, key: string, { isCurse, quantity, keepOnDeath, keepBetweenLevels, ...rest }: Modifier, firstTimeSetup: () => void): Modifier;

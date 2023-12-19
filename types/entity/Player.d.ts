@@ -34,6 +34,7 @@ export interface IPlayer {
     isSpawned: boolean;
     cardsInToolbar: string[];
     inventory: string[];
+    freeSpells: string[];
     upgrades: Upgrade.IUpgrade[];
     upgradesLeftToChoose: number;
     perksLeftToChoose: number;
@@ -55,7 +56,7 @@ export declare function setPlayerRobeColor(player: IPlayer, color: number | stri
 export declare function resetPlayerForNextLevel(player: IPlayer, underworld: Underworld): void;
 export declare function updateGlobalRefToCurrentClientPlayer(player: IPlayer, underworld: Underworld): void;
 export declare function serialize(player: IPlayer): IPlayerSerialized;
-export declare function load(player: IPlayerSerialized, underworld: Underworld): IPlayer | undefined;
+export declare function load(player: IPlayerSerialized, index: number, underworld: Underworld, isClientPlayerSourceOfTruth: boolean): IPlayer | undefined;
 export declare function setClientConnected(player: IPlayer, connected: boolean, underworld: Underworld): void;
 export declare function syncLobby(underworld: Underworld): void;
 export declare function enterPortal(player: IPlayer, underworld: Underworld): void;

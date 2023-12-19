@@ -40,8 +40,8 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     attackRange: number;
     name?: string;
     isMiniboss: boolean;
-    predictionScale?: number;
     isPrediction?: boolean;
+    predictionScale?: number;
     faction: Faction;
     UITargetCircleOffsetY: number;
     defaultImagePath: string;
@@ -60,6 +60,7 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     onAgroEvents: string[];
     onTurnStartEvents: string[];
     onTurnEndEvents: string[];
+    onDrawSelectedEvents: string[];
     animations: UnitAnimations;
     sfx: UnitSFX;
     modifiers: {
@@ -115,6 +116,7 @@ export declare function setPlayerAttributeMax(unit: IUnit, attribute: 'manaMax' 
 export declare function isUnitsTurnPhase(unit: IUnit, underworld: Underworld): boolean;
 export declare function subTypeToAttentionMarkerImage(unit: IUnit): string;
 export declare function findLOSLocation(unit: IUnit, target: Vec2, underworld: Underworld): Vec2[];
+export declare function drawSelectedGraphics(unit: IUnit, prediction: boolean | undefined, underworld: Underworld): void;
 export declare function demoAnimations(unit: IUnit): Promise<void>;
 export declare function resetUnitStats(unit: IUnit, underworld: Underworld): void;
 export {};

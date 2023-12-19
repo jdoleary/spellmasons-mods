@@ -83,7 +83,7 @@ export declare function tryTriggerPickup(pickup: IPickup, unit: IUnit, underworl
 export declare const spike_damage = 30;
 export declare const CARDS_PICKUP_NAME = "Spells";
 export declare const PICKUP_SPIKES_NAME = "Trap";
-export declare const PICKUP_PORTAL_NAME = "Portal";
+export declare const PORTAL_PURPLE_NAME = "Portal";
 export declare const pickups: IPickupSource[];
 export declare function givePlayerUpgrade(p: Player.IPlayer, underworld: Underworld): void;
 export {};

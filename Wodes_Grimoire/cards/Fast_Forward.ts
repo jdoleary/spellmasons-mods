@@ -1,5 +1,7 @@
 /// <reference path="../../globalTypes.d.ts" />
+import Underworld from '../../types/Underworld';
 import type { Spell } from '../../types/cards/index';
+import { IUnit } from '../../types/entity/Unit';
 
 const {
     PixiUtils,
@@ -76,7 +78,7 @@ const spell: Spell = {
 
     },
 };
-async function procEvents(unit, prediction, underworld) {
+async function procEvents(unit: IUnit, prediction: boolean, underworld: Underworld) {
     //onTurnStart events first for order.
     for (let i = 0; i < unit.onTurnStartEvents.length; i++) {
         const eventName = unit.onTurnStartEvents[i];
@@ -93,7 +95,7 @@ async function procEvents(unit, prediction, underworld) {
         if (eventName) {
             const fne = Events.default.onTurnEndSource[eventName];
             if (fne) {
-                await fne(unit, underworld, prediction);
+                await fne(unit, prediction, underworld);
             }
         }
     }

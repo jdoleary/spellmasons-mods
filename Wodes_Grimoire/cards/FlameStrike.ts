@@ -62,7 +62,7 @@ const spell: Spell = {
                     } else {
                         //Does spell effect for underworld
                         if (prediction) {
-                            drawUICircle(unit, adjustedRadius, 13981270); //13981270 is healthRed from color ui
+                            drawUICircle(globalThis.predictionGraphics, unit, adjustedRadius, 13981270); //13981270 is healthRed from color ui
                         }
                         explosionTargets.forEach(t => {
                             const damage = t == unit ? quantityAdjustedDamageMain : quantityAdjustedDamageSplash;

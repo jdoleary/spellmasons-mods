@@ -1,6 +1,7 @@
 /// <reference path="../../globalTypes.d.ts" />
+import Underworld from '../../types/Underworld';
 import type { Spell } from '../../types/cards/index';
-import { isUnit } from '../../types/entity/Unit';
+import { IUnit, isUnit } from '../../types/entity/Unit';
 
 const {
     cardUtils,
@@ -58,7 +59,7 @@ const spell: Spell = {
         //onMove: (unit, newLocation) => {triggerDistanceDamage(unit);return newLocation},
         onDamage: (unit, amount, underworld, prediction) => { triggerDistanceDamage(unit, underworld, prediction); return amount },
         onTurnStart: async (unit, prediction, underworld) => { triggerDistanceDamage(unit, underworld, prediction); return false },
-        onTurnEnd: async (unit, underworld) => { triggerDistanceDamage(unit, underworld); },
+        onTurnEnd: async (unit, prediction, underworld) => { triggerDistanceDamage(unit, underworld, prediction); },
     },
 };
 
@@ -101,7 +102,7 @@ function updateTooltip(unit) {
         modifier.tooltip = `When target moves deal ${caltropsAmount(modifier.caltropsCounter)} damage, lasts ${modifier.quantity} turns`
     }
 }
-function triggerDistanceDamage(unit, underworld, prediction = false) {
+function triggerDistanceDamage(unit: IUnit, underworld: Underworld, prediction = false) {
     const modifier = unit.modifiers && unit.modifiers[cardId];
     let x_diff = unit.x - modifier.last_x;
     let y_diff = unit.y - modifier.last_y;

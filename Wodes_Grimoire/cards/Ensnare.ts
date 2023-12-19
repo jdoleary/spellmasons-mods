@@ -1,5 +1,7 @@
 /// <reference path="../../globalTypes.d.ts" />
+import Underworld from '../../types/Underworld';
 import type { Spell } from '../../types/cards/index';
+import { IUnit } from '../../types/entity/Unit';
 const {
     cardUtils,
     commonTypes,
@@ -53,7 +55,7 @@ const spell: Spell = {
 
     },
     events: {
-        onTurnEnd: async (unit, underworld) => {
+        onTurnEnd: async (unit: IUnit, prediction: boolean, underworld: Underworld) => {
             // Decrement how many turns left the unit is for pacify
             const modifier = unit.modifiers[cardId];
             if (modifier) {

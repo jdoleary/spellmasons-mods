@@ -1,5 +1,4 @@
 import * as Unit from './Unit';
-import * as Upgrade from '../Upgrade';
 import * as Cards from '../cards';
 import Underworld from '../Underworld';
 import { AttributePerk } from '../Perk';
@@ -35,7 +34,7 @@ export interface IPlayer {
     cardsInToolbar: string[];
     inventory: string[];
     freeSpells: string[];
-    upgrades: Upgrade.IUpgrade[];
+    upgrades: string[];
     upgradesLeftToChoose: number;
     perksLeftToChoose: number;
     cardUsageCounts: CardUsage;

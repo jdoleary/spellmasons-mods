@@ -119,4 +119,5 @@ export declare function findLOSLocation(unit: IUnit, target: Vec2, underworld: U
 export declare function drawSelectedGraphics(unit: IUnit, prediction: boolean | undefined, underworld: Underworld): void;
 export declare function demoAnimations(unit: IUnit): Promise<void>;
 export declare function resetUnitStats(unit: IUnit, underworld: Underworld): void;
+export declare function unitSourceIdToName(unitSourceId: string, asMiniboss: boolean): string;
 export {};

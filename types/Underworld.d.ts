@@ -106,6 +106,7 @@ export default class Underworld {
     fullySimulateForceMovePredictions(): void;
     runForceMove(forceMoveInst: ForceMove, prediction: boolean): boolean;
     queueGameLoop: () => void;
+    addForceMove(forceMoveInst: ForceMove): void;
     gameLoopForceMove: () => boolean;
     gameLoopUnit: (u: Unit.IUnit, aliveNPCs: Unit.IUnit[], deltaTime: number) => boolean;
     awaitForceMoves: () => Promise<void>;

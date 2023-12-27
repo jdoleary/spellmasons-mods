@@ -79,6 +79,7 @@ export interface ICard {
     noInitialTarget?: boolean;
     supportQuantity?: boolean;
     onlySelectDeadUnits?: boolean;
+    ignoreRange?: boolean;
     sfx?: string;
 }
 export declare const allCards: {

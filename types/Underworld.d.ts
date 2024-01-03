@@ -95,6 +95,10 @@ export default class Underworld {
     startTime: number | undefined;
     winTime: number | undefined;
     hotseatCurrentPlayerIndex: number;
+    headlessTimeouts: {
+        time: number;
+        callback: () => void;
+    }[];
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
     calculateKillsNeededForLevel(level: number): number;
@@ -104,14 +108,14 @@ export default class Underworld {
     syncPredictionEntities(): void;
     syncronizeRNG(RNGState: SeedrandomState | boolean): prng;
     fullySimulateForceMovePredictions(): void;
-    runForceMove(forceMoveInst: ForceMove, prediction: boolean): boolean;
+    runForceMove(forceMoveInst: ForceMove, deltaTime: number, prediction: boolean): boolean;
     queueGameLoop: () => void;
     addForceMove(forceMoveInst: ForceMove): void;
-    gameLoopForceMove: () => boolean;
+    gameLoopForceMove: (deltaTime: number) => boolean;
     gameLoopUnit: (u: Unit.IUnit, aliveNPCs: Unit.IUnit[], deltaTime: number) => boolean;
-    awaitForceMoves: () => Promise<void>;
+    awaitForceMoves: (prediction?: boolean) => Promise<void>;
     triggerGameLoopHeadless: () => void;
-    _gameLoopHeadless: () => boolean;
+    _gameLoopHeadless: (loopCount: number) => boolean;
     gameLoop: (timestamp: number) => void;
     setPath(unit: Unit.IUnit, target: Vec2): void;
     calculatePath(preExistingPath: Unit.UnitPath | undefined, startPoint: Vec2, target: Vec2): Unit.UnitPath;
@@ -186,6 +190,7 @@ export default class Underworld {
     checkIfShouldSpawnPortal(): void;
     hasLineOfSight(seer: Vec2, target: Vec2): boolean;
     dev_shuffleUnits(): Unit.IUnit[];
+    findIdenticalUnit(current: Unit.IUnit, potentialMatches: Unit.IUnitSerialized[]): Unit.IUnitSerialized | undefined;
     unitIsIdentical(unit: Unit.IUnit, serialized: Unit.IUnitSerialized): boolean;
     syncUnits(units: Unit.IUnitSerialized[], excludePlayerUnits?: boolean): void;
     sendPlayerThinking(thoughts: {
@@ -200,6 +205,7 @@ export default class Underworld {
     serializeForHash(): any;
     serializeForSaving(): IUnderworldSerialized;
     serializeForSyncronize(): IUnderworldSerializedForSyncronize;
+    updateAccessibilityOutlines(): void;
 }
 export type IUnderworldSerialized = Omit<typeof Underworld, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "doodads" | "doodadsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
     players: Player.IPlayerSerialized[];

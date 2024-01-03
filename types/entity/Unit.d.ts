@@ -32,6 +32,7 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     type: 'unit';
     id: number;
     unitSourceId: string;
+    real?: IUnit;
     strength: number;
     originalLife: boolean;
     path?: UnitPath;
@@ -69,6 +70,7 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     predictedNextTurnDamage: number;
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean): IUnit;
+export declare function updateAccessibilityOutline(unit: IUnit, targeted: boolean, outOfRange?: boolean): void;
 export declare function adjustUnitStatsByUnderworldCalamity(unit: IUnit, statCalamity: StatCalamity): void;
 interface DifficultyAdjustedUnitStats {
     healthMax: number;
@@ -78,7 +80,7 @@ export declare function adjustUnitPropsDueToDifficulty(source: Partial<UnitSourc
 export declare function adjustUnitDifficulty(unit: IUnit, difficulty: number): void;
 export declare function addModifier(unit: IUnit, key: string, underworld: Underworld, prediction: boolean, quantity?: number, extra?: object): void;
 export declare function removeModifier(unit: IUnit, key: string, underworld: Underworld): void;
-export declare function cleanup(unit: IUnit, maintainPosition?: boolean): void;
+export declare function cleanup(unit: IUnit, maintainPosition?: boolean, forceCleanPlayerUnit?: boolean): void;
 export declare function serialize(unit: IUnit): IUnitSerialized;
 export declare function load(unit: IUnitSerialized, underworld: Underworld, prediction: boolean): IUnit;
 export declare function syncronize(unitSerialized: IUnitSerialized, originalUnit: IUnit): void;

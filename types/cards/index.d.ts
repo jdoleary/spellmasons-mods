@@ -2,7 +2,7 @@ import type * as Player from '../entity/Player';
 import * as Unit from '../entity/Unit';
 import * as Pickup from '../entity/Pickup';
 import type { Vec2 } from '../jmath/Vec';
-import Events, { onDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected } from '../Events';
+import Events, { onDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision } from '../Events';
 import { Subsprite } from '../Subsprites';
 import { UnitDamage } from './slash';
 import Underworld from '../Underworld';
@@ -24,6 +24,7 @@ interface Events {
     onTurnStart?: onTurnStart;
     onTurnEnd?: onTurnEnd;
     onDrawSelected?: onDrawSelected;
+    onProjectileCollision?: onProjectileCollision;
 }
 export interface Spell {
     card: ICard;
@@ -79,6 +80,7 @@ export interface ICard {
     noInitialTarget?: boolean;
     supportQuantity?: boolean;
     onlySelectDeadUnits?: boolean;
+    ignoreRange?: boolean;
     sfx?: string;
 }
 export declare const allCards: {

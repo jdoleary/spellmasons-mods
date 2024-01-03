@@ -1,10 +1,10 @@
 import { Vec2 } from '../jmath/Vec';
 import { Spell } from './index';
-import type { ForceMove } from '../jmath/moveWithCollision';
+import { ForceMove } from '../jmath/moveWithCollision';
 import Underworld from '../Underworld';
 import { HasSpace } from '../entity/Type';
 export declare const pushId = "push";
-export declare const velocityStartMagnitude = 10;
+export declare const velocityStartMagnitude = 0.625;
 declare const spell: Spell;
 interface forcePushArgs {
     pushedObject: HasSpace;

@@ -38,6 +38,7 @@ declare const mapping: {
     cameraRight: string[];
     touchPadMoveCharacter: string[];
     openChat: string[];
+    adminPowerBar: string[];
 };
 export default mapping;
 export declare function fullyUpdateControls(newMapping: any): void;

@@ -1,11 +1,9 @@
-import * as Unit from '../entity/Unit';
 import { EffectState, ICard, Spell } from './index';
 import { LineSegment } from '../jmath/lineSegment';
 import { Vec2 } from '../jmath/Vec';
 import Underworld from '../Underworld';
 export declare const arrowCardId = "Arrow";
 declare const spell: Spell;
-export declare function arrowEffect(multiShotCount: number, damageDone: number, onCollide?: (state: EffectState, firstTarget: Unit.IUnit, underworld: Underworld, prediction: boolean) => Promise<EffectState>, skipClearCache?: boolean): (state: EffectState, card: ICard, quantity: number, underworld: Underworld, prediction: boolean, outOfRange?: boolean) => Promise<EffectState>;
+export declare function arrowEffect(multiShotCount: number, collideFnKey: string, doesPierce?: boolean): (state: EffectState, card: ICard, quantity: number, underworld: Underworld, prediction: boolean, outOfRange?: boolean) => Promise<EffectState>;
 export default spell;
 export declare function findArrowPath(casterPositionAtTimeOfCast: Vec2, target: Vec2, underworld: Underworld): LineSegment | undefined;
-export declare function findArrowCollisions(casterPositionAtTimeOfCast: Vec2, casterId: number, target: Vec2, prediction: boolean, underworld: Underworld): Vec2[];

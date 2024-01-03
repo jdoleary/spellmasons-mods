@@ -2,6 +2,7 @@ import type * as Player from '../../entity/Player';
 import * as Cards from '../../cards';
 import Underworld from '../../Underworld';
 import { Overworld } from '../../Overworld';
+export declare function resetInventoryContent(): void;
 export declare const elCardHand: HTMLElement;
 export declare const elFloatingCardHolderLeft: HTMLElement;
 export declare const elFloatingCardHolderRight: HTMLElement;

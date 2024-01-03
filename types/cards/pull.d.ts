@@ -3,7 +3,7 @@ import { Spell } from './index';
 import Underworld from '../Underworld';
 import { HasSpace } from '../entity/Type';
 export declare const pullId = "pull";
-export declare const velocityStartMagnitude = 10;
+export declare const velocityStartMagnitude = 0.625;
 declare const spell: Spell;
 export declare function pull(pushedObject: HasSpace, towards: Vec2, quantity: number, underworld: Underworld, prediction: boolean): Promise<void>;
 export default spell;

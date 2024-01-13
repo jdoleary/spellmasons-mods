@@ -50,7 +50,12 @@ export declare function normalizedVector(point1: Vec2, point2: Vec2): {
     distance: number;
 };
 export declare function collideWithLineSegments(circle: Circle, lineSegments: LineSegment[], underworld: Underworld): boolean;
-export declare function forceMovePreventForceThroughWall(forceMoveInst: ForceMove, underworld: Underworld, trueVelocity: Vec2): boolean;
+export declare function predictWallCollision(forceMoveInst: ForceMove, underworld: Underworld, deltaTime: number): {
+    msUntilCollision: number;
+    wall: LineSegment | undefined;
+};
+export declare function projectVelocityAlongWall(velocity: Vec2, lineSegment: LineSegment): Vec2;
+export declare function reflectVelocityOnWall(velocity: Vec2, lineSegment: LineSegment): Vec2;
 export declare function moveWithCollisions(mover: Circle, destination: Vec2, circles: HasSpace[], underworld: Underworld): void;
 declare function repelCircles(mover: Circle, originalPosition: Vec2, other: Circle, underworld: Underworld, otherIsFixed?: boolean): void;
 declare function repelCircleFromLine(mover: Circle, line: LineSegment, underworld: Underworld): boolean;

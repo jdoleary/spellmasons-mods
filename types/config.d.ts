@@ -45,3 +45,5 @@ export declare const NUMBER_OF_PLAYERS_BEFORE_BUDGET_INCREASES = 2;
 export declare const LAST_LEVEL_INDEX = 11;
 export declare const NUMBER_OF_UNITS_TO_MERGE = 5;
 export declare const TIMEMASON_PERCENT_DRAIN = 1;
+export declare const FORCE_MOVE_PROMISE_TIMEOUT_MILLIS = 2000;
+export declare const SERVER_HUB_URL = "https://server-hub-d2b2v.ondigitalocean.app";

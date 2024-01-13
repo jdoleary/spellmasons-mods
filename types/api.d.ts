@@ -49,8 +49,7 @@ import * as cardUtils from './cards/cardUtils';
 import * as cards from './cards/index';
 import * as cardsUtil from './cards/util';
 import * as Events from './Events';
-import { forcePush, makeForcePush } from './cards/push';
-import { pull } from './cards/pull';
+import { forcePushTowards, forcePushAwayFrom, forcePushToDestination, forcePushDelta } from './effects/force_move';
 import * as commonTypes from './types/commonTypes';
 import * as particleEmitter from '@pixi/particle-emitter';
 declare const SpellmasonsAPI: {
@@ -69,9 +68,10 @@ declare const SpellmasonsAPI: {
     eventListeners: typeof eventListeners;
     Events: typeof Events;
     FloatingText: typeof FloatingText;
-    forcePush: typeof forcePush;
-    makeForcePush: typeof makeForcePush;
-    pull: typeof pull;
+    forcePushDelta: typeof forcePushDelta;
+    forcePushTowards: typeof forcePushTowards;
+    forcePushAwayFrom: typeof forcePushAwayFrom;
+    forcePushToDestination: typeof forcePushToDestination;
     ImmediateModeSprites: typeof ImmediateModeSprites;
     inLiquid: typeof inLiquid;
     JAudio: typeof JAudio;

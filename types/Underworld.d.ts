@@ -110,7 +110,7 @@ export default class Underworld {
     fullySimulateForceMovePredictions(): void;
     runForceMove(forceMoveInst: ForceMove, deltaTime: number, prediction: boolean): boolean;
     queueGameLoop: () => void;
-    addForceMove(forceMoveInst: ForceMove): void;
+    addForceMove(forceMoveInst: ForceMove, prediction: boolean): void;
     gameLoopForceMove: (deltaTime: number) => boolean;
     gameLoopUnit: (u: Unit.IUnit, aliveNPCs: Unit.IUnit[], deltaTime: number) => boolean;
     awaitForceMoves: (prediction?: boolean) => Promise<void>;
@@ -187,12 +187,13 @@ export default class Underworld {
     addUnitToArray(unit: Unit.IUnit, prediction: boolean): Unit.IUnit;
     addPickupToArray(pickup: Pickup.IPickup, prediction: boolean): void;
     castCards(args: CastCardsArgs): Promise<Cards.EffectState>;
+    runTurnStartEvents(units: Unit.IUnit[], prediction: boolean): Promise<Unit.IUnit[]>;
     checkIfShouldSpawnPortal(): void;
     hasLineOfSight(seer: Vec2, target: Vec2): boolean;
     dev_shuffleUnits(): Unit.IUnit[];
     findIdenticalUnit(current: Unit.IUnit, potentialMatches: Unit.IUnitSerialized[]): Unit.IUnitSerialized | undefined;
     unitIsIdentical(unit: Unit.IUnit, serialized: Unit.IUnitSerialized): boolean;
-    syncUnits(units: Unit.IUnitSerialized[], excludePlayerUnits?: boolean): void;
+    syncUnits(units: Unit.IUnitSerialized[], isClientSourceOfTruthForOwnUnit?: boolean): void;
     sendPlayerThinking(thoughts: {
         target?: Vec2;
         cardIds: string[];

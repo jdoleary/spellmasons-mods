@@ -16,7 +16,7 @@ export type onAgro = {
     (agroer: IUnit, agroTarget: IUnit): IUnit;
 };
 export type onTurnStart = {
-    (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<boolean>;
+    (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;
 };
 export type onTurnEnd = {
     (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;

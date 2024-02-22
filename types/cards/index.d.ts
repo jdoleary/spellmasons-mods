@@ -4,7 +4,6 @@ import * as Pickup from '../entity/Pickup';
 import type { Vec2 } from '../jmath/Vec';
 import Events, { onDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision } from '../Events';
 import { Subsprite } from '../Subsprites';
-import { UnitDamage } from './slash';
 import Underworld from '../Underworld';
 import { CardCategory } from '../types/commonTypes';
 import { HasSpace } from '../entity/Type';
@@ -47,7 +46,6 @@ export interface EffectState {
     targetedPickups: Pickup.IPickup[];
     castLocation: Vec2;
     aggregator: {
-        unitDamage: UnitDamage[];
         radius: number;
     };
     initialTargetedUnitId: number | undefined;

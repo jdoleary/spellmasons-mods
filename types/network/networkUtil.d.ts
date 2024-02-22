@@ -3,6 +3,7 @@ import { MESSAGE_TYPES } from '../types/MessageTypes';
 import Underworld from '../Underworld';
 import type PieClient from '@websocketpie/client';
 import { Overworld } from '../Overworld';
+import type { Room } from '@websocketpie/client';
 export interface ClientPresenceChangedArgs {
     type: string;
     clients: string[];
@@ -13,6 +14,8 @@ export declare function hostGiveClientGameState(clientId: string, underworld: Un
 export interface IHostApp {
     sendData(payload: any, extras?: any): void;
     isHostApp: boolean;
+    soloMode: boolean;
+    currentRoomInfo?: Room;
 }
 export declare function typeGuardHostApp(x: PieClient | IHostApp): x is IHostApp;
 export declare function getVersionInequality(clientVersion?: string, serverVersion?: string): 'equal' | 'client behind' | 'server behind' | 'malformed';

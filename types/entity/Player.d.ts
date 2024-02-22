@@ -1,5 +1,6 @@
 import * as Unit from './Unit';
 import * as Cards from '../cards';
+import { Faction } from '../types/commonTypes';
 import Underworld from '../Underworld';
 import { AttributePerk } from '../Perk';
 export type IPlayerSerialized = Omit<IPlayer, "unit"> & {
@@ -27,6 +28,7 @@ export interface IPlayer {
     colorMagic: number;
     endedTurn: boolean;
     clientId: string;
+    playerId: string;
     clientConnected: boolean;
     unit: Unit.IUnit;
     awaitingSpawn: boolean;
@@ -50,10 +52,10 @@ export interface IPlayer {
 }
 export declare function inPortal(player: IPlayer): boolean;
 export declare function changeMageType(type: MageType, player?: IPlayer, underworld?: Underworld): void;
-export declare function create(clientId: string, underworld: Underworld): IPlayer;
+export declare function create(clientId: string, playerId: string, underworld: Underworld): IPlayer;
 export declare function setPlayerRobeColor(player: IPlayer, color: number | string, colorMagic?: number | string): void;
 export declare function resetPlayerForNextLevel(player: IPlayer, underworld: Underworld): void;
-export declare function updateGlobalRefToCurrentClientPlayer(player: IPlayer, underworld: Underworld): void;
+export declare function updateGlobalRefToPlayerIfCurrentClient(player: IPlayer): void;
 export declare function serialize(player: IPlayer): IPlayerSerialized;
 export declare function load(player: IPlayerSerialized, index: number, underworld: Underworld, isClientPlayerSourceOfTruth: boolean): IPlayer | undefined;
 export declare function setClientConnected(player: IPlayer, connected: boolean, underworld: Underworld): void;
@@ -63,4 +65,10 @@ export declare function ableToAct(player: IPlayer): boolean;
 export declare function addCardToHand(card: Cards.ICard | undefined, player: IPlayer | undefined, underworld: Underworld): void;
 export declare function setSpellmasonsToChannellingAnimation(player: IPlayer): void;
 export declare function removeCardsFromHand(player: IPlayer, cards: string[], underworld: Underworld): void;
+export declare function getFactionsOf(players: {
+    clientConnected: boolean;
+    unit: {
+        faction: Faction;
+    };
+}[]): Faction[];
 export {};

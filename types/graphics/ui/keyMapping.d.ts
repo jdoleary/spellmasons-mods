@@ -1,4 +1,4 @@
-declare const mapping: {
+declare const originalMapping: Readonly<{
     showWalkRope: string[];
     dequeueSpell: string[];
     openInventory: string[];
@@ -39,8 +39,8 @@ declare const mapping: {
     touchPadMoveCharacter: string[];
     openChat: string[];
     adminPowerBar: string[];
-};
-export default mapping;
+}>;
+export default originalMapping;
 export declare function fullyUpdateControls(newMapping: any): void;
 export declare function keyToHumanReadable(keyboardKeys: string[]): string;
 interface ModifierKeys {

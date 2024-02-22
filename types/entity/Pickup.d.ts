@@ -11,6 +11,9 @@ export declare const PICKUP_RADIUS = 36;
 export declare const PICKUP_IMAGE_PATH = "pickups/scroll";
 export declare const RED_PORTAL = "Red Portal";
 export declare const BLUE_PORTAL = "Blue Portal";
+export declare const HEALTH_POTION = "Health Potion";
+export declare const MANA_POTION = "Mana Potion";
+export declare const STAMINA_POTION = "Stamina Potion";
 export declare const CURSED_MANA_POTION = "Cursed Mana Potion";
 type IPickupEffect = ({ unit, player, pickup, prediction }: {
     unit?: IUnit;
@@ -81,7 +84,6 @@ export declare function removePickup(pickup: IPickup, underworld: Underworld, pr
 export declare function triggerPickup(pickup: IPickup, unit: IUnit, player: Player.IPlayer | undefined, underworld: Underworld, prediction: boolean): void;
 export declare function tryTriggerPickup(pickup: IPickup, unit: IUnit, underworld: Underworld, prediction: boolean): void;
 export declare const spike_damage = 30;
-export declare const CARDS_PICKUP_NAME = "Spells";
 export declare const PICKUP_SPIKES_NAME = "Trap";
 export declare const PORTAL_PURPLE_NAME = "Portal";
 export declare const pickups: IPickupSource[];

@@ -1,8 +1,10 @@
+import type Underworld from "./Underworld";
 export declare function enableRemoteLogging(): void;
 interface EventGroupMessage {
     seed: string;
     gameName: string;
     startTime?: number;
+    endTime?: number;
     serverRegion?: string;
     events: Event[];
 }
@@ -10,7 +12,7 @@ interface Event {
     time: number;
     message: string;
 }
-export declare function sendEventToServerHub(eventG: EventGroupMessage): void;
+export declare function sendEventToServerHub(eventG: Partial<EventGroupMessage>, underworld: Underworld): void;
 declare enum LogLevel {
     DEBUG = 0,
     TRACE = 1,

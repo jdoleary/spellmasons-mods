@@ -21,7 +21,11 @@ interface Trail {
 }
 export declare function addTrail(position: Vec2, target: Vec2, underworld: Underworld, config: particles.EmitterConfigV3): Promise<void>;
 export declare function cleanUpTrail(trail: Trail): void;
-export declare function makeManaTrail(start: Vec2, target: Vec2, underworld: Underworld, colorStart: string, colorEnd: string): Promise<void>;
+export declare function calculateMaxParticles(defaultMaxParticles: number, totalNumberOfTrails?: number): {
+    maxParticles: number;
+    ratioToDefault: number;
+};
+export declare function makeManaTrail(start: Vec2, target: Vec2, underworld: Underworld, colorStart: string, colorEnd: string, totalNumberOfTrails?: number): Promise<void>;
 export declare function updateParticles(delta: number, bloods: BloodParticle[], seedrandom: prng, underworld: Underworld): void;
 export declare function logNoTextureWarning(where: string): void;
 export declare function createParticleTexture(): import("pixi.js").Texture<import("pixi.js").Resource> | undefined;

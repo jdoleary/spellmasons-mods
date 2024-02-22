@@ -40,5 +40,5 @@ export declare function updateTutorialChecklist(): void;
 export declare function tutorialCompleteTask(key: keyof TutorialChecklist, condition?: () => boolean): void;
 export declare function tutorialShowTask(key: keyof TutorialChecklist): void;
 export declare function isTutorialComplete(): boolean;
-export declare function isFirstTutorialStepComplete(): boolean;
+export declare function isTutorialFirstStepsComplete(steps?: (keyof TutorialChecklist)[]): boolean;
 export {};

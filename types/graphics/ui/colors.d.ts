@@ -1,4 +1,5 @@
 export declare const trueWhite = 16777215;
+export declare const trueGrey = 8421504;
 export declare const trueBlack = 0;
 export declare const trueRed = 16711680;
 export declare const trueGreen = 65280;
@@ -48,3 +49,6 @@ export declare const attackRangeAlly = 42463;
 export declare const attackRangeEnemy = 13981270;
 export declare const textSoftBlack = 2499364;
 export declare const robeColors: number[];
+export declare const bloatExplodeStart = 14050359;
+export declare const bloatExplodeEnd = 16115894;
+export declare function convertToHashColor(color: number): string;

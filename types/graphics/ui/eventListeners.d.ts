@@ -23,7 +23,7 @@ export declare const adminCommands: {
 };
 export declare function triggerAdminCommand(label: string, clientId: string, payload: any): void;
 interface AdminActionProps {
-    clientId?: string;
+    playerId?: string;
     pos?: Vec2;
     selectedUnitid?: number;
     selectedPickupLocation?: Vec2;

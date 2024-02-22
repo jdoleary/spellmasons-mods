@@ -1,11 +1,6 @@
-import { Spell } from './index';
+import { EffectState, ICard, Spell } from './index';
+import Underworld from '../Underworld';
 export declare const slashCardId = "Slash";
-export interface UnitDamage {
-    id: number;
-    x: number;
-    y: number;
-    health: number;
-    damageTaken: number;
-}
 declare const spell: Spell;
+export declare function slashEffect(state: EffectState, card: ICard, quantity: number, underworld: Underworld, prediction: boolean, damage: number, scale: number): Promise<EffectState>;
 export default spell;

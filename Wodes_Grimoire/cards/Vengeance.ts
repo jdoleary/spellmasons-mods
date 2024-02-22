@@ -47,7 +47,7 @@ const spell: Spell = {
                 if (!prediction) {
                     for (let i = 0; i < quantity; i++) {
                         // Red vengance particle trail
-                        manaTrailPromises.push(Particles.makeManaTrail(state.casterUnit, unit, underworld, '#ef4242', '#400d0d'));
+                        manaTrailPromises.push(Particles.makeManaTrail(state.casterUnit, unit, underworld, '#ef4242', '#400d0d', targets.length * quantity));
                     }
                 }
                 promises.push((prediction ? Promise.resolve() : Promise.all(manaTrailPromises)));
@@ -58,7 +58,7 @@ const spell: Spell = {
                     playDefaultSpellSFX(card, prediction);
                 }
                 //Quantity is not passed into the function so that vengance can change its damage mid cast (ex. vengance hits self, second vengange then does more)
-                for (let q = 0; q < quantity; q++){
+                for (let q = 0; q < quantity; q++) {
                     for (let unit of targets) {
                         //Does spell effect for underworld
                         Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);

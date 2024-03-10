@@ -4,7 +4,6 @@ import type { Spell } from '../../types/cards/index';
 import { IUnit } from '../../types/entity/Unit';
 
 const {
-    PixiUtils,
     cardUtils,
     commonTypes,
     cards,
@@ -12,22 +11,13 @@ const {
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
-const { containerSpells } = PixiUtils;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { oneOffImage, playDefaultSpellSFX } = cardUtils;
+const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 const Events = globalThis.SpellmasonsAPI.Events;
 
 
 const cardId = 'Fast Forward';
-//const animationPath = 'owoWIP'; //TODO
-//const imageName = 'spellmasons-mods/Wodes_grimoire/IconWIP.png'; //TODO
-/*
-This spell does NOT work well with any DOTs that deal damage at the end of the turn.
-Adding in !prediction to the function of proc'ing the events means that the player wont be able to see it
-But the player will also see the enemy take damage every tick and heal themselves before they cast
-Need to ask Jordan if onTurnEvents can have predictions passed through or to pass predictions through without prediction variable
-*/
 const spell: Spell = {
     card: {
         id: cardId,
@@ -38,9 +28,8 @@ const spell: Spell = {
         expenseScaling: 1.5,
         probability: probabilityMap[CardRarity.RARE],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconFastForward.png',
-        //animationPath,
         sfx: 'push', //TODO
-        description: [`Shunt the target forward through time. Causes progression of modifiers but does not effect cooldowns.`], //TODO: better deffinition
+        description: [`Shunt the target forward through time. Causes progression of spell effects but does not affect cooldowns.`], //TODO: better deffinition
         effect: async (state, card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);

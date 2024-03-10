@@ -20,26 +20,25 @@ const spell: Spell = {
     card: {
         id: cardId,
         category: CardCategory.Mana,
-        supportQuantity: true,
+        supportQuantity: false,
         manaCost: 0,
         healthCost: 35,
         expenseScaling: 1,
         probability: probabilityMap[CardRarity.UNCOMMON],
         thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconHarvest.png',
         sfx: 'sacrifice',
-        description: [`Consumes target corpse for ${manaRegain} mana. Does not work on player corpses.\n\nTastes like chicken.`],
+        description: [`Consumes target corpse for ${manaRegain} mana. Does not work on player corpses. Unstackable.\n\nTastes like chicken.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             let promises: any[] = [];
             let totalManaHarvested = 0;
             //Corpses only. Cleaning up another player causes a crash, all players need some unit. Can't move player corpse to OoB either cause they could be res'ed in same chain
-            const targets = state.targetedUnits.filter(u => !u.alive && u.unitType != UnitType.PLAYER_CONTROLLED);
+            //flaggedForRemoval prevents multiple casts on the same corpse
+            const targets = state.targetedUnits.filter(u => !u.alive && u.unitType != UnitType.PLAYER_CONTROLLED && u.flaggedForRemoval != true);
             for (let unit of targets) {
                 totalManaHarvested += (manaRegain * quantity);
                 const manaTrailPromises: any[] = [];
                 if (!prediction) {
-                    for (let i = 0; i < quantity; i++) {
-                        manaTrailPromises.push(Particles.makeManaTrail(unit, state.casterUnit, underworld, '#e4ffee', '#40ff66')); //Light green means souls :)
-                    }
+                    manaTrailPromises.push(Particles.makeManaTrail(unit, state.casterUnit, underworld, '#e4ffee', '#40ff66')); //Light green means souls :)
                 }
                 promises.push((prediction ? Promise.resolve() : Promise.all(manaTrailPromises)));
             }

@@ -56,9 +56,10 @@ const spell: Spell = {
                                 const damage = t == unit ? quantityAdjustedDamageMain : quantityAdjustedDamageSplash;
                                 Unit.takeDamage(t, damage, undefined, underworld, prediction, state);
                             });
+                            resolve();
                         }, 400);
                         //This lasts 2.5 seconds
-                        makeFlameStrikeWithParticles(unit, prediction, resolve);
+                        makeFlameStrikeWithParticles(unit, prediction);
                     } else {
                         //Does spell effect for underworld
                         if (prediction) {

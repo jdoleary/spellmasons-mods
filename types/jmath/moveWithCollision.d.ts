@@ -33,6 +33,7 @@ interface ForceMoveProjectileArgs {
     pushedObject: HasSpace;
     startPoint: Vec2;
     endPoint: Vec2;
+    speed: number;
     doesPierce: boolean;
     ignoreUnitIds: number[];
     collideFnKey: string;

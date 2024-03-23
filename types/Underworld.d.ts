@@ -170,6 +170,7 @@ export default class Underworld {
     tryEndPlayerTurnPhase(): Promise<Boolean>;
     endPlayerTurnCleanup(): void;
     executePlayerTurn(): Promise<void>;
+    quicksave(extraInfo?: string): void;
     executeNPCTurn(faction: Faction): Promise<void>;
     endFullTurnCycle(): Promise<void>;
     endMyTurnButtonHandler(): Promise<void>;

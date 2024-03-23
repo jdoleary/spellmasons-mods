@@ -1,4 +1,4 @@
 import { Spell } from './index';
-export declare const shoveCardId = "shove";
+export declare const executeCardId = "Execute";
 declare const spell: Spell;
 export default spell;

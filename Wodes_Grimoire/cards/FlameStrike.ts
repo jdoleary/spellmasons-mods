@@ -38,7 +38,7 @@ const spell: Spell = {
             await new Promise<void>((resolve) => {
                 //Living units
                 const targets = state.targetedUnits.filter(u => u.alive);
-                const adjustedRadius = splashRadius + state.aggregator.radius;
+                const adjustedRadius = getAdjustedRadius(state.aggregator.radiusBoost);
                 if (targets.length == 0) {
                     refundLastSpell(state, prediction);
                     resolve();
@@ -76,4 +76,8 @@ const spell: Spell = {
         },
     },
 };
+function getAdjustedRadius(radiusBoost: number = 0) {
+    // +50% radius per radius boost
+    return splashRadius * (1 + (0.5 * radiusBoost));
+}
 export default spell;

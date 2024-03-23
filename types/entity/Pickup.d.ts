@@ -15,6 +15,7 @@ export declare const HEALTH_POTION = "Health Potion";
 export declare const MANA_POTION = "Mana Potion";
 export declare const STAMINA_POTION = "Stamina Potion";
 export declare const CURSED_MANA_POTION = "Cursed Mana Potion";
+export declare const RECALL_POINT = "Recall Point";
 type IPickupEffect = ({ unit, player, pickup, prediction }: {
     unit?: IUnit;
     player?: Player.IPlayer;

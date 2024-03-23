@@ -46,7 +46,7 @@ export interface EffectState {
     targetedPickups: Pickup.IPickup[];
     castLocation: Vec2;
     aggregator: {
-        radius: number;
+        radiusBoost: number;
     };
     initialTargetedUnitId: number | undefined;
     initialTargetedPickupId: number | undefined;
@@ -88,7 +88,7 @@ export declare const allModifiers: {
     [id: string]: Modifiers;
 };
 export declare function getCardsFromIds(cardIds: string[]): ICard[];
-export declare function addTarget(target: any, effectState: EffectState): void;
+export declare function addTarget(target: any, effectState: EffectState, underworld: Underworld): void;
 export declare function addUnitTarget(unit: Unit.IUnit, effectState: EffectState): void;
 export declare function addPickupTarget(pickup: Pickup.IPickup, effectState: EffectState): void;
 export {};

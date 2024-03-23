@@ -47,3 +47,4 @@ export declare const NUMBER_OF_UNITS_TO_MERGE = 5;
 export declare const TIMEMASON_PERCENT_DRAIN = 1;
 export declare const FORCE_MOVE_PROMISE_TIMEOUT_MILLIS = 2000;
 export declare const SERVER_HUB_URL = "https://server-hub-d2b2v.ondigitalocean.app";
+export declare const PATHING_POLYGON_OFFSET = 10;

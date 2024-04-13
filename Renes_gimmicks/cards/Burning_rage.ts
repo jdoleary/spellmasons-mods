@@ -1,5 +1,8 @@
 /// <reference path="../../globalTypes.d.ts" />
+import Underworld from '../../types/Underworld';
 import type { Spell } from '../../types/cards/index';
+import { IUnit } from '../../types/entity/Unit';
+import { Vec2 } from '../../types/jmath/Vec';
 
 const {
     particleEmitter,
@@ -14,7 +17,7 @@ const {
 } = globalThis.SpellmasonsAPI;
 const BURNING_RAGE_PARTICLE_EMITTER_NAME = 'BURNING_RAGE';
 
-function makeBurningRageParticles(follow, prediction: boolean, underworld) {
+function makeBurningRageParticles(follow: Vec2, prediction: boolean, underworld: Underworld) {
     if (prediction || globalThis.headless) {
         // Don't show if just a prediction or running on the server (globalThis.headless)
         return;
@@ -164,7 +167,7 @@ const spell: Spell = {
         }
     }
 };
-function add(unit, underworld, prediction, quantity) {
+function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity: number) {
     cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: true, quantity, persistBetweenLevels: false,
     }, () => {
@@ -175,21 +178,15 @@ function add(unit, underworld, prediction, quantity) {
         makeBurningRageParticles(unit, prediction, underworld);
     });
 }
-function remove(unit, underworld) {
+function remove(unit: IUnit, underworld: Underworld) {
     unit.damage -= unit.modifiers[cardId].quantity * attackMultiplier;
     unit.damage = Math.max(unit.damage, 0);
-    let removeFollower = undefined;
     for (let follower of underworld.particleFollowers) {
         if (follower.emitter.name === BURNING_RAGE_PARTICLE_EMITTER_NAME && follower.target == unit) {
             // Remove emitter
             ParticleCollection.stopAndDestroyForeverEmitter(follower.emitter);
-            removeFollower = follower;
             break;
         }
     }
-    if (removeFollower) {
-        underworld.particleFollowers = underworld.particleFollowers.filter(pf => pf !== removeFollower);
-    }
-    // console.log('jtest', underworld.particleEmitter)
 }
 export default spell;

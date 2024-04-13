@@ -1,20 +1,17 @@
 /// <reference path="../../globalTypes.d.ts" />
 import Underworld from '../../types/Underworld';
 import type { Spell } from '../../types/cards/index';
-import { IUnit, isUnit } from '../../types/entity/Unit';
+import { IUnit } from '../../types/entity/Unit';
 
 const {
-    cardUtils,
     commonTypes,
     cards,
     cardsUtil,
-    Particles,
     FloatingText,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const maxDuration = 3;
@@ -33,8 +30,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/' + cardId + '.png',
         sfx: 'hurt',
         description: [`Target takes some damage it moves. Stacks, casting again replenishes duration up to ${maxDuration} turns. (Updates on turn change, recasts or damage)`],
-        effect: async (state, card, quantity, underworld, prediction) => {
-            let promises: any[] = [];
+        effect: async (state, _card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);
 
@@ -57,13 +53,13 @@ const spell: Spell = {
     },
     events: {
         //onMove: (unit, newLocation) => {triggerDistanceDamage(unit);return newLocation},
-        onDamage: (unit, amount, underworld, prediction) => { triggerDistanceDamage(unit, underworld, prediction); return amount },
-        onTurnStart: async (unit, prediction, underworld) => { triggerDistanceDamage(unit, underworld, prediction); return false },
+        onTakeDamage: (unit, amount, underworld, prediction) => { triggerDistanceDamage(unit, underworld, prediction); return amount },
+        onTurnStart: async (unit, prediction, underworld) => { triggerDistanceDamage(unit, underworld, prediction); },
         onTurnEnd: async (unit, prediction, underworld) => { triggerDistanceDamage(unit, underworld, prediction); },
     },
 };
 
-function add(unit, underworld, prediction, quantity, extra) {
+function add(unit: IUnit, _underworld: Underworld, prediction: boolean, quantity: number, extra: any) {
     let firstStack = !unit.onTurnStartEvents.includes(cardId);
     const modifier = cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: false, quantity, persistBetweenLevels: false,
@@ -73,7 +69,7 @@ function add(unit, underworld, prediction, quantity, extra) {
             //unit.onMove.push(cardId);
             unit.onTurnEndEvents.push(cardId);
             unit.onTurnStartEvents.push(cardId);
-            unit.onDamageEvents.push(cardId);
+            unit.onTakeDamageEvents.push(cardId);
         }
     });
     if (firstStack) {
@@ -96,7 +92,7 @@ function caltropsAmount(castquantity: number) {
     }
     return caltrops;
 }
-function updateTooltip(unit) {
+function updateTooltip(unit: IUnit) {
     const modifier = unit.modifiers && unit.modifiers[cardId];
     if (modifier) {
         modifier.tooltip = `When target moves deal ${caltropsAmount(modifier.caltropsCounter)} damage, lasts ${modifier.quantity} turns`

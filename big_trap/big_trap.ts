@@ -18,10 +18,10 @@ const huge_trap: IPickupSource = {
     probability: 70,
     scale: 1.5,
     description: [`A huge trap that does ${spike_damage} damage.`],
-    willTrigger: ({ unit, player, pickup, underworld }) => {
+    willTrigger: ({ unit }) => {
         return !!unit;
     },
-    effect: ({ unit, player, pickup, prediction, underworld }) => {
+    effect: ({ unit, pickup, prediction, underworld }) => {
         if (unit) {
             // Play trap spring animation
             if (!prediction) {

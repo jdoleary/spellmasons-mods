@@ -1,5 +1,7 @@
 /// <reference path="../../globalTypes.d.ts" />
+import Underworld from '../../types/Underworld';
 import type { Spell } from '../../types/cards/index';
+import { IUnit } from '../../types/entity/Unit';
 const {
     cardUtils,
     commonTypes,
@@ -74,7 +76,7 @@ const spell: Spell = {
         }
     }
 };
-function add(unit, underworld, prediction, quantity, extra) {
+function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity: number, extra: any) {
     const modifier = cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: false, quantity, persistBetweenLevels: false,
     }, () => {
@@ -92,7 +94,7 @@ function add(unit, underworld, prediction, quantity, extra) {
         updateTooltip(unit);
     }
 }
-function updateTooltip(unit) {
+function updateTooltip(unit: IUnit) {
     const modifier = unit.modifiers && unit.modifiers[cardId];
     if (modifier) {
         modifier.tooltip = `${modifier.graceCountdown} turns until healed for ${-calculateGraceHealing(modifier.graceQuantity)}`

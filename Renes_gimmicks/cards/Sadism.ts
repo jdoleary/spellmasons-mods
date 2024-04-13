@@ -2,15 +2,12 @@
 import type { Spell } from '../../types/cards/index';
 
 const {
-    cardUtils,
     commonTypes,
     cards,
-    Particles,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
-const { playDefaultSpellSFX } = cardUtils;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 const retaliate = 0.15
@@ -28,8 +25,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/Sadism.png',
         sfx: 'hurt',
         description: [`Damage to target equal to its attack, you receive ${retaliate * 100}% of that attack damage`],
-        effect: async (state, card, quantity, underworld, prediction) => {
-            let promises: any[] = [];
+        effect: async (state, _card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);
 

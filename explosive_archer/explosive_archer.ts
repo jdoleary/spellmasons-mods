@@ -9,7 +9,6 @@ const {
   rangedAction,
   commonTypes,
   config,
-  forcePush,
   JPromise,
   JAudio,
   PixiUtils,
@@ -55,7 +54,7 @@ const unit: UnitSource = {
     damage: 'archerHurt',
     death: 'archerDeath',
   },
-  init: (unit: IUnit.IUnit, underworld: Underworld) => {
+  init: (unit: IUnit.IUnit, _underworld: Underworld) => {
     if (unit.image && unit.image.sprite && unit.image.sprite.filters) {
       unit.image.sprite.filters.push(
         new MultiColorReplaceFilter(
@@ -96,7 +95,7 @@ const unit: UnitSource = {
             // Deal damage to units
             Unit.takeDamage({ unit: u, amount: explosionDamage, fromVec2: attackTarget }, underworld, false);
             // Push units away from exploding unit
-            return forcePush(u, attackTarget, 10, underworld, false);
+            return SpellmasonsAPI.forcePushAwayFrom(u, attackTarget, 10, underworld, false);
           })));
         });
 
@@ -132,10 +131,10 @@ const huge_trap: IPickupSource = {
   probability: 70,
   scale: 1.5,
   description: ['Deals 🍞 to any unit that touches it', spike_damage.toString()],
-  willTrigger: ({ unit, player, pickup, underworld }) => {
+  willTrigger: ({ unit }) => {
     return !!unit;
   },
-  effect: ({ unit, player, pickup, prediction, underworld }) => {
+  effect: ({ unit, pickup, prediction, underworld }) => {
     if (unit) {
       // Play trap spring animation
       if (!prediction) {

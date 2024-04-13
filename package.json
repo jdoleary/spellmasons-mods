@@ -4,7 +4,8 @@
   "description": "- Custom Units\r - Custom Spells\r - Custom Pickups\r - Custom Art\r - Custom Sound effects",
   "main": "vite.config.js",
   "scripts": {
-    "build": "vite build"
+    "build": "tsc && vite build",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",

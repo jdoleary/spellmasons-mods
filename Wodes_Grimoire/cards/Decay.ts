@@ -1,14 +1,13 @@
 /// <reference path="../../globalTypes.d.ts" />
+import Underworld from '../../types/Underworld';
 import type { Spell } from '../../types/cards/index';
+import { IUnit } from '../../types/entity/Unit';
 const {
-    PixiUtils,
     cardUtils,
     commonTypes,
     cards,
     cardsUtil,
-    FloatingText,
-    JImage
-} = globalThis.SpellmasonsAPI;
+    FloatingText } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
 const Unit = globalThis.SpellmasonsAPI.Unit;
@@ -69,7 +68,7 @@ const spell: Spell = {
         }
     }
 };
-function add(unit, underworld, prediction, quantity) {
+function add(unit: IUnit, _underworld: Underworld, _prediction: boolean, quantity: number) {
     cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: true, quantity, persistBetweenLevels: false,
     }, () => {
@@ -77,8 +76,6 @@ function add(unit, underworld, prediction, quantity) {
         if (!unit.onTurnStartEvents.includes(cardId)) {
             unit.onTurnStartEvents.push(cardId);
         }
-        //Adds subsprite, also TODO
-        //JImage.addSubSprite(unit.image, imageName);
     });
 }
 export default spell;

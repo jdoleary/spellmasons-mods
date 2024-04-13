@@ -1,5 +1,5 @@
 /// <reference path="../../globalTypes.d.ts" />
-import type { Spell } from '../../types/cards/index';
+import type { EffectState, Spell } from '../../types/cards/index';
 
 const {
     cardUtils,
@@ -69,7 +69,7 @@ const spell: Spell = {
         },
     },
 };
-function damageDone(state) {
+function damageDone(state: EffectState) {
     //This is made into a function so it also changes damage mid cast.
     let damageMain = state.casterUnit.healthMax - state.casterUnit.health;
     damageMain = Math.max(0, damageMain); //Prevents healing

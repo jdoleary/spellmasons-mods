@@ -50,6 +50,7 @@ export type IPickup = HasSpace & {
     emitter?: JEmitter;
     emitterJID?: string;
     flaggedForRemoval: boolean;
+    sentForceTrigger?: boolean;
 };
 export interface IPickupSource {
     name: string;

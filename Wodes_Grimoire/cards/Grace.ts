@@ -58,7 +58,7 @@ const spell: Spell = {
                 updateTooltip(unit);
                 if (modifier.graceCountdown <= 0) {
                     let healing = calculateGraceHealing(modifier.graceQuantity);
-                    Unit.takeDamage(unit, healing, undefined, underworld, prediction);
+                    Unit.takeDamage({ unit, amount: healing }, underworld, prediction);
                     if (!prediction) {
                         FloatingText.default({
                             coords: unit,
@@ -71,7 +71,6 @@ const spell: Spell = {
                     Unit.removeModifier(unit, cardId, underworld);
                 }
             }
-            return false;
         }
     }
 };

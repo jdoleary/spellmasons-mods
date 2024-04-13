@@ -3,7 +3,10 @@ import type { IUnit } from './entity/Unit';
 import Underworld from './Underworld';
 import { IPickup } from './entity/Pickup';
 import { ForceMoveProjectile } from './jmath/moveWithCollision';
-export type onDamage = {
+export type onDealDamage = {
+    (damageDealer: IUnit, amount: number, underworld: Underworld, prediction: boolean, damageReciever?: IUnit): number;
+};
+export type onTakeDamage = {
     (unit: IUnit, amount: number, underworld: Underworld, prediction: boolean, damageDealer?: IUnit): number;
 };
 export type onDeath = {
@@ -35,8 +38,11 @@ declare const _default: {
     onAgroSource: {
         [name: string]: onAgro;
     };
-    onDamageSource: {
-        [name: string]: onDamage;
+    onDealDamageSource: {
+        [name: string]: onDealDamage;
+    };
+    onTakeDamageSource: {
+        [name: string]: onTakeDamage;
     };
     onDeathSource: {
         [name: string]: onDeath;

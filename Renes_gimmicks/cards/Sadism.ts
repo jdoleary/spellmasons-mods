@@ -27,7 +27,7 @@ const spell: Spell = {
         probability: probabilityMap[CardRarity.UNCOMMON],
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/Sadism.png',
         sfx: 'hurt',
-        description: [`Damage to target equal to its attack, you receive ${retaliate *100}% of that attack damage`],
+        description: [`Damage to target equal to its attack, you receive ${retaliate * 100}% of that attack damage`],
         effect: async (state, card, quantity, underworld, prediction) => {
             let promises: any[] = [];
             //Living units
@@ -40,10 +40,10 @@ const spell: Spell = {
             }
             for (let unit of targets) {
                 let damage = unit.damage * quantity;
-                Unit.takeDamage(unit, damage, state.casterUnit, underworld, prediction, state);
-                Unit.takeDamage(state.casterUnit, damage * retaliate, undefined, underworld, prediction, state);
+                Unit.takeDamage({ unit, amount: damage, fromVec2: state.casterUnit, sourceUnit: state.casterUnit }, underworld, prediction);
+                Unit.takeDamage({ unit: state.casterUnit, amount: damage * retaliate }, underworld, prediction);
             }
-            state.casterUnit.health -= state.casterUnit.health%1;
+            state.casterUnit.health -= state.casterUnit.health % 1;
             return state;
         },
     },

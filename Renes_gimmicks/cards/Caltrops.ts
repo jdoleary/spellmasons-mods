@@ -117,7 +117,7 @@ function triggerDistanceDamage(unit: IUnit, underworld: Underworld, prediction =
     };
     modifier.last_x = unit.x;
     modifier.last_y = unit.y;
-    Unit.takeDamage(unit, damage, undefined, underworld, prediction);
+    Unit.takeDamage({ unit, amount: damage }, underworld, prediction);
     if (!prediction) {
         FloatingText.default({
             coords: unit,

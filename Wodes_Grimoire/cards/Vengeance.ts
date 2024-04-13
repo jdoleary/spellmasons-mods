@@ -61,7 +61,7 @@ const spell: Spell = {
                 for (let q = 0; q < quantity; q++) {
                     for (let unit of targets) {
                         //Does spell effect for underworld
-                        Unit.takeDamage(unit, damageDone(state), state.casterUnit, underworld, prediction, state);
+                        Unit.takeDamage({ unit, amount: damageDone(state), sourceUnit: state.casterUnit, fromVec2: state.casterUnit }, underworld, prediction);
                     }
                 }
             });

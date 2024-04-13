@@ -2,7 +2,7 @@ import type * as Player from '../entity/Player';
 import * as Unit from '../entity/Unit';
 import * as Pickup from '../entity/Pickup';
 import type { Vec2 } from '../jmath/Vec';
-import Events, { onDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision } from '../Events';
+import Events, { onDealDamage, onTakeDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision } from '../Events';
 import { Subsprite } from '../Subsprites';
 import Underworld from '../Underworld';
 import { CardCategory } from '../types/commonTypes';
@@ -16,7 +16,8 @@ export interface Modifiers {
     remove?: (unit: Unit.IUnit, underworld: Underworld) => void;
 }
 interface Events {
-    onDamage?: onDamage;
+    onDealDamage?: onDealDamage;
+    onTakeDamage?: onTakeDamage;
     onDeath?: onDeath;
     onMove?: onMove;
     onAgro?: onAgro;

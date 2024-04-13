@@ -152,7 +152,7 @@ const spell: Spell = {
             // Damage unit and increment modifier counter
             const modifier = unit.modifiers[cardId];
             if (modifier && !prediction) {
-                Unit.takeDamage(unit, modifier.quantity * damageMultiplier, undefined, underworld, prediction);
+                Unit.takeDamage({ unit, amount: modifier.quantity * damageMultiplier }, underworld, prediction);
                 FloatingText.default({
                     coords: unit,
                     text: `${modifier.quantity * damageMultiplier} rage damage`,
@@ -161,7 +161,6 @@ const spell: Spell = {
                 unit.damage += attackMultiplier;
                 modifier.quantity++;
             }
-            return false;
         }
     }
 };

@@ -60,7 +60,7 @@ const spell: Spell = {
             const modifier = unit.modifiers[cardId];
             if (modifier) {
                 const healing = healingAmount(modifier.regenCounter)
-                Unit.takeDamage(unit, healing, undefined, underworld, prediction);
+                Unit.takeDamage({ unit, amount: healing }, underworld, prediction);
                 modifier.quantity--;
                 if (!prediction) {
                     updateTooltip(unit);

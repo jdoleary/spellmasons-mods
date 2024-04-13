@@ -56,7 +56,7 @@ const huge_trap: IPickupSource = {
                 }
 
             }
-            Unit.takeDamage(unit, spike_damage, unit, underworld, prediction)
+            Unit.takeDamage({ unit, amount: spike_damage, fromVec2: unit }, underworld, prediction);
         }
     }
 };

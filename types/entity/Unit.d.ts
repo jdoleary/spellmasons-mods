@@ -3,7 +3,6 @@ import { PixiSpriteOptions } from '../graphics/PixiUtils';
 import { UnitSubType, UnitType, Faction } from '../types/commonTypes';
 import type { Vec2 } from '../jmath/Vec';
 import { UnitSource } from './units';
-import { EffectState } from '../cards';
 import Underworld from '../Underworld';
 import { HasLife, HasMana, HasSpace, HasStamina } from './Type';
 import { Modifier } from '../cards/util';
@@ -13,7 +12,7 @@ export interface UnitPath {
     lastOwnPosition: Vec2;
     targetPosition: Vec2;
 }
-export type IUnitSerialized = Omit<IUnit, "resolveDoneMoving" | "image" | "animations" | "sfx"> & {
+export type IUnitSerialized = Omit<IUnit, "predictionCopy" | "resolveDoneMoving" | "image" | "animations" | "sfx"> & {
     image?: Image.IImageAnimatedSerialized;
 };
 export interface UnitAnimations {
@@ -33,6 +32,7 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     id: number;
     unitSourceId: string;
     real?: IUnit;
+    predictionCopy?: IUnit;
     strength: number;
     originalLife: boolean;
     path?: UnitPath;
@@ -56,7 +56,8 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     unitType: UnitType;
     unitSubType: UnitSubType;
     flaggedForRemoval?: boolean;
-    onDamageEvents: string[];
+    onDealDamageEvents: string[];
+    onTakeDamageEvents: string[];
     onDeathEvents: string[];
     onAgroEvents: string[];
     onTurnStartEvents: string[];
@@ -90,11 +91,18 @@ export declare function playComboAnimation(unit: IUnit, key: string | undefined,
 export declare function playAnimation(unit: IUnit, spritePath: string | undefined, options?: PixiSpriteOptions): Promise<void>;
 export declare function resurrect(unit: IUnit, underworld: Underworld): void;
 export declare function die(unit: IUnit, underworld: Underworld, prediction: boolean): void;
-export declare function composeOnDamageEvents(unit: IUnit, damage: number, underworld: Underworld, prediction: boolean): number;
-export declare function takeDamage(unit: IUnit, amount: number, damageFromVec2: Vec2 | undefined, underworld: Underworld, prediction: boolean, state?: EffectState, options?: {
-    thinBloodLine: boolean;
-}): void;
+export declare function composeOnDealDamageEvents(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): number;
+export declare function composeOnTakeDamageEvents(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): number;
+interface damageArgs {
+    unit: IUnit;
+    amount: number;
+    sourceUnit?: IUnit;
+    fromVec2?: Vec2;
+    thinBloodLine?: boolean;
+}
+export declare function takeDamage(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): void;
 export declare function syncPlayerHealthManaUI(underworld: Underworld): void;
+export declare function isRemaining(unit: IUnit, underworld: Underworld, prediction: boolean): boolean | undefined;
 export declare function canAct(unit: IUnit): boolean;
 export declare function canMove(unit: IUnit): boolean;
 export declare function livingUnitsInSameFaction(unit: IUnit, units: IUnit[]): IUnit[];

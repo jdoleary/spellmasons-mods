@@ -54,7 +54,7 @@ const spell: Spell = {
                             //This setTimoue exsist to delay the damage dealt until it matches more with animation
                             explosionTargets.forEach(t => {
                                 const damage = t == unit ? quantityAdjustedDamageMain : quantityAdjustedDamageSplash;
-                                Unit.takeDamage(t, damage, undefined, underworld, prediction, state);
+                                Unit.takeDamage({ unit: t, amount: damage, sourceUnit: state.casterUnit }, underworld, prediction)
                             });
                             resolve();
                         }, 400);
@@ -67,7 +67,7 @@ const spell: Spell = {
                         }
                         explosionTargets.forEach(t => {
                             const damage = t == unit ? quantityAdjustedDamageMain : quantityAdjustedDamageSplash;
-                            Unit.takeDamage(t, damage, undefined, underworld, prediction, state);
+                            Unit.takeDamage({ unit: t, amount: damage, sourceUnit: state.casterUnit }, underworld, prediction)
                         });
                         resolve();
                     }

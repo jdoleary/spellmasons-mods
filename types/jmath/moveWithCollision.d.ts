@@ -2,6 +2,7 @@ import { Vec2 } from './Vec';
 import { LineSegment } from "./lineSegment";
 import Underworld from '../Underworld';
 import { HasSpace } from '../entity/Type';
+import { IUnit } from '../entity/Unit';
 export declare enum ForceMoveType {
     PROJECTILE = 0,
     UNIT_OR_PICKUP = 1
@@ -22,6 +23,7 @@ export type ForceMoveUnitOrPickup = ForceMove & {
 export declare function isForceMoveUnitOrPickup(x: ForceMove): x is ForceMoveUnitOrPickup;
 export type ForceMoveProjectile = ForceMove & {
     type: ForceMoveType.PROJECTILE;
+    sourceUnit?: IUnit;
     startPoint: Vec2;
     endPoint: Vec2;
     doesPierce: boolean;
@@ -31,6 +33,7 @@ export type ForceMoveProjectile = ForceMove & {
 export declare function isForceMoveProjectile(x: ForceMove): x is ForceMoveProjectile;
 interface ForceMoveProjectileArgs {
     pushedObject: HasSpace;
+    sourceUnit?: IUnit;
     startPoint: Vec2;
     endPoint: Vec2;
     speed: number;

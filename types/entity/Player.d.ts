@@ -63,6 +63,7 @@ export declare function syncLobby(underworld: Underworld): void;
 export declare function enterPortal(player: IPlayer, underworld: Underworld): void;
 export declare function ableToAct(player: IPlayer): boolean;
 export declare function addCardToHand(card: Cards.ICard | undefined, player: IPlayer | undefined, underworld: Underworld): void;
+export declare function setSpellmasonsToChannellingAnimationClose(player: IPlayer): Promise<void>;
 export declare function setSpellmasonsToChannellingAnimation(player: IPlayer): void;
 export declare function removeCardsFromHand(player: IPlayer, cards: string[], underworld: Underworld): void;
 export declare function getFactionsOf(players: {

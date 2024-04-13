@@ -45,26 +45,24 @@ const spell: Spell = {
             // let delayBetweenAnimations = delayBetweenAnimationsStart;
 
             for (let unit of targets) {
-                if (state.casterUnit.health < state.casterUnit.healthMax){
-                    if (unit.health < 10 * quantity){
-                        state.casterUnit.health += unit.health/2
+                if (state.casterUnit.health < state.casterUnit.healthMax) {
+                    if (unit.health < 10 * quantity) {
+                        state.casterUnit.health += unit.health / 2
                     }
-                    else{
-                        state.casterUnit.health += 5*quantity;
+                    else {
+                        state.casterUnit.health += 5 * quantity;
                     }
-                    if (state.casterUnit.health > state.casterUnit.healthMax){
+                    if (state.casterUnit.health > state.casterUnit.healthMax) {
                         state.casterUnit.health = state.casterUnit.healthMax
                     }
                 }
-                if (!prediction){
+                if (!prediction) {
                     const spellEffectImage = oneOffImage(unit, animationPath, containerSpells);
                     spellEffectImage
                 };
-                // setTimeout(() => {
-                Unit.takeDamage(unit, 10 * quantity, state.casterUnit, underworld, prediction, state);
-                // }, 100);
+                Unit.takeDamage({ unit, amount: 10 * quantity, sourceUnit: state.casterUnit, fromVec2: state.casterUnit }, underworld, prediction);
             }
-            state.casterUnit.health -= state.casterUnit.health%1
+            state.casterUnit.health -= state.casterUnit.health % 1
             if (!prediction && !globalThis.headless) {
                 await new Promise((resolve) => {
                     setTimeout(resolve, 400);

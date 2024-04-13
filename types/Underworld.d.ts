@@ -137,9 +137,19 @@ export default class Underworld {
     generateRandomLevelData(levelIndex: number): LevelData | undefined;
     pickGroundTileLayers(biome: Biome): string[];
     addGroundTileImages(biome: Biome): void;
-    isPointValidSpawn(spawnPoint: Vec2, radius: number, fromSource?: Vec2): boolean;
-    findValidSpawn(spawnSource: Vec2, ringLimit: number, radius?: number): Vec2 | undefined;
-    findValidSpawns(spawnSource: Vec2, radius: number | undefined, ringLimit: number): Vec2[];
+    isPointValidSpawn(spawnPoint: Vec2, radius: number, prediction: boolean, fromSource?: Vec2): boolean;
+    findValidSpawn({ spawnSource, ringLimit, radius, prediction }: {
+        spawnSource: Vec2;
+        ringLimit: number;
+        radius?: number;
+        prediction: boolean;
+    }): Vec2 | undefined;
+    findValidSpawns({ spawnSource, ringLimit, radius, prediction }: {
+        spawnSource: Vec2;
+        ringLimit: number;
+        radius?: number;
+        prediction: boolean;
+    }): Vec2[];
     cleanUpLevel(): void;
     postSetupLevel(): void;
     createLevelSyncronous(levelData: LevelData): void;
@@ -206,6 +216,7 @@ export default class Underworld {
     getUnitsAt(coords: Vec2, prediction?: boolean): Unit.IUnit[];
     getUnitAt(coords: Vec2, prediction?: boolean): Unit.IUnit | undefined;
     getPickupAt(coords: Vec2, prediction?: boolean): Pickup.IPickup | undefined;
+    getUnitById(id: number, prediction: boolean): Unit.IUnit | undefined;
     addUnitToArray(unit: Unit.IUnit, prediction: boolean): Unit.IUnit;
     addPickupToArray(pickup: Pickup.IPickup, prediction: boolean): void;
     castCards(args: CastCardsArgs): Promise<Cards.EffectState>;

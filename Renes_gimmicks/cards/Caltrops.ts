@@ -99,6 +99,9 @@ function updateTooltip(unit: IUnit) {
     }
 }
 function triggerDistanceDamage(unit: IUnit, underworld: Underworld, prediction = false) {
+    if (!unit.alive) {
+        return;
+    }
     const modifier = unit.modifiers && unit.modifiers[cardId];
     let x_diff = unit.x - modifier.last_x;
     let y_diff = unit.y - modifier.last_y;

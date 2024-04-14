@@ -28,7 +28,7 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 1.5,
         probability: probabilityMap[CardRarity.UNCOMMON],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconFlameStrike.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconFlameStrike.png',
         sfx: 'burst',
         description: [`Deals ${damageMain} damage to the target and ${damageSplash} damage to nearby targets in a small area.`],
         effect: async (state, card, quantity, underworld, prediction) => {

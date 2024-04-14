@@ -22,7 +22,7 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 2.5,
         probability: probabilityMap[CardRarity.RARE],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconDominate.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconDominate.png',
         sfx: 'suffocate',
         description: [`Converts an enemy to fight for you if they are below ${healthThreshhold * 100}% health.`], //Wololo
         effect: async (state, card, quantity, underworld, prediction) => {

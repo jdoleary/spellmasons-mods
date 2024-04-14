@@ -27,7 +27,7 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 1.5,
         probability: probabilityMap[CardRarity.RARE],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconFastForward.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconFastForward.png',
         sfx: 'push', //TODO
         description: [`Shunt the target forward through time. Causes progression of spell effects but does not affect cooldowns.`], //TODO: better deffinition
         effect: async (state, card, quantity, underworld, prediction) => {

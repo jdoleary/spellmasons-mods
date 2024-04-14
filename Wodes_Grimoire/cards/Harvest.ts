@@ -25,7 +25,7 @@ const spell: Spell = {
         healthCost: 35,
         expenseScaling: 1,
         probability: probabilityMap[CardRarity.UNCOMMON],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconHarvest.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconHarvest.png',
         sfx: 'sacrifice',
         description: [`Consumes target corpse for ${manaRegain} mana. Does not work on player corpses. Unstackable.\n\nTastes like chicken.`],
         effect: async (state, card, quantity, underworld, prediction) => {

@@ -4,7 +4,7 @@ Installation:
     Enable in the Spellmason's mod page!
 
     Otherwise:
-        Place Wodes_grimoire in "Spellmasons/resources/app/src/build/spellmasons-mods"
+        Place Wodes_Grimoire in "Spellmasons/resources/app/src/build/spellmasons-mods"
         Open the spellmasons-mods index.ts
         Put in "import Wodes_Grimoire from './Wodes_Grimoire/Index';" with the other imports
         Put "Wodes_Grimoire," in the list of const mods: commonTypes.Mod[]

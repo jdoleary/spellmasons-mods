@@ -43,8 +43,9 @@ export declare const PIXI_TEXT_DROP_SHADOW: {
 };
 export declare const NUMBER_OF_PLAYERS_BEFORE_BUDGET_INCREASES = 2;
 export declare const LAST_LEVEL_INDEX = 12;
-export declare const GORU_LEVEL_INDEX = 9;
+export declare const GORU_LEVEL_INDEX = 9999;
 export declare const NUMBER_OF_UNITS_TO_MERGE = 5;
+export declare const IS_ANNIVERSARY_UPDATE_OUT = false;
 export declare const TIMEMASON_PERCENT_DRAIN = 1;
 export declare const FORCE_MOVE_PROMISE_TIMEOUT_MILLIS = 2000;
 export declare const SERVER_HUB_URL = "https://server-hub-d2b2v.ondigitalocean.app";

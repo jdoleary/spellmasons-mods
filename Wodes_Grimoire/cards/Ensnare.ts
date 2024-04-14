@@ -24,7 +24,7 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 2,
         probability: probabilityMap[CardRarity.SPECIAL],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconEnsnare.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconEnsnare.png',
         sfx: '',
         description: [`Prevents the target from moving for one turn. Furthur casts increase duration.`],
         effect: async (state, card, quantity, underworld, prediction) => {

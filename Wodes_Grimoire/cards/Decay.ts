@@ -24,7 +24,7 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 2,
         probability: probabilityMap[CardRarity.RARE],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconDecay.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconDecay.png',
         sfx: 'poison',
         description: [`Causes the target to take damage equal to the number of decay stacks squared at the start of their turn. The target then gains another stack.`],
         effect: async (state, card, quantity, underworld, prediction) => {

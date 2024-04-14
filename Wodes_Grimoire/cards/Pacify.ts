@@ -24,7 +24,7 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 2,
         probability: probabilityMap[CardRarity.SPECIAL],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconPacify.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconPacify.png',
         sfx: '',
         description: [`Prevents the target from attacking for one turn. Stacks increase duration. Does not affect Support Class units such as summoners or priests.`],
         effect: async (state, card, quantity, underworld, prediction) => {

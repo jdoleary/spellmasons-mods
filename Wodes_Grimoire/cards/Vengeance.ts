@@ -23,7 +23,7 @@ const spell: Spell = {
         healthCost: 0,
         expenseScaling: 1.5,
         probability: probabilityMap[CardRarity.UNCOMMON],
-        thumbnail: 'spellmasons-mods/Wodes_grimoire/graphics/icons/spelliconVengeance.png',
+        thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconVengeance.png',
         sfx: 'hurt',
         description: [`Deals damage equal to your missing health. This harms you first if you are targeted, then enemies.`],
         effect: async (state, card, quantity, underworld, prediction) => {

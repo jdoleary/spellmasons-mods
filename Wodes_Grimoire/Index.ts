@@ -18,7 +18,7 @@ const mod: Mod = {
     modName: 'Wode\'s Grimoire',
     author: 'Blood Spartan',
     description: 'Adds 10 new spells to your arsenal.', //TODO make word good
-    screenshot: 'spellmasons-mods/Wodes_grimoire/graphics/icons/Wodes_grimoire_icon.png',
+    screenshot: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/Wodes_grimoire_icon.png',
     spells: [
         //Add or Remove spells here.
         Decay,

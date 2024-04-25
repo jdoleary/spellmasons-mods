@@ -17,7 +17,7 @@ const {
 } = globalThis.SpellmasonsAPI;
 const BURNING_RAGE_PARTICLE_EMITTER_NAME = 'BURNING_RAGE';
 
-function makeBurningRageParticles(follow: Vec2, prediction: boolean, underworld: Underworld) {
+function makeBurningRageParticles(follow: Vec2, underworld: Underworld, prediction: boolean) {
     if (prediction || globalThis.headless) {
         // Don't show if just a prediction or running on the server (globalThis.headless)
         return;
@@ -151,7 +151,7 @@ const spell: Spell = {
         remove,
     },
     events: {
-        onTurnStart: async (unit, prediction, underworld) => {
+        onTurnStart: async (unit, underworld, prediction) => {
             // Damage unit and increment modifier counter
             const modifier = unit.modifiers[cardId];
             if (modifier && !prediction) {
@@ -175,7 +175,7 @@ function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity:
         if (!unit.onTurnStartEvents.includes(cardId)) {
             unit.onTurnStartEvents.push(cardId);
         }
-        makeBurningRageParticles(unit, prediction, underworld);
+        makeBurningRageParticles(unit, underworld, prediction);
     });
 }
 function remove(unit: IUnit, underworld: Underworld) {

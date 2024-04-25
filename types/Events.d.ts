@@ -19,13 +19,13 @@ export type onAgro = {
     (agroer: IUnit, agroTarget: IUnit): IUnit;
 };
 export type onTurnStart = {
-    (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;
+    (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
 export type onTurnEnd = {
-    (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;
+    (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
 export type onDrawSelected = {
-    (unit: IUnit, prediction: boolean, underworld: Underworld): Promise<void>;
+    (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
 export type onProjectileCollision = ({ unit, pickup, underworld, prediction }: {
     unit?: IUnit;

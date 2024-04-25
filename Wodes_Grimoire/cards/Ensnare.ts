@@ -55,7 +55,7 @@ const spell: Spell = {
 
     },
     events: {
-        onTurnEnd: async (unit: IUnit, prediction: boolean, underworld: Underworld) => {
+        onTurnEnd: async (unit: IUnit, underworld: Underworld, prediction: boolean) => {
             // Decrement how many turns left the unit is for pacify
             const modifier = unit.modifiers[cardId];
             if (modifier) {

@@ -49,12 +49,12 @@ const spell: Spell = {
                         });
                     }, 200);
                     //const spellEffectImage = oneOffImage(unit, animationPath, containerSpells); //figure this out
-                    procEvents(unit, prediction, underworld);
+                    procEvents(unit, underworld, prediction);
                 }
             } else {
                 for (let unit of targets) {
                     //Does spell effect for underworld
-                    procEvents(unit, prediction, underworld);
+                    procEvents(unit, underworld, prediction);
 
                 }
             }
@@ -67,7 +67,7 @@ const spell: Spell = {
 
     },
 };
-async function procEvents(unit: IUnit, prediction: boolean, underworld: Underworld) {
+async function procEvents(unit: IUnit, underworld: Underworld, prediction: boolean) {
     //onTurnStart events first for order.
     for (let i = 0; i < unit.onTurnStartEvents.length; i++) {
         const eventName = unit.onTurnStartEvents[i];
@@ -75,7 +75,7 @@ async function procEvents(unit: IUnit, prediction: boolean, underworld: Underwor
             //Made into function because eventName points to a modifier (probably) whose arguments need to be pass in.
             const fns = Events.default.onTurnStartSource[eventName];
             if (fns) {
-                await fns(unit, prediction, underworld); //Returns boolean, but ignored.
+                await fns(unit, underworld, prediction); //Returns boolean, but ignored.
             }
         }
     }
@@ -84,7 +84,7 @@ async function procEvents(unit: IUnit, prediction: boolean, underworld: Underwor
         if (eventName) {
             const fne = Events.default.onTurnEndSource[eventName];
             if (fne) {
-                await fne(unit, prediction, underworld);
+                await fne(unit, underworld, prediction);
             }
         }
     }

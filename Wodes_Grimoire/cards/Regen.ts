@@ -55,7 +55,7 @@ const spell: Spell = {
         remove
     },
     events: {
-        onTurnEnd: async (unit: IUnit, prediction: boolean, underworld: Underworld) => {
+        onTurnEnd: async (unit: IUnit, underworld: Underworld, prediction: boolean) => {
             // Heal unit and decremit modifier
             const modifier = unit.modifiers[cardId];
             if (modifier) {

@@ -54,8 +54,8 @@ const spell: Spell = {
     events: {
         //onMove: (unit, newLocation) => {triggerDistanceDamage(unit);return newLocation},
         onTakeDamage: (unit, amount, underworld, prediction) => { triggerDistanceDamage(unit, underworld, prediction); return amount },
-        onTurnStart: async (unit, prediction, underworld) => { triggerDistanceDamage(unit, underworld, prediction); },
-        onTurnEnd: async (unit, prediction, underworld) => { triggerDistanceDamage(unit, underworld, prediction); },
+        onTurnStart: async (unit, underworld, prediction) => { triggerDistanceDamage(unit, underworld, prediction); },
+        onTurnEnd: async (unit, underworld, prediction) => { triggerDistanceDamage(unit, underworld, prediction); },
     },
 };
 

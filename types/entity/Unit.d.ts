@@ -79,6 +79,7 @@ interface DifficultyAdjustedUnitStats {
 }
 export declare function adjustUnitPropsDueToDifficulty(source: Partial<UnitSource>, difficulty: number): DifficultyAdjustedUnitStats;
 export declare function adjustUnitDifficulty(unit: IUnit, difficulty: number): void;
+export declare function updateStrengthSpriteScaling(unit: IUnit, oldStrength: number): void;
 export declare function addModifier(unit: IUnit, key: string, underworld: Underworld, prediction: boolean, quantity?: number, extra?: object): void;
 export declare function removeModifier(unit: IUnit, key: string, underworld: Underworld): void;
 export declare function cleanup(unit: IUnit, maintainPosition?: boolean, forceCleanPlayerUnit?: boolean): void;
@@ -102,7 +103,8 @@ interface damageArgs {
 }
 export declare function takeDamage(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): void;
 export declare function syncPlayerHealthManaUI(underworld: Underworld): void;
-export declare function isRemaining(unit: IUnit, underworld: Underworld, prediction: boolean): boolean | undefined;
+export declare function isBoss(unitSourceId: string): boolean;
+export declare function isRemaining(unit: IUnit, underworld: Underworld, prediction: boolean): boolean | Modifier | undefined;
 export declare function canAct(unit: IUnit): boolean;
 export declare function canMove(unit: IUnit): boolean;
 export declare function livingUnitsInSameFaction(unit: IUnit, units: IUnit[]): IUnit[];
@@ -134,4 +136,7 @@ export declare function drawSelectedGraphics(unit: IUnit, prediction: boolean | 
 export declare function demoAnimations(unit: IUnit): Promise<void>;
 export declare function resetUnitStats(unit: IUnit, underworld: Underworld): void;
 export declare function unitSourceIdToName(unitSourceId: string, asMiniboss: boolean): string;
+export declare function getFactionsOf(units: {
+    faction: Faction;
+}[]): Faction[];
 export {};

@@ -18,4 +18,5 @@ export declare const RED_PORTAL_JID = "redPortal";
 export declare const BLUE_PORTAL_JID = "bluePortal";
 export declare function makeDeathmasonPortal(position: Vec2, prediction: boolean, colorStart: string, colorEnd: string): import("../types/commonTypes").JEmitter | undefined;
 export declare function makeLightBeamParticles(position: Vec2): void;
+export declare function makePrimedCorpseParticles(follow: IUnit, underworld: Underworld, prediction: boolean, resolver?: () => void): void;
 export declare function stopAndDestroyForeverEmitter(emitter?: particles.Emitter): void;

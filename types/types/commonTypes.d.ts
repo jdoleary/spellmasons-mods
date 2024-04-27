@@ -13,7 +13,8 @@ export declare enum UnitSubType {
     RANGED_RADIUS = 2,
     SUPPORT_CLASS = 3,
     SPECIAL_LOS = 4,
-    DOODAD = 5
+    DOODAD = 5,
+    GORU_BOSS = 6
 }
 export declare enum Faction {
     ALLY = 0,

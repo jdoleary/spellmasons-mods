@@ -84,6 +84,7 @@ export default class Underworld {
         displayObject: DisplayObject;
         emitter?: Emitter;
         target: Vec2;
+        keepOnDeath?: boolean;
     }[];
     activeMods: string[];
     generatingLevel: boolean;
@@ -277,6 +278,7 @@ interface CastCardsArgs {
     castLocation: Vec2;
     prediction: boolean;
     outOfRange?: boolean;
+    castForFree?: boolean;
     magicColor?: number;
     casterPlayer?: Player.IPlayer;
     initialTargetedUnitId?: number;

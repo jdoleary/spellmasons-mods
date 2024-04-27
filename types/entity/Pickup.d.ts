@@ -14,8 +14,8 @@ export declare const BLUE_PORTAL = "Blue Portal";
 export declare const HEALTH_POTION = "Health Potion";
 export declare const MANA_POTION = "Mana Potion";
 export declare const STAMINA_POTION = "Stamina Potion";
-export declare const CURSED_MANA_POTION = "Cursed Mana Potion";
 export declare const RECALL_POINT = "Recall Point";
+type IPickupDescription = (pickup: IPickup) => Localizable;
 type IPickupEffect = ({ unit, player, pickup, prediction }: {
     unit?: IUnit;
     player?: Player.IPlayer;
@@ -38,13 +38,14 @@ export type IPickup = HasSpace & {
     type: 'pickup';
     id: number;
     name: string;
-    description: Localizable;
     imagePath?: string;
     image?: Image.IImageAnimated;
     real?: IPickup;
     playerOnly: boolean;
     turnsLeftToGrab?: number;
     text?: PIXI.Text;
+    power: number;
+    description: IPickupDescription;
     effect: IPickupEffect;
     willTrigger: IPickupWillTrigger;
     emitter?: JEmitter;
@@ -55,7 +56,6 @@ export type IPickup = HasSpace & {
 export interface IPickupSource {
     name: string;
     modName?: string;
-    description: Localizable;
     imagePath?: string;
     animationSpeed?: number;
     playerOnly?: boolean;
@@ -63,6 +63,7 @@ export interface IPickupSource {
     scale: number;
     probability: number;
     init?: IPickupInit;
+    description: IPickupDescription;
     effect: IPickupEffect;
     willTrigger: IPickupWillTrigger;
 }
@@ -89,5 +90,6 @@ export declare const spike_damage = 30;
 export declare const PICKUP_SPIKES_NAME = "Trap";
 export declare const PORTAL_PURPLE_NAME = "Portal";
 export declare const pickups: IPickupSource[];
+export declare function setPower(pickup: IPickup, newPower: number): void;
 export declare function givePlayerUpgrade(p: Player.IPlayer, underworld: Underworld): void;
 export {};

@@ -61,6 +61,7 @@ export declare function load(player: IPlayerSerialized, index: number, underworl
 export declare function setClientConnected(player: IPlayer, connected: boolean, underworld: Underworld): void;
 export declare function syncLobby(underworld: Underworld): void;
 export declare function enterPortal(player: IPlayer, underworld: Underworld): void;
+export declare function resetPlayerForSpawn(player: IPlayer, underworld: Underworld): void;
 export declare function ableToAct(player: IPlayer): boolean;
 export declare function addCardToHand(card: Cards.ICard | undefined, player: IPlayer | undefined, underworld: Underworld): void;
 export declare function setSpellmasonsToChannellingAnimationClose(player: IPlayer): Promise<void>;

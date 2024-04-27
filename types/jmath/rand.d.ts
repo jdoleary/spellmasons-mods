@@ -16,7 +16,7 @@ export interface SeedrandomState {
 export declare function randSign(seedrandomInstance: prng): number;
 export declare function randBool(seedrandomInstance: prng): boolean;
 export declare function randInt(minInclusive: number, maxInclusive: number, seedrandomInstance?: prng): number;
-export declare function randFloat(minInclusive: number, maxInclusive: number, seedrandomInstance?: prng): number;
+export declare function randFloat(minInclusive: number, maxExclusive: number, seedrandomInstance?: prng): number;
 interface objectWithProbability {
     probability: number;
 }

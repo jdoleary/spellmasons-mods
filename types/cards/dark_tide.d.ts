@@ -1,4 +1,4 @@
 import { Spell } from './index';
-export declare const slowCardId = "slow";
+export declare const darkTideId = "Dark Tide";
 declare const spell: Spell;
 export default spell;

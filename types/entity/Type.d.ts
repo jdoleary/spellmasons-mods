@@ -7,6 +7,7 @@ export interface HasSpace {
     image?: Image.IImageAnimated;
     immovable: boolean;
     beingPushed: boolean;
+    flaggedForRemoval?: boolean;
 }
 export declare function hasSpace(maybe: any): maybe is HasSpace;
 export interface HasLife {

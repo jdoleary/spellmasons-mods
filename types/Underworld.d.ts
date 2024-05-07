@@ -165,7 +165,7 @@ export default class Underworld {
     getRemainingPlayerUnits(): Unit.IUnit[];
     getRemainingPlayerAllies(): Unit.IUnit[];
     getRemainingPlayerEnemies(): Unit.IUnit[];
-    progressGameState(): Promise<void>;
+    progressGameState(): Promise<false | undefined>;
     trySpawnBoss(): Promise<boolean>;
     trySpawnNextWave(): boolean;
     isLevelComplete(): boolean;

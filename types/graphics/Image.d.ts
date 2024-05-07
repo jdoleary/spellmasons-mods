@@ -6,6 +6,7 @@ export interface HasImage {
 }
 export declare function hasImage(maybe: any): maybe is HasImage;
 export type IImageAnimatedSerialized = {
+    scaleModifiers?: ScaleModifier[];
     sprite: {
         x: number;
         y: number;
@@ -23,12 +24,21 @@ export type JSpriteAnimated = PIXI.AnimatedSprite & {
     imagePath: string;
     doRemoveWhenPrimaryAnimationChanges: boolean;
 };
+interface ScaleModifier {
+    id: string;
+    x?: number;
+    y?: number;
+}
 export interface IImageAnimated {
     sprite: JSpriteAnimated;
+    scaleModifiers?: ScaleModifier[];
     resolver: undefined | (() => void);
     mask?: string;
 }
 export declare function create(coords: Vec2, spritesheetId: string, parent: PIXI.Container | undefined, pixiSpriteOptions?: PixiSpriteOptions): IImageAnimated | undefined;
+export declare function removeScaleModifier(image: IImageAnimated | undefined, id: string, strength: number): void;
+export declare function addScaleModifier(image: IImageAnimated | undefined, mod: ScaleModifier, strength: number): void;
+export declare function setScaleFromModifiers(image: IImageAnimated | undefined, strength: number): void;
 export declare function cleanup(image?: IImageAnimated): void;
 export declare function changeSprite(image: IImageAnimated | undefined, imagePath: string, container: PIXI.Container | undefined, resolver: undefined | (() => void), options?: PixiSpriteOptions): JSpriteAnimated | undefined;
 export declare function serialize(image: IImageAnimated): IImageAnimatedSerialized;

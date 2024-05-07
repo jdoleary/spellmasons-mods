@@ -14,7 +14,7 @@ export declare const BLUE_PORTAL = "Blue Portal";
 export declare const HEALTH_POTION = "Health Potion";
 export declare const MANA_POTION = "Mana Potion";
 export declare const STAMINA_POTION = "Stamina Potion";
-export declare const RECALL_POINT = "Recall Point";
+export declare const RECALL_POINT = "Recall";
 type IPickupDescription = (pickup: IPickup) => Localizable;
 type IPickupEffect = ({ unit, player, pickup, prediction }: {
     unit?: IUnit;

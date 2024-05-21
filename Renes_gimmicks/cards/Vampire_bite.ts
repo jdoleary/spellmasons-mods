@@ -31,8 +31,7 @@ const spell: Spell = {
         animationPath,
         sfx: 'hurt',
         description: [`Deals 10 to the target and heals you for up to 50% damage done. Healing is not affected by modifiers, including blood curse`],
-        // TODO timeout needs validation
-        timeoutMs: 1000,
+        timeoutMs: 400,
         effect: async (state, _card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);

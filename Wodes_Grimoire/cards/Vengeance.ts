@@ -26,7 +26,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconVengeance.png',
         sfx: 'hurt',
         description: [`Deals damage equal to your missing health. This harms you first if you are targeted, then enemies.`],
-        timeoutMs: 20,
+        timeoutMs: 840,
         effect: async (state, card, quantity, underworld, prediction) => {
             let promises: any[] = [];
             //Living units

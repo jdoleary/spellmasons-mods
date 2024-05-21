@@ -17,7 +17,7 @@ const huge_trap: IPickupSource = {
     name: 'Huge Trap',
     probability: 70,
     scale: 1.5,
-    description: [`A huge trap that does ${spike_damage} damage.`],
+    description: () => [`A huge trap that does ${spike_damage} damage.`],
     willTrigger: ({ unit }) => {
         return !!unit;
     },

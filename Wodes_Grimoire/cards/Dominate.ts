@@ -25,6 +25,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconDominate.png',
         sfx: 'suffocate',
         description: [`Converts an enemy to fight for you if they are below ${healthThreshhold * 100}% health.`], //Wololo
+        timeoutMs: 20,
         effect: async (state, card, quantity, underworld, prediction) => {
             //Living units, Units below threshhold, and units that are in your faction
             const targets = state.targetedUnits.filter(u => u.alive && u.health <= u.healthMax * healthThreshhold && u.faction !== state.casterUnit.faction);

@@ -25,6 +25,7 @@ const spell: Spell = {
     sfx: 'hurt',
     description: [`Summons a trap that does 30 damage when stepped on`],
     allowNonUnitTarget: true,
+    timeoutMs: 20,
     effect: async (state, card, _quantity, underworld, prediction) => {
       const summonLocation = {
         x: state.castLocation.x,

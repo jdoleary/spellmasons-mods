@@ -65,6 +65,7 @@ export default class Underworld {
     forceMove: ForceMove[];
     forceMovePrediction: ForceMove[];
     forceMovePromise: Promise<void> | undefined;
+    timeSinceLastSimulationStep: number;
     lastThoughtsHash: string;
     playerThoughts: {
         [clientId: string]: {

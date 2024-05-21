@@ -30,6 +30,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/' + cardId + '.png',
         sfx: 'hurt',
         description: [`Target takes some damage it moves. Stacks, casting again replenishes duration up to ${maxDuration} turns. (Updates on turn change, recasts or damage)`],
+        timeoutMs: 20,
         effect: async (state, _card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);

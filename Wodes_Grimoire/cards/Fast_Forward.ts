@@ -30,6 +30,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconFastForward.png',
         sfx: 'push', //TODO
         description: [`Shunt the target forward through time. Causes progression of spell effects but does not affect cooldowns.`], //TODO: better deffinition
+        timeoutMs: 20,
         effect: async (state, card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);

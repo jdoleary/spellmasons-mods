@@ -27,6 +27,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconEnsnare.png',
         sfx: '',
         description: [`Prevents the target from moving for one turn. Furthur casts increase duration.`],
+        timeoutMs: 20,
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive.
             const targets = state.targetedUnits.filter(u => u.alive);
@@ -40,11 +41,6 @@ const spell: Spell = {
                 for (let unit of targets) {
                     Unit.addModifier(unit, card.id, underworld, prediction, quantity);
                 }
-            }
-            if (!prediction && !globalThis.headless) {
-                await new Promise((resolve) => {
-                    setTimeout(resolve, 100);
-                })
             }
             return state;
         }

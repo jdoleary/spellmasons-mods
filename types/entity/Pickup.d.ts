@@ -41,6 +41,7 @@ export type IPickup = HasSpace & {
     imagePath?: string;
     image?: Image.IImageAnimated;
     real?: IPickup;
+    predictionCopy?: IPickup;
     playerOnly: boolean;
     turnsLeftToGrab?: number;
     text?: PIXI.Text;

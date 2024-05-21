@@ -40,6 +40,7 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/undead_blade/spellIconUndeadBlade.png',
         animationPath,
         sfx: 'hurt',
+        timeoutMs: 403,
         description: [`Deals ${damageDone} to summoned units and resurrected units only.`],
         effect: async (state, card, quantity, underworld, prediction) => {
             // .filter: only target living units

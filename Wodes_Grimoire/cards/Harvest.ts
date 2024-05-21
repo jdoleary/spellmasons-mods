@@ -28,7 +28,6 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconHarvest.png',
         sfx: 'sacrifice',
         description: [`Consumes target corpse for ${manaRegain} mana. Does not work on player corpses. Unstackable.\n\nTastes like chicken.`],
-        // TODO timeout needs verification
         timeoutMs: 900,
         effect: async (state, card, quantity, underworld, prediction) => {
             let promises: any[] = [];

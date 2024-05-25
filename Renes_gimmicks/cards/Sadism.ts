@@ -25,7 +25,6 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/Sadism.png',
         sfx: 'hurt',
         description: [`Damage to target equal to its attack, you receive ${retaliate * 100}% of that attack damage`],
-        timeoutMs: 20,
         effect: async (state, _card, quantity, underworld, prediction) => {
             //Living units
             const targets = state.targetedUnits.filter(u => u.alive);

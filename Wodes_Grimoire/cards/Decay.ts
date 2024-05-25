@@ -27,7 +27,6 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconDecay.png',
         sfx: 'poison',
         description: [`Causes the target to take damage equal to the number of decay stacks squared at the start of their turn. The target then gains another stack.`],
-        timeoutMs: 20,
         effect: async (state, card, quantity, underworld, prediction) => {
             //Only filter unit thats are alive
             const targets = state.targetedUnits.filter(u => u.alive);

@@ -72,7 +72,6 @@ export interface ICard {
     animationPath?: string;
     effect: EffectFn;
     description: Localizable;
-    timeoutMs: number;
     requiresFollowingCard?: boolean;
     expenseScaling: number;
     cooldown?: number;

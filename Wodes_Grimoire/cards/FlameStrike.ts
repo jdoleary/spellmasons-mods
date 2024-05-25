@@ -31,7 +31,6 @@ const spell: Spell = {
         thumbnail: 'spellmasons-mods/Wodes_Grimoire/graphics/icons/spelliconFlameStrike.png',
         sfx: 'burst',
         description: [`Deals ${damageMain} damage to the target and ${damageSplash} damage to nearby targets in a small area.`],
-        timeoutMs: 400,
         effect: async (state, card, quantity, underworld, prediction) => {
             //Using await new Promise instead of the other way spells work to force
             //Flamestrike to finish before continue to the next spell.

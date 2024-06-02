@@ -116,7 +116,7 @@ export declare function orient(unit: IUnit, faceTarget: Vec2): void;
 export declare function _moveTowards(unit: IUnit, target: Vec2, underworld: Underworld): void;
 export declare function moveTowardsMulti(unit: IUnit, points: Vec2[], underworld: Underworld): Promise<void>;
 export declare function moveTowards(unit: IUnit, point: Vec2, underworld: Underworld): Promise<void>;
-export declare function setLocation(unit: IUnit, coordinates: Vec2, underworld: Underworld): void;
+export declare function setLocation(unit: IUnit, coordinates: Vec2, underworld: Underworld, prediction: boolean): void;
 export declare function changeFaction(unit: IUnit, faction: Faction): void;
 export declare function syncImage(unit: IUnit): void;
 export declare function getExplainPathForUnitId(id: string): string;

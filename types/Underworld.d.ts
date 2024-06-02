@@ -238,19 +238,17 @@ export default class Underworld {
     merge(unit: Unit.IUnit, mergeUnits: Unit.IUnit[]): Promise<boolean>;
     serializeForHash(): any;
     serializeForSaving(): IUnderworldSerialized;
-    serializeForSyncronize(): IUnderworldSerializedForSyncronize;
     updateAccessibilityOutlines(): void;
 }
-export type IUnderworldSerialized = Omit<typeof Underworld, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "doodads" | "doodadsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
-    players: Player.IPlayerSerialized[];
-    units: Unit.IUnitSerialized[];
-    pickups: Pickup.IPickupSerialized[];
-};
 type NonFunctionPropertyNames<T> = {
     [K in keyof T]: T[K] extends Function ? never : K;
 }[keyof T];
 type UnderworldNonFunctionProperties = Exclude<NonFunctionPropertyNames<Underworld>, null | undefined>;
-export type IUnderworldSerializedForSyncronize = Omit<Pick<Underworld, UnderworldNonFunctionProperties>, "pie" | "overworld" | "debugGraphics" | "players" | "units" | "pickups" | "obstacles" | "random" | "gameLoop" | "particleFollowers">;
+export type IUnderworldSerialized = Omit<Pick<Underworld, UnderworldNonFunctionProperties>, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
+    players: Player.IPlayerSerialized[];
+    units: Unit.IUnitSerialized[];
+    pickups: Pickup.IPickupSerialized[];
+};
 export type Biome = 'water' | 'lava' | 'blood' | 'ghost';
 export declare function biomeTextColor(biome?: Biome): number | string;
 export interface LevelData {

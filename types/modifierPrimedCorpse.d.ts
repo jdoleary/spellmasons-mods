@@ -1,2 +1,2 @@
-export declare const primedCorpseId = "primedCorpse";
+export declare const primedCorpseId = "Primed Corpse";
 export default function registerPrimedCorpse(): void;

@@ -1,4 +1,4 @@
-import type * as particles from '@pixi/particle-emitter';
+import type * as particles from 'jdoleary-fork-pixi-particle-emitter';
 import { Spell } from '../cards';
 import { IPickupSource } from '../entity/Pickup';
 import { UnitSource } from '../entity/units';

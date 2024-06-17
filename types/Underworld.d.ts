@@ -18,7 +18,7 @@ import type PieClient from '@websocketpie/client';
 import { DisplayObject, TilingSprite } from 'pixi.js';
 import { HasSpace } from './entity/Type';
 import { Overworld } from './Overworld';
-import { Emitter } from '@pixi/particle-emitter';
+import { Emitter } from 'jdoleary-fork-pixi-particle-emitter';
 import { StatCalamity } from './Perk';
 export declare enum turn_phase {
     Stalled = 0,

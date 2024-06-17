@@ -51,3 +51,4 @@ export declare const FORCE_MOVE_PROMISE_TIMEOUT_MILLIS = 2000;
 export declare const SERVER_HUB_URL = "https://server-hub-d2b2v.ondigitalocean.app";
 export declare const PATHING_POLYGON_OFFSET = 10;
 export declare const WALL_BOUNDS_OFFSET = 14;
+export declare const STAT_POINTS_PER_LEVEL = 3;

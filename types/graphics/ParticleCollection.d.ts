@@ -1,4 +1,4 @@
-import * as particles from '@pixi/particle-emitter';
+import * as particles from 'jdoleary-fork-pixi-particle-emitter';
 import { Vec2 } from '../jmath/Vec';
 import { IUnit } from '../entity/Unit';
 import Underworld from '../Underworld';

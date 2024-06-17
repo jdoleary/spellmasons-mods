@@ -9,7 +9,6 @@ export interface CardCost {
     healthCost: number;
 }
 export declare function levelsUntilCardIsEnabled(cardId: string, underworld?: Underworld): number;
-export declare function getCardCooldown(cardId: string, underworld?: Underworld): number;
 export declare function playSpellSFX(sfxKey: string, prediction: boolean): void;
 export declare function playDefaultSpellSFX(card: ICard, prediction: boolean): void;
 export declare function playDefaultSpellAnimation(card: ICard, targets: Vec2[], prediction: boolean): Promise<void | void[]>;

@@ -1,4 +1,4 @@
-import * as particles from '@pixi/particle-emitter';
+import * as particles from 'jdoleary-fork-pixi-particle-emitter';
 import { Vec2 } from '../jmath/Vec';
 import { prng } from '../jmath/rand';
 import { BloodParticle } from './PixiUtils';
@@ -30,6 +30,7 @@ export declare function updateParticles(delta: number, bloods: BloodParticle[], 
 export declare function logNoTextureWarning(where: string): void;
 export declare function createParticleTexture(): import("pixi.js").Texture<import("pixi.js").Resource> | undefined;
 export declare function createHardCircleParticleTexture(): import("pixi.js").Texture<import("pixi.js").Resource> | undefined;
+export declare function auraEmitter(position: Vec2, size: number, prediction: boolean): JEmitter | undefined;
 export declare function moveStreakEmitter(position: Vec2, prediction: boolean): JEmitter | undefined;
 export declare function cleanUpEmitters(onlyTurnScopedEmitters: boolean): void;
 export {};

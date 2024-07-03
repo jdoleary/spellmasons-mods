@@ -1,12 +1,8 @@
 import { Mod } from '../types/types/commonTypes';
-
 import Gravity from './cards/Gravity';
 import LimitGlove from './cards/LimitGlove';
 import WhiteWind from './cards/WhiteWind';
-import TargetHp3 from './cards/TargetHp3';
-import TargetHp4 from './cards/TargetHp4';
-import TargetHp5 from './cards/TargetHp5';
-import TargetHpPrime from './cards/TargetHpPrime';
+import { TargetHpPrime, TargetHp3, TargetHp4, TargetHp5 } from './cards/TargetHpCards';
 const mod: Mod = {
     modName: 'DaiNekoIchi\'s Tome of Spells',
     author: 'DaiNekoIchi, PADS',
@@ -16,10 +12,10 @@ const mod: Mod = {
         Gravity,
         LimitGlove,
         WhiteWind,
+        TargetHpPrime,
         TargetHp3,
         TargetHp4,
         TargetHp5,
-        TargetHpPrime
     ],
     spritesheet: 'spellmasons-mods/DaiNekoIchis_TomeOfSpells/graphics/spritesheet.json'
 };

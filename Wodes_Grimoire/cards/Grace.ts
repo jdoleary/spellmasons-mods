@@ -80,10 +80,7 @@ function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity:
     const modifier = cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: false, quantity, persistBetweenLevels: false,
     }, () => {
-        // Register onTurnStart event
-        if (!unit.onTurnStartEvents.includes(cardId)) {
-            unit.onTurnStartEvents.push(cardId);
-        }
+        SpellmasonsAPI.Unit.addEvent(unit, cardId);
     });
 
     if (!modifier.graceCountdown) {

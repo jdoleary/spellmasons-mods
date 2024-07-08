@@ -171,10 +171,7 @@ function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity:
     cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: true, quantity, persistBetweenLevels: false,
     }, () => {
-        //Adds event
-        if (!unit.onTurnStartEvents.includes(cardId)) {
-            unit.onTurnStartEvents.push(cardId);
-        }
+        SpellmasonsAPI.Unit.addEvent(unit, cardId);
         makeBurningRageParticles(unit, underworld, prediction);
     });
 }

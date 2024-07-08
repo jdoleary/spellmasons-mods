@@ -69,8 +69,8 @@ const spell: Spell = {
 };
 async function procEvents(unit: IUnit, underworld: Underworld, prediction: boolean) {
     //onTurnStart events first for order.
-    for (let i = 0; i < unit.onTurnStartEvents.length; i++) {
-        const eventName = unit.onTurnStartEvents[i];
+    for (let i = 0; i < unit.events.length; i++) {
+        const eventName = unit.events[i];
         if (eventName) {
             //Made into function because eventName points to a modifier (probably) whose arguments need to be pass in.
             const fns = Events.default.onTurnStartSource[eventName];
@@ -79,8 +79,8 @@ async function procEvents(unit: IUnit, underworld: Underworld, prediction: boole
             }
         }
     }
-    for (let i = 0; i < unit.onTurnEndEvents.length; i++) {
-        const eventName = unit.onTurnEndEvents[i];
+    for (let i = 0; i < unit.events.length; i++) {
+        const eventName = unit.events[i];
         if (eventName) {
             const fne = Events.default.onTurnEndSource[eventName];
             if (fne) {

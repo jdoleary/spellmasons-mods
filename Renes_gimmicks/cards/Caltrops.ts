@@ -60,16 +60,13 @@ const spell: Spell = {
 };
 
 function add(unit: IUnit, _underworld: Underworld, prediction: boolean, quantity: number, extra: any) {
-    let firstStack = !unit.onTurnStartEvents.includes(cardId);
+    let firstStack = !unit.events.includes(cardId);
     const modifier = cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: false, quantity, persistBetweenLevels: false,
     }, () => {
         //Register onTurn
         if (firstStack) {
-            //unit.onMove.push(cardId);
-            unit.onTurnEndEvents.push(cardId);
-            unit.onTurnStartEvents.push(cardId);
-            unit.onTakeDamageEvents.push(cardId);
+            SpellmasonsAPI.Unit.addEvent(unit, cardId);
         }
     });
     if (firstStack) {

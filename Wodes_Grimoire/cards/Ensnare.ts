@@ -68,10 +68,7 @@ function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity:
         isCurse: true, quantity, persistBetweenLevels: false,
         originalstat: unit.staminaMax,
     }, () => {
-        //Register onTurnEndEvents
-        if (!unit.onTurnEndEvents.includes(cardId)) {
-            unit.onTurnEndEvents.push(cardId);
-        }
+        SpellmasonsAPI.Unit.addEvent(unit, cardId);
         unit.stamina = 0;
         unit.staminaMax = 0;
     });

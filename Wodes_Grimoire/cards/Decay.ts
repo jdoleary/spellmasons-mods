@@ -67,10 +67,7 @@ function add(unit: IUnit, _underworld: Underworld, _prediction: boolean, quantit
     cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: true, quantity, persistBetweenLevels: false,
     }, () => {
-        //Adds event
-        if (!unit.onTurnStartEvents.includes(cardId)) {
-            unit.onTurnStartEvents.push(cardId);
-        }
+        SpellmasonsAPI.Unit.addEvent(unit, cardId);
     });
 }
 export default spell;

@@ -82,10 +82,7 @@ function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity:
     const modifier = cardsUtil.getOrInitModifier(unit, cardId, {
         isCurse: false, quantity, persistBetweenLevels: false,
     }, () => {
-        //Register onTurnEndEvents
-        if (!unit.onTurnEndEvents.includes(cardId)) {
-            unit.onTurnEndEvents.push(cardId);
-        }
+        SpellmasonsAPI.Unit.addEvent(unit, cardId);
     });
     if (modifier.quantity > 5) {
         modifier.quantity = 5; //All casts give 5 turns, the max duration. When over 5, a new cast was done so update stacks

@@ -16,7 +16,7 @@ const { isPickup } = Pickup;
 
 const UNITS_PER_STACK = 3;
 // Used to generate "Target HP * x" cards.
-export function generateTargetHpMultipleOfSpell(multipleOf: number, manaCost: number, requiredId: number | string | undefined, rarity: CardRarity) : Spell {
+export function generateTargetHpMultipleOfSpell(multipleOf: number, manaCost: number, requiredId: number | string | undefined, rarity: CardRarity): Spell {
     let reqId;
     if (requiredId) {
         reqId = [`TargetHp${reqId}`]
@@ -47,7 +47,7 @@ export function generateTargetHpMultipleOfSpell(multipleOf: number, manaCost: nu
                     .sort(math.sortCosestTo(state.castLocation))
                     .slice(0, UNITS_PER_STACK * quantity);
                 for (let target of targets) {
-                    addTarget(target, state, underworld);
+                    addTarget(target, state, underworld, prediction);
                 }
                 return state;
             }
@@ -55,8 +55,8 @@ export function generateTargetHpMultipleOfSpell(multipleOf: number, manaCost: nu
     }
 }
 
-function isPrime(num: number) : boolean {
-    if (num <= 1) { 
+function isPrime(num: number): boolean {
+    if (num <= 1) {
         return false; // 0 and 1 are neither both prime nor composite numbers
     }
     for (let n = 2; n < num; n++) {
@@ -67,9 +67,9 @@ function isPrime(num: number) : boolean {
     return true;
 }
 
-export const TargetHp3 = generateTargetHpMultipleOfSpell(3,30,'Prime',commonTypes.CardRarity.UNCOMMON);
-export const TargetHp4 = generateTargetHpMultipleOfSpell(4,35,3,commonTypes.CardRarity.RARE);
-export const TargetHp5 = generateTargetHpMultipleOfSpell(5,40,4,commonTypes.CardRarity.FORBIDDEN);
+export const TargetHp3 = generateTargetHpMultipleOfSpell(3, 30, 'Prime', commonTypes.CardRarity.UNCOMMON);
+export const TargetHp4 = generateTargetHpMultipleOfSpell(4, 35, 3, commonTypes.CardRarity.RARE);
+export const TargetHp5 = generateTargetHpMultipleOfSpell(5, 40, 4, commonTypes.CardRarity.FORBIDDEN);
 export const TargetHpPrime: Spell = {
     card: {
         id: `Target Health Prime`,
@@ -86,15 +86,15 @@ export const TargetHpPrime: Spell = {
         ignoreRange: true,
         effect: async (state, card, quantity, underworld, prediction, outOfRange) => {
             const targets = underworld.getPotentialTargets(prediction)
-            .filter(u => {
-                if (Unit.isUnit(u)) {
-                    return u.alive && isPrime(u.health)
-                } else { return false };
-            })
-            .sort(math.sortCosestTo(state.castLocation))
-            .slice(0, UNITS_PER_STACK * quantity);
+                .filter(u => {
+                    if (Unit.isUnit(u)) {
+                        return u.alive && isPrime(u.health)
+                    } else { return false };
+                })
+                .sort(math.sortCosestTo(state.castLocation))
+                .slice(0, UNITS_PER_STACK * quantity);
             for (let target of targets) {
-                addTarget(target, state, underworld);
+                addTarget(target, state, underworld, prediction);
             }
             return state;
         }

@@ -7,7 +7,8 @@ const {
     commonTypes,
     cards,
     cardUtils,
-    Unit
+    Unit,
+    JPromise,
 } = globalThis.SpellmasonsAPI;
 const { oneOffImage, playDefaultSpellSFX, playSpellSFX } = cardUtils;
 const { refundLastSpell } = cards;
@@ -34,13 +35,20 @@ const spell: Spell = {
         effect: async (state, card, quantity, underworld, prediction) => {
             const targets = state.targetedUnits.filter(u => u.alive);
             if (!prediction && !globalThis.headless) {
-                for (let unit of targets) {
-                    oneOffImage(unit, animationPath, containerSpells);
-                }
+                // Trigger first sfx
                 playSpellSFX('push', prediction);
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                playDefaultSpellSFX(card, prediction);
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                let promises = [];
+                for (let unit of targets) {
+                    promises.push(new Promise<void>(res => {
+                        oneOffImage(unit, animationPath, containerSpells, res);
+                        // Trigger final sfx timed along with animation
+                        setTimeout(() => {
+                            playDefaultSpellSFX(card, prediction);
+                        }, 1000);
+                    }));
+                }
+                await JPromise.raceTimeout(2000, 'Gravity attack animation', Promise.all(promises));
+
             }
             for (let unit of targets) {
                 let damage = unit.health * percentDamage * quantity;

@@ -83,7 +83,7 @@ function makeWhiteWindParticles(position: Vec2, radius: number, underworld: Unde
                 "minR": 0
             }
         }, [texture]);
-        simpleEmitter(position, particleConfig);
+    simpleEmitter(position, particleConfig);
 }
 
 const cardId = 'Healing Breeze';
@@ -119,19 +119,11 @@ const spell: Spell = {
             for (let entity of entities) {
                 if (Unit.isUnit(entity)) {
                     let target: IUnit = entity;
-                    Unit.takeDamage({unit: target, amount: -state.casterUnit.health}, underworld, prediction);
+                    Unit.takeDamage({ unit: target, amount: -state.casterUnit.health }, underworld, prediction);
                 }
                 playDefaultSpellSFX(card, prediction);
             }
-            if (!prediction && !globalThis.headless) {
-                for (let follower of underworld.particleFollowers) {
-                    if (follower.emitter.name === WHITE_WIND_EMITTER_NAME && follower.target == state.casterUnit) {
-                        // Remove emitter
-                        ParticleCollection.stopAndDestroyForeverEmitter(follower.emitter);
-                        break;
-                    }
-                }
-            }
+
             return state;
         }
     }

@@ -74,7 +74,7 @@ export const TargetHpPrime: Spell = {
     card: {
         id: `Target Health Prime`,
         category: CardCategory.Targeting,
-        supportQuantity: false,
+        supportQuantity: true,
         manaCost: 25,
         healthCost: 0,
         expenseScaling: 4,

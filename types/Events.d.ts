@@ -27,7 +27,7 @@ export type onTurnEnd = {
 export type onDrawSelected = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
-export type onProjectileCollision = ({ unit, pickup, underworld, prediction }: {
+export type onProjectileCollision = ({ unit, pickup, projectile, underworld, prediction }: {
     unit?: IUnit;
     pickup?: IPickup;
     projectile: ForceMoveProjectile;

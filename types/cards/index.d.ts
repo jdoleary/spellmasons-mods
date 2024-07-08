@@ -11,9 +11,10 @@ import { Overworld } from '../Overworld';
 import { Localizable } from '../localization';
 export interface Modifiers {
     subsprite?: Subsprite;
-    init?: (unit: Unit.IUnit, underworld: Underworld, prediction: boolean) => void;
+    addModifierVisuals?: (unit: Unit.IUnit, underworld: Underworld, prediction: boolean) => void;
     add?: (unit: Unit.IUnit, underworld: Underworld, prediction: boolean, quantity: number, extra?: object) => void;
     remove?: (unit: Unit.IUnit, underworld: Underworld) => void;
+    description?: string;
 }
 interface Events {
     onDealDamage?: onDealDamage;
@@ -88,7 +89,7 @@ export declare const allModifiers: {
     [id: string]: Modifiers;
 };
 export declare function getCardsFromIds(cardIds: string[]): ICard[];
-export declare function addTarget(target: any, effectState: EffectState, underworld: Underworld): void;
-export declare function addUnitTarget(unit: Unit.IUnit, effectState: EffectState): void;
+export declare function addTarget(target: any, effectState: EffectState, underworld: Underworld, prediction: boolean): void;
+export declare function addUnitTarget(unit: Unit.IUnit, effectState: EffectState, prediction: boolean): void;
 export declare function addPickupTarget(pickup: Pickup.IPickup, effectState: EffectState): void;
 export {};

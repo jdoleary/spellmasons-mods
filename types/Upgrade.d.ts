@@ -11,13 +11,14 @@ export interface IUpgrade {
     cardCategory?: CardCategory;
     description: (player: IPlayer) => string;
     thumbnail: string;
-    maxCopies?: number;
     effect: (player: IPlayer, underworld: Underworld) => void;
     probability: number;
     cost: CardCost;
 }
 export declare function isPickingClass(player: IPlayer): boolean;
-export declare function generateUpgrades(player: IPlayer, numberOfUpgrades: number, minimumProbability: number, underworld: Underworld): IUpgrade[];
+export declare const filterUpgrades: (u: IUpgrade, player: Pick<IPlayer, "upgrades" | "inventory">, underworld: Pick<Underworld, "activeMods">) => boolean;
+export declare function omitRerolledUpgrades(upgradeList: IUpgrade[]): IUpgrade[];
+export declare function generateUpgrades(player: IPlayer, numberOfUpgrades: number, underworld: Underworld): IUpgrade[];
 export declare function createUpgradeElement(upgrade: IUpgrade, player: IPlayer, underworld: Underworld): HTMLDivElement | undefined;
 export declare function getUpgradeByTitle(title: string): IUpgrade | undefined;
 export declare const upgradeSourceWhenDead: IUpgrade[];

@@ -56,13 +56,7 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     unitType: UnitType;
     unitSubType: UnitSubType;
     flaggedForRemoval?: boolean;
-    onDealDamageEvents: string[];
-    onTakeDamageEvents: string[];
-    onDeathEvents: string[];
-    onAgroEvents: string[];
-    onTurnStartEvents: string[];
-    onTurnEndEvents: string[];
-    onDrawSelectedEvents: string[];
+    events: string[];
     animations: UnitAnimations;
     sfx: UnitSFX;
     modifiers: {
@@ -138,4 +132,5 @@ export declare function unitSourceIdToName(unitSourceId: string, asMiniboss: boo
 export declare function getFactionsOf(units: {
     faction: Faction;
 }[]): Faction[];
+export declare function addEvent(unit: IUnit, eventId: string): void;
 export {};

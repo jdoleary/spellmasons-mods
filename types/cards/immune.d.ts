@@ -3,7 +3,7 @@ import Underworld from '../Underworld';
 import { Vec2 } from '../jmath/Vec';
 export declare const id = "Immune";
 export default function registerImmune(): void;
-export declare function init(unit: Unit.IUnit, underworld: Underworld, prediction: boolean): void;
+export declare function addModifierVisuals(unit: Unit.IUnit, underworld: Underworld, prediction: boolean): void;
 export declare function add(unit: Unit.IUnit, underworld: Underworld, prediction: boolean, quantity?: number): void;
 export declare function remove(unit: Unit.IUnit, underworld: Underworld): void;
 export declare function resetNotifiedImmune(): void;

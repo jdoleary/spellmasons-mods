@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { Vec2 } from '../jmath/Vec';
-import { View } from '../views';
+import { View } from '../View';
 import { JSpriteAnimated } from './Image';
 import Underworld, { Biome } from '../Underworld';
 import { IUnit } from '../entity/Unit';

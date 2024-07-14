@@ -12,4 +12,4 @@ const mods: commonTypes.Mod[] = [
     DaiNekoIchis_TomeOfSpells
 ];
 console.log('Mods: Add mods', mods);
-globalThis.mods = mods;
+globalThis.mods = globalThis.mods !== undefined ? [...globalThis.mods, ...mods] : mods;

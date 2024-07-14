@@ -11,5 +11,5 @@ const mods: commonTypes.Mod[] = [
     Renes_Gimmicks,
     DaiNekoIchis_TomeOfSpells
 ];
-console.log('Mods: Add mods', mods);
 globalThis.mods = globalThis.mods !== undefined ? [...globalThis.mods, ...mods] : mods;
+console.log('Mods: Add mods', globalThis.mods);

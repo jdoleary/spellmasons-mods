@@ -2,7 +2,7 @@ import type * as Player from '../entity/Player';
 import * as Unit from '../entity/Unit';
 import * as Pickup from '../entity/Pickup';
 import type { Vec2 } from '../jmath/Vec';
-import Events, { onDealDamage, onTakeDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision } from '../Events';
+import { onDealDamage, onTakeDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision } from '../Events';
 import { Subsprite } from '../Subsprites';
 import Underworld from '../Underworld';
 import { CardCategory } from '../types/commonTypes';
@@ -10,13 +10,16 @@ import { HasSpace } from '../entity/Type';
 import { Overworld } from '../Overworld';
 import { Localizable } from '../localization';
 export interface Modifiers {
+    id?: string;
     subsprite?: Subsprite;
-    addModifierVisuals?: (unit: Unit.IUnit, underworld: Underworld, prediction: boolean) => void;
+    addModifierVisuals?: (unit: Unit.IUnit, underworld: Underworld) => void;
     add?: (unit: Unit.IUnit, underworld: Underworld, prediction: boolean, quantity: number, extra?: object) => void;
     remove?: (unit: Unit.IUnit, underworld: Underworld) => void;
     description?: string;
+    probability?: number;
 }
-interface Events {
+export interface Events {
+    id?: string;
     onDealDamage?: onDealDamage;
     onTakeDamage?: onTakeDamage;
     onDeath?: onDeath;
@@ -92,4 +95,3 @@ export declare function getCardsFromIds(cardIds: string[]): ICard[];
 export declare function addTarget(target: any, effectState: EffectState, underworld: Underworld, prediction: boolean): void;
 export declare function addUnitTarget(unit: Unit.IUnit, effectState: EffectState, prediction: boolean): void;
 export declare function addPickupTarget(pickup: Pickup.IPickup, effectState: EffectState): void;
-export {};

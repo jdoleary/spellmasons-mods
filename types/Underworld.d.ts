@@ -31,6 +31,7 @@ export declare const showUpgradesClassName = "showUpgrades";
 export default class Underworld {
     seed: string;
     gameMode?: GameMode;
+    difficulty: number;
     localUnderworldNumber: number;
     overworld: Overworld;
     random: prng;

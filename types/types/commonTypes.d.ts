@@ -1,5 +1,5 @@
 import type * as particles from 'jdoleary-fork-pixi-particle-emitter';
-import { Spell } from '../cards';
+import { Events, Modifiers, Spell } from '../cards';
 import { IPickupSource } from '../entity/Pickup';
 import { UnitSource } from '../entity/units';
 export type GameMode = 'tutorial' | 'hard' | 'impossible';
@@ -52,4 +52,6 @@ export interface Mod {
     units?: UnitSource[];
     pickups?: IPickupSource[];
     spells?: Spell[];
+    modifiers?: Modifiers[];
+    events?: Events[];
 }

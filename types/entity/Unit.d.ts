@@ -2,7 +2,6 @@ import * as Image from '../graphics/Image';
 import { PixiSpriteOptions } from '../graphics/PixiUtils';
 import { UnitSubType, UnitType, Faction } from '../types/commonTypes';
 import type { Vec2 } from '../jmath/Vec';
-import { UnitSource } from './units';
 import Underworld from '../Underworld';
 import { HasLife, HasMana, HasSpace, HasStamina } from './Type';
 import { Modifier } from '../cards/util';
@@ -69,10 +68,10 @@ export declare function updateAccessibilityOutline(unit: IUnit, targeted: boolea
 export declare function adjustUnitStatsByUnderworldCalamity(unit: IUnit, statCalamity: StatCalamity): void;
 interface DifficultyAdjustedUnitStats {
     healthMax: number;
-    manaMax: number;
+    health: number;
 }
-export declare function adjustUnitPropsDueToDifficulty(source: Partial<UnitSource>, difficulty: number): DifficultyAdjustedUnitStats;
-export declare function adjustUnitDifficulty(unit: IUnit, difficulty: number): void;
+export declare function adjustUnitPropsDueToDifficulty(stats: DifficultyAdjustedUnitStats, difficultyRatio: number): DifficultyAdjustedUnitStats;
+export declare function adjustUnitDifficulty(unit: IUnit, oldDifficulty: number, newDifficulty: number): void;
 export declare function addModifier(unit: IUnit, key: string, underworld: Underworld, prediction: boolean, quantity?: number, extra?: object): void;
 export declare function removeModifier(unit: IUnit, key: string, underworld: Underworld): void;
 export declare function cleanup(unit: IUnit, maintainPosition?: boolean, forceCleanPlayerUnit?: boolean): void;
@@ -119,7 +118,7 @@ export declare function startTurnForUnits(units: IUnit[], underworld: Underworld
 export declare function endTurnForUnits(units: IUnit[], underworld: Underworld, prediction: boolean): Promise<void>;
 export declare function runTurnStartEvents(unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 export declare function runTurnEndEvents(unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
-export declare function makeMiniboss(unit: IUnit): void;
+export declare function makeMiniboss(unit: IUnit, underworld: Underworld): void;
 export declare function copyForPredictionUnit(u: IUnit, underworld: Underworld): IUnit;
 export declare function setPlayerAttributeMax(unit: IUnit, attribute: 'manaMax' | 'healthMax' | 'staminaMax', newValue: number): void;
 export declare function isUnitsTurnPhase(unit: IUnit, underworld: Underworld): boolean;

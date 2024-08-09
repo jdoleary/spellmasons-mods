@@ -6,6 +6,7 @@ import Underworld from '../Underworld';
 import { HasLife, HasMana, HasSpace, HasStamina } from './Type';
 import { Modifier } from '../cards/util';
 import { StatCalamity } from '../Perk';
+import { IPickup } from './Pickup';
 export interface UnitPath {
     points: Vec2[];
     lastOwnPosition: Vec2;
@@ -83,7 +84,7 @@ export declare function returnToDefaultSprite(unit: IUnit): void;
 export declare function playComboAnimation(unit: IUnit, key: string | undefined, keyMoment?: () => Promise<any>, options?: PixiSpriteOptions): Promise<void>;
 export declare function playAnimation(unit: IUnit, spritePath: string | undefined, options?: PixiSpriteOptions): Promise<void>;
 export declare function resurrect(unit: IUnit, underworld: Underworld): void;
-export declare function die(unit: IUnit, underworld: Underworld, prediction: boolean): void;
+export declare function die(unit: IUnit, underworld: Underworld, prediction: boolean, sourceUnit?: IUnit): void;
 export declare function composeOnDealDamageEvents(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): number;
 export declare function composeOnTakeDamageEvents(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): number;
 interface damageArgs {
@@ -118,6 +119,7 @@ export declare function startTurnForUnits(units: IUnit[], underworld: Underworld
 export declare function endTurnForUnits(units: IUnit[], underworld: Underworld, prediction: boolean): Promise<void>;
 export declare function runTurnStartEvents(unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 export declare function runTurnEndEvents(unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
+export declare function runPickupEvents(unit: IUnit, pickup: IPickup, underworld: Underworld, prediction: boolean): Promise<void>;
 export declare function makeMiniboss(unit: IUnit, underworld: Underworld): void;
 export declare function copyForPredictionUnit(u: IUnit, underworld: Underworld): IUnit;
 export declare function setPlayerAttributeMax(unit: IUnit, attribute: 'manaMax' | 'healthMax' | 'staminaMax', newValue: number): void;

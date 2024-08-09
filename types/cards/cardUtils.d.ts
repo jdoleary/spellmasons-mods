@@ -1,4 +1,4 @@
-import type { ICard } from ".";
+import type { ICard, Modifiers } from ".";
 import { type CardUsage, type IPlayer } from "../entity/Player";
 import { Vec2 } from "../jmath/Vec";
 import * as Image from '../graphics/Image';
@@ -8,6 +8,7 @@ export interface CardCost {
     manaCost: number;
     healthCost: number;
 }
+export declare function isRune(m?: Modifiers): boolean;
 export declare function levelsUntilCardIsEnabled(cardId: string, underworld?: Underworld): number;
 export declare function playSpellSFX(sfxKey: string, prediction: boolean): void;
 export declare function playDefaultSpellSFX(card: ICard, prediction: boolean): void;

@@ -15,7 +15,6 @@ export interface IUpgrade {
     probability: number;
     cost: CardCost;
 }
-export declare function isPickingClass(player: IPlayer): boolean;
 export declare const filterUpgrades: (u: IUpgrade, player: Pick<IPlayer, "upgrades" | "inventory">, underworld: Pick<Underworld, "activeMods">) => boolean;
 export declare function omitRerolledUpgrades(upgradeList: IUpgrade[]): IUpgrade[];
 export declare function generateUpgrades(player: IPlayer, numberOfUpgrades: number, underworld: Underworld): IUpgrade[];
@@ -23,4 +22,3 @@ export declare function createUpgradeElement(upgrade: IUpgrade, player: IPlayer,
 export declare function getUpgradeByTitle(title: string): IUpgrade | undefined;
 export declare const upgradeSourceWhenDead: IUpgrade[];
 export declare const upgradeCardsSource: IUpgrade[];
-export declare const upgradeMageClassSource: IUpgrade[];

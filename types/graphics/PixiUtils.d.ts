@@ -39,7 +39,9 @@ export declare function getCamera(): {
 };
 export declare function getMapCenter(underworld: Underworld): Vec2;
 export declare function setCameraToMapCenter(underworld: Underworld): void;
-export declare function updateCameraPosition(underworld: Underworld): void;
+export declare function updateCameraPosition(underworld: Underworld, deltaTime: number): void;
+export declare function getNextCameraVelocity(cameraVelocity: Vec2, targetCameraVelocity: Vec2, deltaTime: number): Vec2;
+export declare function getNextCameraPosition(cameraPos: Vec2, cameraVelocity: Vec2, zoom: number, deltaTime: number): Vec2;
 export declare function updateNameText(nameText?: PIXI.Text, zoom?: number): void;
 export declare function setupPixi(): Promise<void>;
 export declare function addPixiContainersForView(view: View): void;

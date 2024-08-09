@@ -20,10 +20,8 @@ interface Stats {
     gameStartTime: number;
     totalKills: number;
 }
-export type MageType = 'Spellmason' | 'Timemason' | 'Bloodmason' | 'Necromancer' | 'Archer' | 'Far Gazer' | 'Cleric' | 'Witch' | 'Gambler';
 export interface IPlayer {
     name: string;
-    mageType?: MageType;
     color: number;
     colorMagic: number;
     endedTurn: boolean;
@@ -49,9 +47,13 @@ export interface IPlayer {
     stats: Stats;
     cursesChosen: number;
     statPointsUnspent: number;
+    lockedRunes: {
+        index: number;
+        key: string;
+        levelIndexUnlocked?: number;
+    }[];
 }
 export declare function inPortal(player: IPlayer): boolean;
-export declare function changeMageType(type: MageType, player?: IPlayer, underworld?: Underworld): void;
 export declare function create(clientId: string, playerId: string, underworld: Underworld): IPlayer;
 export declare function setPlayerRobeColor(player: IPlayer, color: number | string, colorMagic?: number | string): void;
 export declare function resetPlayerForNextLevel(player: IPlayer, underworld: Underworld): void;

@@ -2,7 +2,7 @@ import type * as Player from '../entity/Player';
 import * as Unit from '../entity/Unit';
 import * as Pickup from '../entity/Pickup';
 import type { Vec2 } from '../jmath/Vec';
-import { onDealDamage, onTakeDamage, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision } from '../Events';
+import { onDealDamage, onTakeDamage, onKill, onTooltip, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision, onTeleport, onSpawn, onPickup } from '../Events';
 import { Subsprite } from '../Subsprites';
 import Underworld from '../Underworld';
 import { CardCategory } from '../types/commonTypes';
@@ -12,18 +12,30 @@ import { Localizable } from '../localization';
 export interface Modifiers {
     id?: string;
     subsprite?: Subsprite;
+    constant?: boolean;
+    stage?: MODIFIER_STAGE;
     addModifierVisuals?: (unit: Unit.IUnit, underworld: Underworld) => void;
     add?: (unit: Unit.IUnit, underworld: Underworld, prediction: boolean, quantity: number, extra?: object) => void;
     remove?: (unit: Unit.IUnit, underworld: Underworld) => void;
-    description?: string;
+    unitOfMeasure?: string;
+    description?: Localizable;
     probability?: number;
+    costPerUpgrade?: number;
+    quantityPerUpgrade?: number;
+    maxUpgradeCount?: number;
+    keepBetweenLevels?: boolean;
 }
 export interface Events {
     id?: string;
     onDealDamage?: onDealDamage;
     onTakeDamage?: onTakeDamage;
+    onKill?: onKill;
+    onTooltip?: onTooltip;
     onDeath?: onDeath;
     onMove?: onMove;
+    onTeleport?: onTeleport;
+    onSpawn?: onSpawn;
+    onPickup?: onPickup;
     onAgro?: onAgro;
     onTurnStart?: onTurnStart;
     onTurnEnd?: onTurnEnd;
@@ -52,6 +64,8 @@ export interface EffectState {
     castLocation: Vec2;
     aggregator: {
         radiusBoost: number;
+        additionalPierce: number;
+        additionalBounce: number;
     };
     initialTargetedUnitId: number | undefined;
     initialTargetedPickupId: number | undefined;
@@ -84,6 +98,7 @@ export interface ICard {
     onlySelectDeadUnits?: boolean;
     ignoreRange?: boolean;
     sfx?: string;
+    frontload?: boolean;
 }
 export declare const allCards: {
     [cardId: string]: ICard;
@@ -95,3 +110,7 @@ export declare function getCardsFromIds(cardIds: string[]): ICard[];
 export declare function addTarget(target: any, effectState: EffectState, underworld: Underworld, prediction: boolean): void;
 export declare function addUnitTarget(unit: Unit.IUnit, effectState: EffectState, prediction: boolean): void;
 export declare function addPickupTarget(pickup: Pickup.IPickup, effectState: EffectState): void;
+export declare function getMaxRuneQuantity(modifier: Modifiers): number;
+export type MODIFIER_STAGE = 'Soul Shard' | 'Soul Bind' | 'Amount Multiplier' | 'Amount Flat' | 'Amount Override' | 'Blood Curse' | 'Reactive Effects' | 'Unstaged Events';
+export declare const MODIFIER_ORDER: MODIFIER_STAGE[];
+export declare function eventsSorter(lookup: typeof allModifiers): (eventA: string, eventB: string) => number;

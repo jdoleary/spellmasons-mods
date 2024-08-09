@@ -25,4 +25,5 @@ export declare function chooseOneOfSeeded<T>(arr: T[], seedRandomInstance: prng)
 export declare function chooseOneOf<T>(arr?: T[]): T | undefined;
 export declare function chooseObjectWithProbability<T extends objectWithProbability>(source: T[], seedRandomInstance: prng): T | undefined;
 export declare function getUniqueSeedString(underworld: Underworld, player?: IPlayer): string;
+export declare function getUniqueSeedStringPerLevel(underworld: Underworld, player?: IPlayer): string;
 export {};

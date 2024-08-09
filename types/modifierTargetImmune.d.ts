@@ -1,2 +1,2 @@
-export declare const targetImmuneId = "Target Immune";
+export declare const targetImmuneId = "target_immune";
 export default function registerTargetImmune(): void;

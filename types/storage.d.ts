@@ -1,4 +1,3 @@
-import { MageType } from "./entity/Player";
 export declare const STORAGE_OPTIONS = "OPTIONS";
 export declare const STORAGE_LANGUAGE_CODE_KEY = "language";
 export declare const STORAGE_ID_PLAYER_COLOR = "player-color";
@@ -14,5 +13,3 @@ export declare function remove(key: string): void;
 export declare function set(key: string, value: any): void;
 export declare function assign(key: string, value: object): void;
 export declare function get(key: string): string | null;
-export declare function getStoredMageTypeWinsKey(mageType: MageType): string;
-export declare function getStoredMageTypeFarthestLevelKey(mageType: MageType): string;

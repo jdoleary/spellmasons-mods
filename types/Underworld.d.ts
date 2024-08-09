@@ -117,6 +117,7 @@ export default class Underworld {
     runForceMove(forceMoveInst: ForceMove, deltaTime: number, prediction: boolean): boolean;
     queueGameLoop: () => void;
     addForceMove(forceMoveInst: ForceMove, prediction: boolean): void;
+    resetForceMoveTimeout(): void;
     gameLoopForceMove: (deltaTime: number) => boolean;
     gameLoopUnit: (u: Unit.IUnit, aliveNPCs: Unit.IUnit[], deltaTime: number) => boolean;
     awaitForceMoves: (prediction?: boolean) => Promise<void>;
@@ -198,7 +199,7 @@ export default class Underworld {
     perksLeftToChoose(player: Player.IPlayer): number;
     cursesLeftToChoose(player: Player.IPlayer): number;
     upgradesLeftToChoose(player: Player.IPlayer): number;
-    spendStatPoint(stat: string, player: Player.IPlayer): void;
+    upgradeRune(runeModifierId: string, player: Player.IPlayer): void;
     adminShowMageTypeSelect(): void;
     showUpgrades(): void;
     addRerollButton(player: Player.IPlayer): void;

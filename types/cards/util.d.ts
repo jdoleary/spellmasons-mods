@@ -4,6 +4,6 @@ export interface Modifier {
     isCurse: boolean;
     quantity: number;
     keepOnDeath?: boolean;
-    keepBetweenLevels?: boolean;
 }
-export declare function getOrInitModifier(unit: IUnit, key: string, { isCurse, quantity, keepOnDeath, keepBetweenLevels, ...rest }: Modifier, firstTimeSetup: () => void): Modifier;
+export declare function getOrInitModifier(unit: IUnit, key: string, { isCurse, quantity, keepOnDeath, ...rest }: Modifier, firstTimeSetup: () => void): Modifier;
+export declare function quantityWithUnit(quantity: number, unitOfMeasure: string | undefined): string;

@@ -3,6 +3,7 @@ import { LineSegment } from "./lineSegment";
 import Underworld from '../Underworld';
 import { HasSpace } from '../entity/Type';
 import { IUnit } from '../entity/Unit';
+import { EffectState } from '../cards';
 export declare enum ForceMoveType {
     PROJECTILE = 0,
     UNIT_OR_PICKUP = 1
@@ -25,21 +26,26 @@ export type ForceMoveProjectile = ForceMove & {
     type: ForceMoveType.PROJECTILE;
     sourceUnit?: IUnit;
     startPoint: Vec2;
-    endPoint: Vec2;
-    doesPierce: boolean;
-    ignoreUnitIds: number[];
+    velocity: Vec2;
+    piercesRemaining: number;
+    bouncesRemaining: number;
+    collidingUnitIds: number[];
     collideFnKey: string;
+    state: EffectState;
+    ignoreCollisionLifetime?: number | undefined;
 };
 export declare function isForceMoveProjectile(x: ForceMove): x is ForceMoveProjectile;
 interface ForceMoveProjectileArgs {
     pushedObject: HasSpace;
     sourceUnit?: IUnit;
     startPoint: Vec2;
-    endPoint: Vec2;
-    speed: number;
-    doesPierce: boolean;
-    ignoreUnitIds: number[];
+    velocity: Vec2;
+    piercesRemaining: number;
+    bouncesRemaining: number;
+    collidingUnitIds: number[];
     collideFnKey: string;
+    state: EffectState;
+    ignoreCollisionLifetime?: number | undefined;
 }
 export declare function makeForceMoveProjectile(args: ForceMoveProjectileArgs, underworld: Underworld, prediction: boolean): ForceMove;
 export type Circle = {
@@ -54,7 +60,7 @@ export declare function normalizedVector(point1: Vec2, point2: Vec2): {
     distance: number;
 };
 export declare function collideWithLineSegments(circle: Circle, lineSegments: LineSegment[], underworld: Underworld): boolean;
-export declare function predictWallCollision(forceMoveInst: ForceMove, underworld: Underworld, deltaTime: number): {
+export declare function handleWallCollision(forceMoveInst: ForceMove, underworld: Underworld, deltaTime: number): {
     msUntilCollision: number;
     wall: LineSegment | undefined;
 };

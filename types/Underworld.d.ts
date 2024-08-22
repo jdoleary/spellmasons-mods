@@ -133,7 +133,7 @@ export default class Underworld {
     isMyTurn(): boolean;
     cleanup(): void;
     cacheWalls(obstacles: Obstacle.IObstacle[], emptyTiles: Tile[]): void;
-    spawnPickup(index: number, coords: Vec2, prediction?: boolean): void;
+    spawnPickup(index: number, coords: Vec2, prediction?: boolean): Pickup.IPickup | undefined;
     spawnEnemy(id: string, coords: Vec2, isMiniboss: boolean): Unit.IUnit | undefined;
     testLevelData(): LevelData;
     isInsideLiquid(point: Vec2): boolean;
@@ -141,12 +141,20 @@ export default class Underworld {
     generateRandomLevelData(levelIndex: number): LevelData | undefined;
     pickGroundTileLayers(biome: Biome): string[];
     addGroundTileImages(biome: Biome): void;
-    isPointValidSpawn(spawnPoint: Vec2, radius: number, prediction: boolean, fromSource?: Vec2): boolean;
-    findValidSpawn({ spawnSource, ringLimit, radius, prediction }: {
-        spawnSource: Vec2;
-        ringLimit: number;
-        radius?: number;
-        prediction: boolean;
+    isPointValidSpawn(spawnPoint: Vec2, prediction: boolean, extra?: {
+        intersectionRadius?: number;
+        allowLiquid?: boolean;
+        unobstructedPoint?: Vec2;
+    }): boolean;
+    findValidSpawnInWorldBounds(prediction: boolean, seed: prng, extra?: {
+        allowLiquid?: boolean;
+        unobstructedPoint?: Vec2;
+    }): Vec2 | undefined;
+    findValidSpawnInRadius(center: Vec2, prediction: boolean, seed: prng, extra?: {
+        maxRadius?: number;
+        minRadius?: number;
+        allowLiquid?: boolean;
+        unobstructedPoint?: Vec2;
     }): Vec2 | undefined;
     findValidSpawns({ spawnSource, ringLimit, radius, prediction }: {
         spawnSource: Vec2;
@@ -241,6 +249,9 @@ export default class Underworld {
     serializeForHash(): any;
     serializeForSaving(): IUnderworldSerialized;
     updateAccessibilityOutlines(): void;
+    getShuffledRunesForPlayer(player?: Player.IPlayer): ({
+        key: string;
+    } & Cards.Modifiers)[];
 }
 type NonFunctionPropertyNames<T> = {
     [K in keyof T]: T[K] extends Function ? never : K;

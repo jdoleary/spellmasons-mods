@@ -2,7 +2,7 @@ import type * as Player from '../entity/Player';
 import * as Unit from '../entity/Unit';
 import * as Pickup from '../entity/Pickup';
 import type { Vec2 } from '../jmath/Vec';
-import { onDealDamage, onTakeDamage, onKill, onTooltip, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision, onTeleport, onSpawn, onPickup } from '../Events';
+import { onDealDamage, onTakeDamage, onKill, onTooltip, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision, onTeleport, onSpawn, onPickup, onFullTurnCycle } from '../Events';
 import { Subsprite } from '../Subsprites';
 import Underworld from '../Underworld';
 import { CardCategory } from '../types/commonTypes';
@@ -20,11 +20,12 @@ export interface Modifiers {
     unitOfMeasure?: string;
     description?: Localizable;
     probability?: number;
-    costPerUpgrade?: number;
+    _costPerUpgrade?: number;
     quantityPerUpgrade?: number;
     maxUpgradeCount?: number;
     keepBetweenLevels?: boolean;
 }
+export declare function calcluateModifierCostPerUpgrade(mod: Modifiers, underworld: Underworld, player?: Player.IPlayer): number;
 export interface Events {
     id?: string;
     onDealDamage?: onDealDamage;
@@ -37,6 +38,7 @@ export interface Events {
     onSpawn?: onSpawn;
     onPickup?: onPickup;
     onAgro?: onAgro;
+    onFullTurnCycle?: onFullTurnCycle;
     onTurnStart?: onTurnStart;
     onTurnEnd?: onTurnEnd;
     onDrawSelected?: onDrawSelected;

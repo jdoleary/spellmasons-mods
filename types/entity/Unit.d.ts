@@ -74,6 +74,7 @@ interface DifficultyAdjustedUnitStats {
 export declare function adjustUnitPropsDueToDifficulty(stats: DifficultyAdjustedUnitStats, difficultyRatio: number): DifficultyAdjustedUnitStats;
 export declare function adjustUnitDifficulty(unit: IUnit, oldDifficulty: number, newDifficulty: number): void;
 export declare function addModifier(unit: IUnit, key: string, underworld: Underworld, prediction: boolean, quantity?: number, extra?: object): void;
+export declare function removeRune(unit: IUnit, key: string, underworld: Underworld): void;
 export declare function removeModifier(unit: IUnit, key: string, underworld: Underworld): void;
 export declare function cleanup(unit: IUnit, maintainPosition?: boolean, forceCleanPlayerUnit?: boolean): void;
 export declare function serialize(unit: IUnit): IUnitSerialized;

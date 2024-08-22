@@ -33,6 +33,9 @@ export type onPickup = {
 export type onAgro = {
     (agroer: IUnit, agroTarget: IUnit): IUnit;
 };
+export type onFullTurnCycle = {
+    (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
+};
 export type onTurnStart = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
@@ -73,6 +76,9 @@ declare const _default: {
     };
     onPickupSource: {
         [name: string]: onPickup;
+    };
+    onFullTurnCycleSource: {
+        [name: string]: onFullTurnCycle;
     };
     onTurnStartSource: {
         [name: string]: onTurnStart;

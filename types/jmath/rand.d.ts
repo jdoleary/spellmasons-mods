@@ -26,4 +26,6 @@ export declare function chooseOneOf<T>(arr?: T[]): T | undefined;
 export declare function chooseObjectWithProbability<T extends objectWithProbability>(source: T[], seedRandomInstance: prng): T | undefined;
 export declare function getUniqueSeedString(underworld: Underworld, player?: IPlayer): string;
 export declare function getUniqueSeedStringPerLevel(underworld: Underworld, player?: IPlayer): string;
+export declare function getUniqueSeedStringPerPlayer(underworld: Underworld, player?: IPlayer): string;
+export declare function shuffle<T>(array: T[], seedRandomInstance: prng): T[];
 export {};

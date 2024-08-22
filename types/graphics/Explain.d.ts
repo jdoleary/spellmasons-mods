@@ -37,6 +37,7 @@ export interface TutorialChecklist {
     castMultipleInOneTurn: TutorialChecklistItem;
     camera: TutorialChecklistItem;
     recenterCamera: TutorialChecklistItem;
+    spendUpgradePoints: TutorialChecklistItem;
 }
 export declare const tutorialChecklist: TutorialChecklist;
 export declare function updateTutorialChecklist(): void;

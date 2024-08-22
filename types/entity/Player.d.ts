@@ -50,8 +50,9 @@ export interface IPlayer {
     lockedRunes: {
         index: number;
         key: string;
-        levelIndexUnlocked?: number;
+        runePresentedIndexWhenLocked?: number;
     }[];
+    runePresentedIndex: number;
 }
 export declare function inPortal(player: IPlayer): boolean;
 export declare function create(clientId: string, playerId: string, underworld: Underworld): IPlayer;
@@ -75,4 +76,5 @@ export declare function getFactionsOf(players: {
         faction: Faction;
     };
 }[]): Faction[];
+export declare function incrementPresentedRunesForPlayer(player: IPlayer, underworld: Underworld): void;
 export {};

@@ -208,7 +208,6 @@ export default class Underworld {
     cursesLeftToChoose(player: Player.IPlayer): number;
     upgradesLeftToChoose(player: Player.IPlayer): number;
     upgradeRune(runeModifierId: string, player: Player.IPlayer): void;
-    adminShowMageTypeSelect(): void;
     showUpgrades(): void;
     addRerollButton(player: Player.IPlayer): void;
     getRandomCoordsWithinBounds(bounds: Limits, seed?: prng): Vec2;

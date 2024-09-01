@@ -13,6 +13,7 @@ export interface ForceMove {
     pushedObject: HasSpace;
     velocity: Vec2;
     timedOut?: boolean;
+    sourceUnit?: IUnit;
 }
 export type ForceMoveUnitOrPickup = ForceMove & {
     type: ForceMoveType.UNIT_OR_PICKUP;

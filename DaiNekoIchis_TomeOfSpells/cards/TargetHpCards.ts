@@ -19,7 +19,11 @@ const UNITS_PER_STACK = 3;
 export function generateTargetHpMultipleOfSpell(multipleOf: number, manaCost: number, requiredId: number | string | undefined, rarity: CardRarity): Spell {
     let reqId;
     if (requiredId) {
-        reqId = [`TargetHp${reqId}`]
+        if (requiredId == 'Prime') {
+            reqId = ['Target Health Prime']
+        } else {
+            reqId = [`Target Health * ${requiredId}`]
+        }
     } else {
         reqId = undefined
     }

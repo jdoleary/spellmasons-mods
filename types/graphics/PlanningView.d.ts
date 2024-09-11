@@ -28,6 +28,7 @@ export declare function drawUICircleFillPrediction(target: Vec2, radius: number,
 export declare function setPredictionGraphicsLineStyle(color: number): void;
 export declare function isOutOfBounds(target: Vec2, underworld: Underworld): boolean;
 export declare function updateTooltipContent(underworld: Underworld): void;
+export declare function modifiersToText(selectedUnit: Unit.IUnit): string;
 export declare function checkIfNeedToClearTooltip(): void;
 export declare function clearTooltipSelection(): boolean;
 export declare function updateTooltipSelectionWhileSpawning(mousePos: Vec2, underworld: Underworld): void;

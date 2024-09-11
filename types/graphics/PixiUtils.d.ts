@@ -54,6 +54,7 @@ export interface PixiSpriteOptions {
         colors: [number, number][];
         epsilon: number;
     };
+    scale?: number;
 }
 export declare function getPixiTextureAnimated(imagePath: string): PIXI.Texture<PIXI.Resource>[] | undefined;
 export declare function addPixiSpriteAnimated(imagePath: string, parent: PIXI.Container | undefined, options?: PixiSpriteOptions): JSpriteAnimated | undefined;

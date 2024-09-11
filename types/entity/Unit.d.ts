@@ -12,8 +12,9 @@ export interface UnitPath {
     lastOwnPosition: Vec2;
     targetPosition: Vec2;
 }
-export type IUnitSerialized = Omit<IUnit, "predictionCopy" | "resolveDoneMoving" | "image" | "animations" | "sfx"> & {
+export type IUnitSerialized = Omit<IUnit, "predictionCopy" | "resolveDoneMoving" | "image" | "animations" | "sfx" | "summonedBy"> & {
     image?: Image.IImageAnimatedSerialized;
+    summonedById: number | undefined;
 };
 export interface UnitAnimations {
     idle: string;
@@ -33,6 +34,7 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     unitSourceId: string;
     real?: IUnit;
     predictionCopy?: IUnit;
+    summonedBy?: IUnit;
     strength: number;
     originalLife: boolean;
     path?: UnitPath;

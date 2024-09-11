@@ -20,6 +20,7 @@ export interface Modifiers {
     unitOfMeasure?: string;
     description?: Localizable;
     probability?: number;
+    unavailableUntilLevelIndex?: number;
     _costPerUpgrade?: number;
     quantityPerUpgrade?: number;
     maxUpgradeCount?: number;
@@ -87,6 +88,7 @@ export interface ICard {
     category: CardCategory;
     manaCost: number;
     healthCost: number;
+    costGrowthAlgorithm?: "nlogn" | "log" | 'exponential';
     probability: number;
     thumbnail: string;
     animationPath?: string;

@@ -105,11 +105,12 @@ export default class Underworld {
         time: number;
         callback: () => void;
     }[];
+    _battleLog: string[];
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
     calculateKillsNeededForLevel(level: number): number;
     getNumberOfEnemyKillsNeededForNextLevelUp(): number;
-    reportEnemyKilled(enemyKilledPos: Vec2): void;
+    reportEnemyKilled(unit: Unit.IUnit): void;
     syncPlayerPredictionUnitOnly(): void;
     syncPredictionEntities(): void;
     syncronizeRNG(RNGState: SeedrandomState | boolean): prng;
@@ -183,6 +184,7 @@ export default class Underworld {
     trySpawnPortals(): boolean;
     tryGoToNextLevel(): boolean;
     isGameOver(): boolean;
+    clearGameOverModal(): void;
     doGameOver(): void;
     updateGameOverModal(): void;
     hasCompletedTurn(player: Player.IPlayer): boolean;
@@ -212,8 +214,7 @@ export default class Underworld {
     addRerollButton(player: Player.IPlayer): void;
     getRandomCoordsWithinBounds(bounds: Limits, seed?: prng): Vec2;
     redPortalBehavior(faction: Faction): void;
-    clearPredictedNextTurnDamage(): void;
-    incrementTargetsNextTurnDamage(targets: Unit.IUnit[], damage: number, canAttack: boolean): void;
+    incrementTargetsNextTurnDamage(targets: Unit.IUnit[], damage: number, canAttack: boolean, sourceUnit: Unit.IUnit): void;
     getSmartTargets(units: Unit.IUnit[]): {
         [id: number]: {
             targets: Unit.IUnit[];
@@ -251,6 +252,7 @@ export default class Underworld {
     getShuffledRunesForPlayer(player?: Player.IPlayer): ({
         key: string;
     } & Cards.Modifiers)[];
+    battleLog(happening: string, englishOnly?: boolean): void;
 }
 type NonFunctionPropertyNames<T> = {
     [K in keyof T]: T[K] extends Function ? never : K;

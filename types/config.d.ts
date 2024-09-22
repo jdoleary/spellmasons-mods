@@ -54,3 +54,4 @@ export declare const PATHING_POLYGON_OFFSET = 10;
 export declare const WALL_BOUNDS_OFFSET = 14;
 export declare const STAT_POINTS_PER_LEVEL = 120;
 export declare const RUNES_PER_LEVEL = 6;
+export declare const getSmartTargetsChunkSize = 50;

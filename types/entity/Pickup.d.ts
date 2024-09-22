@@ -8,7 +8,7 @@ import { HasSpace } from './Type';
 import { Localizable } from '../localization';
 import { JEmitter } from '../types/commonTypes';
 export declare const PICKUP_RADIUS = 36;
-export declare const PICKUP_IMAGE_PATH = "pickups/scroll";
+export declare const PICKUP_IMAGE_PATH = "scroll";
 export declare const RED_PORTAL = "Red Portal";
 export declare const BLUE_PORTAL = "Blue Portal";
 export declare const HEALTH_POTION = "Health Potion";

@@ -215,7 +215,7 @@ export default class Underworld {
     getRandomCoordsWithinBounds(bounds: Limits, seed?: prng): Vec2;
     redPortalBehavior(faction: Faction): void;
     incrementTargetsNextTurnDamage(targets: Unit.IUnit[], damage: number, canAttack: boolean, sourceUnit: Unit.IUnit): void;
-    getSmartTargets(units: Unit.IUnit[]): {
+    getSmartTargets(units: Unit.IUnit[], restartChunks?: boolean, skipChunking?: boolean): {
         [id: number]: {
             targets: Unit.IUnit[];
             canAttack: boolean;
@@ -249,6 +249,7 @@ export default class Underworld {
     serializeForHash(): any;
     serializeForSaving(): IUnderworldSerialized;
     updateAccessibilityOutlines(): void;
+    setContainerUnitsFilter(): void;
     getShuffledRunesForPlayer(player?: Player.IPlayer): ({
         key: string;
     } & Cards.Modifiers)[];

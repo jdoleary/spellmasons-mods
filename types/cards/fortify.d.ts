@@ -1,5 +1,5 @@
 import { Spell } from './index';
 export declare const id = "fortify";
-export declare const modifierImagePath = "spell-effects/modifierShield.png";
+export declare const modifierImagePath = "modifierShield.png";
 declare const spell: Spell;
 export default spell;

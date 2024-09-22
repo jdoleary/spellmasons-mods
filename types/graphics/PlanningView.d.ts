@@ -15,6 +15,7 @@ export declare function getFillRect(unit: Unit.IUnit, min: number, max: number, 
 };
 export declare function drawUnitMarker(imagePath: string, pos: Vec2, unitYScale?: number, extraMarkerScale?: number): void;
 export declare function runPredictions(underworld: Underworld): Promise<void>;
+export declare function predictAIActions(underworld: Underworld, restartChunks: boolean): void;
 export declare function clearSpellEffectProjection(underworld: Underworld, forceClear?: boolean): void;
 export declare function drawPredictionLine(start: Vec2, end: Vec2): void;
 export declare function drawUIPoly(graphics: PIXI.Graphics, points: Vec2[], color: number, text?: string): void;

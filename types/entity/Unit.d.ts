@@ -65,6 +65,13 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
         [key: string]: Modifier;
     };
     predictedNextTurnDamage: number;
+    attentionMarker?: {
+        imagePath: string;
+        pos: Vec2;
+        unitSpriteScaleY: number;
+        markerScale: number;
+        removalTimeout?: number;
+    };
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean): IUnit;
 export declare function updateAccessibilityOutline(unit: IUnit, targeted: boolean, outOfRange?: boolean): void;

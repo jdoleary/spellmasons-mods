@@ -14,7 +14,8 @@ export declare function getFillRect(unit: Unit.IUnit, min: number, max: number, 
     height: number;
 };
 export declare function drawUnitMarker(imagePath: string, pos: Vec2, unitYScale?: number, extraMarkerScale?: number): void;
-export declare function runPredictions(underworld: Underworld): Promise<void>;
+export declare function runPredictions(underworld: Underworld, vital?: boolean): Promise<void>;
+export declare function _runPredictions(underworld: Underworld): Promise<void>;
 export declare function predictAIActions(underworld: Underworld, restartChunks: boolean): void;
 export declare function clearSpellEffectProjection(underworld: Underworld, forceClear?: boolean): void;
 export declare function drawPredictionLine(start: Vec2, end: Vec2): void;

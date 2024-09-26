@@ -244,8 +244,6 @@ export default class Underworld {
     syncPlayers(players: Player.IPlayerSerialized[], isClientPlayerSourceOfTruth: boolean): void;
     pickupIsIdentical(pickup: Pickup.IPickup, serialized: Pickup.IPickupSerialized): boolean;
     syncPickups(pickups: Pickup.IPickupSerialized[]): void;
-    mergeExcessUnits(): Promise<void>;
-    merge(unit: Unit.IUnit, mergeUnits: Unit.IUnit[]): Promise<boolean>;
     serializeForHash(): any;
     serializeForSaving(): IUnderworldSerialized;
     updateAccessibilityOutlines(): void;

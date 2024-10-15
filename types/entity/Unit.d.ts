@@ -72,6 +72,7 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
         markerScale: number;
         removalTimeout?: number;
     };
+    takingPureDamage?: boolean;
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean): IUnit;
 export declare function updateAccessibilityOutline(unit: IUnit, targeted: boolean, outOfRange?: boolean): void;
@@ -93,7 +94,7 @@ export declare function changeToDieSprite(unit: IUnit): void;
 export declare function returnToDefaultSprite(unit: IUnit): void;
 export declare function playComboAnimation(unit: IUnit, key: string | undefined, keyMoment?: () => Promise<any>, options?: PixiSpriteOptions): Promise<void>;
 export declare function playAnimation(unit: IUnit, spritePath: string | undefined, options?: PixiSpriteOptions): Promise<void>;
-export declare function resurrect(unit: IUnit, underworld: Underworld): void;
+export declare function resurrect(unit: IUnit, underworld: Underworld, preventRepeatRez?: boolean): boolean;
 export declare function die(unit: IUnit, underworld: Underworld, prediction: boolean, sourceUnit?: IUnit): void;
 export declare function composeOnDealDamageEvents(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): number;
 export declare function composeOnTakeDamageEvents(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): number;

@@ -151,11 +151,10 @@ export default class Underworld {
         allowLiquid?: boolean;
         unobstructedPoint?: Vec2;
     }): Vec2 | undefined;
-    findValidSpawnInRadius(center: Vec2, prediction: boolean, seed: prng, extra?: {
-        maxRadius?: number;
-        minRadius?: number;
+    findValidSpawnInRadius(center: Vec2, prediction: boolean, extra?: {
         allowLiquid?: boolean;
         unobstructedPoint?: Vec2;
+        radiusOverride?: number;
     }): Vec2 | undefined;
     findValidSpawns({ spawnSource, ringLimit, radius, prediction }: {
         spawnSource: Vec2;

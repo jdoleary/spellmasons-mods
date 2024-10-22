@@ -2,9 +2,11 @@ import { Spell } from '../../types/cards';
 
 const {
   commonTypes,
+  cards,
 } = globalThis.SpellmasonsAPI;
 
 const { CardCategory, probabilityMap, CardRarity, UnitType } = commonTypes;
+const { refundLastSpell } = cards;
 
 export const reinforceCardId = 'Reinforce';
 const reinforceAmount = 20;
@@ -27,6 +29,10 @@ const spell: Spell = {
       for (let unit of units) {
         unit.healthMax += reinforceAmount;
         unit.health += reinforceAmount;
+      }
+      if (units.length === 0) {
+        refundLastSpell(state, prediction)
+
       }
       return state;
     },

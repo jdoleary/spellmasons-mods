@@ -9,6 +9,8 @@ const {
   config,
   math,
   colors,
+  Unit,
+  JAudio
 } = globalThis.SpellmasonsAPI;
 
 const { addTarget } = cards;
@@ -35,22 +37,19 @@ const spell: Spell = {
     allowNonUnitTarget: true,
     effect: async (state: EffectState, card: ICard, quantity: number, underworld: Underworld, prediction: boolean, outOfRange?: boolean) => {
 
-      const targets = state.targetedUnits;
-      const faction = state.casterUnit.faction;
       // Only target units of the same faction as the caster (player's faction)
-      let addedTargets = prediction ? underworld.unitsPrediction : underworld.units;
-      addedTargets = addedTargets.filter(u =>
-        u.unitSubType != UnitSubType.DOODAD &&
-        !u.flaggedForRemoval &&
-        // Limit to the factions that are targeted
-        // so if you're targeting enemies it will only target wounded enemies
-        u.unitType == PLAYER_CONTROLLED &&
-        // Filter out caster Unit since they are naturPlayer
-        // the "closest" to themselves and if they want to target
-        // themselves they can by casting on themselves and wont
-        // need target Player to do it
-        u !== state.casterUnit &&
-        !state.targetedUnits.includes(u))
+      const addedTargets = underworld.getPotentialTargets(prediction)
+        .filter(u =>
+          Unit.isUnit(u) &&
+          u.unitSubType != UnitSubType.DOODAD &&
+          // Target players only
+          u.unitType == PLAYER_CONTROLLED &&
+          // Filter out caster Unit since they are naturPlayer
+          // the "closest" to themselves and if they want to target
+          // themselves they can by casting on themselves and wont
+          // need target Player to do it
+          u !== state.casterUnit &&
+          !state.targetedUnits.includes(u))
         // Sort by most missing health, and then dist to caster
         .sort((a, b) =>
           distance(state.casterPositionAtTimeOfCast, a) - distance(state.casterPositionAtTimeOfCast, b))
@@ -61,7 +60,7 @@ const spell: Spell = {
           addTarget(target, state, underworld, prediction);
         }
         if (!prediction && !globalThis.headless) {
-          //playSFXKey('targeting');
+          JAudio.playSFXKey('targeting');
           await animateTargetPlayer(addedTargets);
         }
       }

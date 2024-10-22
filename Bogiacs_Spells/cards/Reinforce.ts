@@ -4,7 +4,7 @@ const {
   commonTypes,
 } = globalThis.SpellmasonsAPI;
 
-const { CardCategory, probabilityMap, CardRarity } = commonTypes;
+const { CardCategory, probabilityMap, CardRarity, UnitType } = commonTypes;
 
 export const reinforceCardId = 'Reinforce';
 const reinforceAmount = 20;
@@ -20,11 +20,14 @@ const spell: Spell = {
     probability: probabilityMap[CardRarity.RARE],
     thumbnail: 'spellmasons-mods/Bogiacs_Spells/graphics/icons/Reinforce.png',
     animationPath: 'potionPickup',
-    description: 'Increases Max HP by ' + reinforceAmount.toString() + '.',
+    description: 'Increases Max HP by ' + reinforceAmount.toString() + '.  Does not affect Spellmasons.',
 
     effect: async (state, card, quantity, underworld, prediction) => {
-      state.casterUnit.healthMax += reinforceAmount;
-      state.casterUnit.health += reinforceAmount;
+      const units = state.targetedUnits.filter(u => u.unitType !== UnitType.PLAYER_CONTROLLED);
+      for (let unit of units) {
+        unit.healthMax += reinforceAmount;
+        unit.health += reinforceAmount;
+      }
       return state;
     },
   },

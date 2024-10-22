@@ -13,7 +13,6 @@ const {
 
 const { getOrInitModifier } = cardsUtil;
 const { playDefaultSpellSFX } = cardUtils;
-const { chooseObjectWithProbability, getUniqueSeedString } = rand;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 export const reflectCardId = 'Reflect';
@@ -29,11 +28,6 @@ function add(unit: IUnit, underworld: Underworld, prediction: boolean, quantity:
   getOrInitModifier(unit, reflectCardId, { isCurse: false, quantity }, () => {
     // Add event
     Unit.addEvent(unit, reflectCardId);
-    const animatedReflectSprite = JImage.addSubSprite(unit.image, modifierImagePath);
-    if (animatedReflectSprite) {
-      // Make it red just so it looks distinct from shield
-      animatedReflectSprite.tint = 0xff1100;
-    }
   });
 
 }
@@ -69,6 +63,14 @@ const spell: Spell = {
   modifiers: {
     //stage: `Reflect`,
     add,
+    addModifierVisuals(unit) {
+      const animatedReflectSprite = JImage.addSubSprite(unit.image, modifierImagePath);
+      if (animatedReflectSprite) {
+        // Make it red just so it looks distinct from shield
+        animatedReflectSprite.tint = 0xff1100;
+      }
+
+    },
     subsprite: {
       imageName: modifierImagePath,
       alpha: 0.65,
@@ -131,8 +133,7 @@ const spell: Spell = {
         }
       }
 
-      amount = 0;
-      // Thorns does not modify incoming damage
+      // Reflect does not modify incoming damage
       return amount;
     },
   },

@@ -39,26 +39,18 @@ const spell: Spell = {
                 x: state.castLocation.x,
                 y: state.castLocation.y
             }
-
-            const seed = rand.seedrandom(`${getUniqueSeedString(underworld)} - ${Math.random()}`);
-
-            const choiceUrns = Math.floor(Math.random() * 3) + 1;
-            let urnID: string;
-
-            urnID = urn_explosive_id;
-
-            if (choiceUrns == 1) {
-                urnID = urn_ice_id;
-            }
-            if (choiceUrns == 2) {
-                urnID = urn_poison_id;
+            if (!underworld.isPointValidSpawn(summonLocation, prediction)) {
+                refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
+                return state;
             }
 
-            let sourceUnit = allUnits[urnID];
-            if (sourceUnit) {
-
-
-                if (!prediction) {
+            // Unique to player and cast location so it doesn't spawn the same choice over and over
+            const seedString = `${getUniqueSeedString(underworld, state.casterPlayer)}${state.castLocation.x}${state.castLocation.y}`;
+            const seed = rand.seedrandom(seedString);
+            const urnID = rand.chooseOneOfSeeded([urn_explosive_id, urn_ice_id, urn_poison_id], seed);
+            if (urnID !== undefined) {
+                let sourceUnit = allUnits[urnID];
+                if (sourceUnit) {
                     const unit = Unit.create(
                         urnID,
                         summonLocation.x,
@@ -75,11 +67,14 @@ const spell: Spell = {
                     unit.health *= 1;
                     unit.damage *= 1;
                     addUnitTarget(unit, state, prediction);
-                    VisualEffects.skyBeam(summonLocation)
+                    if (!prediction) {
+                        VisualEffects.skyBeam(summonLocation)
+                    }
+                } else {
+                    refundLastSpell(state, prediction)
                 }
-
             } else {
-                refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
+                refundLastSpell(state, prediction)
             }
 
             return state;

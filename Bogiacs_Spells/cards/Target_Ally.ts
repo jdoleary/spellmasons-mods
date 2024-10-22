@@ -1,5 +1,4 @@
 import type { ICard } from '../../types/cards';
-import { UnitSubType } from '../../types/types/commonTypes';
 import type { Vec2 } from '../../types/jmath/Vec';
 const targetSimilarId = "Target Similar";
 import type Underworld from "../../types/Underworld";
@@ -14,7 +13,7 @@ const {
 
 const { addTarget } = cards;
 const { distance } = math;
-const { CardCategory, probabilityMap, CardRarity } = commonTypes;
+const { CardCategory, probabilityMap, CardRarity, UnitSubType } = commonTypes;
 
 export const targetAllyId = 'Target Ally';
 const targetsPerQuantity = 2;

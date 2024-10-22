@@ -1,24 +1,22 @@
-import { Faction, UnitType } from "../../types/types/commonTypes";
-import { Spell, addUnitTarget } from '../../types/cards/./index';
-import { getUniqueSeedString } from '../../types/jmath/rand';
-import * as Unit from '../../types/entity/Unit';
-import { allUnits } from '../../types/entity/units';
-import { urn_explosive_id } from '../../types/entity/units/urn_explosive';
-import { urn_poison_id } from '../../types/entity/units/urn_poison';
-import { urn_ice_id } from '../../types/entity/units/urn_ice';
+import { Spell } from '../../types/cards/./index';
+const urn_explosive_id = "Explosive Urn";
+const urn_poison_id = "Toxic Urn";
+const urn_ice_id = "Ice Urn";
 import { chaosWarpCardId } from './Chaos_Warp';
 
 const {
-    FloatingText,
-    cardUtils,
     commonTypes,
     cards,
     VisualEffects,
     rand,
+    units,
+    Unit
 } = globalThis.SpellmasonsAPI;
 
-const { refundLastSpell } = cards;
-const { CardCategory, probabilityMap, CardRarity } = commonTypes;
+const { allUnits } = units;
+const { getUniqueSeedString } = rand;
+const { refundLastSpell, addUnitTarget } = cards;
+const { CardCategory, probabilityMap, CardRarity, Faction, UnitType } = commonTypes;
 
 export const chaosWarpUrnCardId = 'Chaos Warp - Urn';
 const spell: Spell = {

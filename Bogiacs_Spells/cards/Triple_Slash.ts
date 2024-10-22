@@ -1,8 +1,6 @@
 const slashCardId = "Slash";
-import type { ICard } from '../../types/cards/./index';
 import type Underworld from "../../types/Underworld";
-import { EffectState, Spell } from '../../types/cards/./index';
-import * as Unit from '../../types/entity/Unit';
+import type { ICard, EffectState, Spell } from '../../types/cards';
 
 const {
     commonTypes,
@@ -10,6 +8,7 @@ const {
     rand,
     cardUtils,
     PixiUtils,
+    Unit
 } = globalThis.SpellmasonsAPI;
 
 const { randFloat } = rand;

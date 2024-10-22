@@ -1,14 +1,19 @@
-import { addTarget, ICard } from '../../types/cards/./index';
-import { UnitSubType } from '../../types/types/commonTypes';
+import { ICard } from '../../types/cards/./index';
 import { Vec2 } from '../../types/jmath/Vec';
-import * as colors from '../../types/graphics/ui/colors';
-import { distance } from '../../types/jmath/math';
-import * as config from '../../types/config';
 import Underworld from "../../types/Underworld";
-import { CardCategory } from '../../types/types/commonTypes';
-import { CardRarity, probabilityMap } from '../../types/types/commonTypes';
 import { EffectState, Spell } from '../../types/cards/./index';
 import { targetAllyId } from './Target_Ally';
+const {
+  commonTypes,
+  cards,
+  config,
+  math,
+  colors,
+} = globalThis.SpellmasonsAPI;
+
+const { addTarget } = cards;
+const { distance } = math;
+const { CardCategory, probabilityMap, CardRarity, UnitSubType } = commonTypes;
 
 
 export const targetPlayerId = 'Target Player';
@@ -50,7 +55,7 @@ const spell: Spell = {
         .sort((a, b) =>
           distance(state.casterPositionAtTimeOfCast, a) - distance(state.casterPositionAtTimeOfCast, b))
         .slice(0, targetsPerQuantity * quantity);
-        
+
       if (addedTargets.length) {
         for (const target of addedTargets) {
           addTarget(target, state, underworld, prediction);

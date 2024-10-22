@@ -12,6 +12,9 @@ export type onTooltip = {
 export type onTakeDamage = {
     (unit: IUnit, amount: number, underworld: Underworld, prediction: boolean, damageDealer?: IUnit): number;
 };
+export type onLiquid = {
+    (unit: IUnit, currentlyInLiquid: boolean, amount: number, underworld: Underworld, prediction: boolean, damageDealer?: IUnit): number;
+};
 export type onKill = {
     (unit: IUnit, killedUnit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
@@ -39,8 +42,14 @@ export type onFullTurnCycle = {
 export type onTurnStart = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
+export type onLevelStart = {
+    (unit: IUnit, underworld: Underworld): void;
+};
 export type onTurnEnd = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
+};
+export type onLevelEnd = {
+    (unit: IUnit, underworld: Underworld): void;
 };
 export type onDrawSelected = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
@@ -61,6 +70,9 @@ declare const _default: {
     };
     onTakeDamageSource: {
         [name: string]: onTakeDamage;
+    };
+    onLiquidSource: {
+        [name: string]: onLiquid;
     };
     onKillSource: {
         [name: string]: onKill;
@@ -83,8 +95,14 @@ declare const _default: {
     onTurnStartSource: {
         [name: string]: onTurnStart;
     };
+    onLevelStartSource: {
+        [name: string]: onLevelStart;
+    };
     onTurnEndSource: {
         [name: string]: onTurnEnd;
+    };
+    onLevelEndSource: {
+        [name: string]: onLevelEnd;
     };
     onDrawSelectedSource: {
         [name: string]: onDrawSelected;

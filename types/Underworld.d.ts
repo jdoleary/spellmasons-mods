@@ -161,6 +161,10 @@ export default class Underworld {
         ringLimit: number;
         radius?: number;
         prediction: boolean;
+    }, extra?: {
+        allowLiquid?: boolean;
+        unobstructedPoint?: Vec2;
+        radiusOverride?: number;
     }): Vec2[];
     cleanUpLevel(): void;
     postSetupLevel(): void;

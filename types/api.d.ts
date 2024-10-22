@@ -5,6 +5,7 @@ import * as Player from './entity/Player';
 import * as Projectile from './entity/Projectile';
 import * as Type from './entity/Type';
 import * as Pickup from './entity/Pickup';
+import * as Obstacle from './entity/Obstacle';
 import * as rangedAction from './entity/units/actions/rangedAction';
 import * as meleeAction from './entity/units/actions/meleeAction';
 import * as Angle from './jmath/Angle';
@@ -47,9 +48,11 @@ import * as Subsprites from './Subsprites';
 import * as Underworld from './Underworld';
 import * as cardUtils from './cards/cardUtils';
 import * as cards from './cards/index';
+import * as Upgrade from './Upgrade';
 import * as cardsUtil from './cards/util';
 import * as Events from './Events';
 import { forcePushTowards, forcePushAwayFrom, forcePushToDestination, forcePushDelta } from './effects/force_move';
+import * as EffectsHeal from './effects/heal';
 import * as commonTypes from './types/commonTypes';
 import * as particleEmitter from 'jdoleary-fork-pixi-particle-emitter';
 declare const SpellmasonsAPI: {
@@ -72,6 +75,7 @@ declare const SpellmasonsAPI: {
     forcePushTowards: typeof forcePushTowards;
     forcePushAwayFrom: typeof forcePushAwayFrom;
     forcePushToDestination: typeof forcePushToDestination;
+    EffectsHeal: typeof EffectsHeal;
     ImmediateModeSprites: typeof ImmediateModeSprites;
     inLiquid: typeof inLiquid;
     JAudio: typeof JAudio;
@@ -87,6 +91,7 @@ declare const SpellmasonsAPI: {
     moveWithCollision: typeof moveWithCollision;
     MultiColorReplaceFilter: typeof MultiColorReplaceFilter;
     Overworld: typeof Overworld;
+    Obstacle: typeof Obstacle;
     ParticleCollection: typeof ParticleCollection;
     particleEmitter: typeof particleEmitter;
     Particles: typeof Particles;
@@ -108,6 +113,7 @@ declare const SpellmasonsAPI: {
     Underworld: typeof Underworld;
     Unit: typeof Unit;
     units: typeof units;
+    Upgrade: typeof Upgrade;
     Vec: typeof Vec;
     VisualEffects: typeof VisualEffects;
 };

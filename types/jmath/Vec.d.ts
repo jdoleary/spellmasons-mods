@@ -4,6 +4,7 @@ export interface Vec2 {
     x: number;
     y: number;
 }
+export declare function isVec2(maybeVec2: any | Vec2): maybeVec2 is Vec2;
 export declare function getAngleBetweenVec2s(origin: Vec2, point: Vec2): number;
 export declare function getAngleBetweenVec2sYInverted(origin: Vec2, point: Vec2): number;
 export declare function multiply(scalar: number, p2: Vec2): Vec2;

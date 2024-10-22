@@ -79,4 +79,5 @@ export declare function startBloodParticleSplatter(underworld: Underworld, damag
     numberOfParticles: number;
 }): void;
 export declare function tickParticle(particle: BloodParticle): boolean;
+export declare const CLASS_HUD_HIDDEN = "HUD-hidden";
 export declare function toggleHUD(): void;

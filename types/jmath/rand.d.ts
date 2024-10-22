@@ -1,6 +1,7 @@
-import type seedrandom from 'seedrandom';
+import seedrandom from 'seedrandom';
 import { IPlayer } from '../entity/Player';
 import Underworld from '../Underworld';
+export { default as seedrandom } from 'seedrandom';
 export interface prng {
     (): number;
     double(): number;
@@ -28,4 +29,3 @@ export declare function getUniqueSeedString(underworld: Underworld, player?: IPl
 export declare function getUniqueSeedStringPerLevel(underworld: Underworld, player?: IPlayer): string;
 export declare function getUniqueSeedStringPerPlayer(underworld: Underworld, player?: IPlayer): string;
 export declare function shuffle<T>(array: T[], seedRandomInstance: prng): T[];
-export {};

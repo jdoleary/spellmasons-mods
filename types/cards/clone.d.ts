@@ -6,6 +6,6 @@ import Underworld from '../Underworld';
 export declare const clone_id = "clone";
 declare const spell: Spell;
 export declare function cloneEffect(addClonesToTargetArray: boolean): EffectFn;
-export declare function doCloneUnit(unit: Unit.IUnit, underworld: Underworld, prediction: boolean, summoner: Unit.IUnit, spawnSource?: Vec2): Unit.IUnit | undefined;
+export declare function doCloneUnit(unit: Unit.IUnit, underworld: Underworld, prediction: boolean, summoner: Unit.IUnit, spawnLocation?: Vec2): Unit.IUnit | undefined;
 export declare function animateMitosis(image?: IImageAnimated): Promise<void>;
 export default spell;

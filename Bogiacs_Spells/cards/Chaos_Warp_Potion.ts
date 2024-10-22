@@ -1,17 +1,15 @@
-import { Spell} from '../../types/cards/./index';
-import { chooseObjectWithProbability, getUniqueSeedString } from '../../types/jmath/rand';
-import * as Pickup from '../../types/entity/Pickup';
-import seedrandom from '../seedrandom';
+import { Spell } from '../../types/cards/./index';
 import { chaosWarpCardId } from './Chaos_Warp';
 
 const {
-    FloatingText,
-    cardUtils,
     commonTypes,
     cards,
     VisualEffects,
+    rand,
+    Pickup,
 } = globalThis.SpellmasonsAPI;
 
+const { chooseObjectWithProbability, getUniqueSeedString } = rand;
 const { refundLastSpell } = cards;
 const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
@@ -37,8 +35,8 @@ const spell: Spell = {
                 y: state.castLocation.y
             }
 
-            const seed = seedrandom(`${getUniqueSeedString(underworld)} - ${Math.random()}`);
-            
+            const seed = rand.seedrandom(`${getUniqueSeedString(underworld)} - ${Math.random()}`);
+
             const choicePotion = chooseObjectWithProbability(Pickup.pickups.map((p, indexPotion) => {
                 return {
                     indexPotion, probability: p.name.includes('Potion') ? p.probability : 0
@@ -48,7 +46,7 @@ const spell: Spell = {
                 const { indexPotion } = choicePotion;
                 if (summonLocation) {
                     underworld.spawnPickup(indexPotion, summonLocation, prediction);
-                        
+
                     if (!prediction) {
                         //setTimeout(() => {
                         //    playSFXKey('spawnPotion');
@@ -62,7 +60,7 @@ const spell: Spell = {
                 refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
 
             }
-            
+
             return state;
         },
     },

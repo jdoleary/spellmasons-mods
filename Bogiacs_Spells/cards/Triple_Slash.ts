@@ -1,15 +1,20 @@
-import { slashCardId } from '../../types/cards/slash';
-import { ICard } from '../../types/cards/./index';
-import Underworld from "../../types/Underworld";
-import { CardCategory } from '../../types/types/commonTypes';
-import { CardRarity, probabilityMap } from '../../types/types/commonTypes';
-import { containerSpells } from '../../types/graphics/PixiUtils';
-import { playDefaultSpellSFX } from "../../types/cards/cardUtils";
-import { EffectState, refundLastSpell, Spell,  } from '../../types/cards/./index';
+const slashCardId = "Slash";
+import type { ICard } from '../../types/cards/./index';
+import type Underworld from "../../types/Underworld";
+import { EffectState, Spell } from '../../types/cards/./index';
 import * as Unit from '../../types/entity/Unit';
-import { oneOffImage } from '../../types/cards/./cardUtils';
-import { randFloat } from '../../types/jmath/rand';
 
+const {
+    commonTypes,
+    cards,
+    rand,
+    cardUtils,
+    PixiUtils,
+} = globalThis.SpellmasonsAPI;
+
+const { randFloat } = rand;
+const { refundLastSpell } = cards;
+const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 export const tripleSlashCardId = 'Triple Slash';
 const damageDone = 20;
@@ -30,7 +35,7 @@ const spell: Spell = {
         sfx: 'hurt',
         description: [`Casts the Slash Spell three times.`],
         effect: async (state, card, quantity, underworld, prediction) => {
-            
+
             return await tripleSlashEffect(state, card, quantity, underworld, prediction, damageDone, 1);
 
             if (state.targetedUnits.filter(u => u.alive).length == 0) {
@@ -51,9 +56,9 @@ export async function tripleSlashEffect(state: EffectState, card: ICard, quantit
     for (let tripleSlashCounter = 0; tripleSlashCounter < 3; tripleSlashCounter++) {
         for (let q = 0; q < quantity; q++) {
             if (!prediction && !globalThis.headless) {
-                playDefaultSpellSFX(card, prediction);
+                cardUtils.playDefaultSpellSFX(card, prediction);
                 for (let unit of targets) {
-                    const spellEffectImage = oneOffImage(unit, animationPath, containerSpells);
+                    const spellEffectImage = cardUtils.oneOffImage(unit, animationPath, PixiUtils.containerSpells);
                     if (spellEffectImage) {
                         // Randomize rotation a bit so that subsequent slashes don't perfectly overlap
                         spellEffectImage.sprite.rotation = randFloat(-Math.PI / 6, Math.PI / 6);

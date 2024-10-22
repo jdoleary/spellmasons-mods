@@ -1,24 +1,24 @@
-import { Faction, UnitType } from "../../types/types/commonTypes";
-import { Spell, addUnitTarget } from '../../types/cards/./index';
-import { chooseObjectWithProbability, getUniqueSeedString } from '../../types/jmath/rand';
-import * as Pickup from '../../types/entity/Pickup';
-import * as Unit from '../../types/entity/Unit';
-import { allUnits } from '../../types/entity/units';
-import seedrandom from '../seedrandom';
-import { urn_explosive_id } from '../../types/entity/units/urn_explosive';
-import { urn_poison_id } from '../../types/entity/units/urn_poison';
-import { urn_ice_id } from '../../types/entity/units/urn_ice';
+import type { Spell } from '../../types/cards';
+const urn_explosive_id = "Explosive Urn";
+const urn_poison_id = "Toxic Urn";
+const urn_ice_id = "Ice Urn";
 
 const {
     cardUtils,
     commonTypes,
     cards,
     VisualEffects,
+    rand,
+    units,
+    Pickup,
+    Unit
 } = globalThis.SpellmasonsAPI;
 
-const { refundLastSpell } = cards;
+const { chooseObjectWithProbability, getUniqueSeedString } = rand;
+const { allUnits } = units;
+const { refundLastSpell, addUnitTarget } = cards;
 const { playDefaultSpellSFX } = cardUtils;
-const { CardCategory, probabilityMap, CardRarity } = commonTypes;
+const { CardCategory, probabilityMap, CardRarity, Faction, UnitType } = commonTypes;
 
 export const chaosWarpCardId = 'Chaos Warp';
 const spell: Spell = {
@@ -42,10 +42,10 @@ const spell: Spell = {
             }
 
             const randomEffect = Math.floor(Math.random() * 10) + 1;
-            const seed = seedrandom(`${getUniqueSeedString(underworld)} - ${Math.random()}`);
-            
+            const seed = rand.seedrandom(`${getUniqueSeedString(underworld)} - ${Math.random()}`);
+
             if (randomEffect <= 5) {//Summon Potion
-                
+
                 const choicePotion = chooseObjectWithProbability(Pickup.pickups.map((p, indexPotion) => {
                     return {
                         indexPotion, probability: p.name.includes('Potion') ? p.probability : 0
@@ -55,7 +55,7 @@ const spell: Spell = {
                     const { indexPotion } = choicePotion;
                     if (summonLocation) {
                         underworld.spawnPickup(indexPotion, summonLocation, prediction);
-                        
+
                         if (!prediction) {
                             //setTimeout(() => {
                             //    playSFXKey('spawnPotion');
@@ -87,13 +87,13 @@ const spell: Spell = {
                     underworld.spawnPickup(index, summonLocation, prediction);
                     VisualEffects.skyBeam(summonLocation)
                 } else {
-                    
+
                 }
 
                 return state;
             }
             else if (randomEffect <= 9) {//Summon Urn
-                
+
                 const choiceUrns = Math.floor(Math.random() * 3) + 1;
                 let urnID: string;
 
@@ -108,8 +108,8 @@ const spell: Spell = {
 
                 let sourceUnit = allUnits[urnID];
                 if (sourceUnit) {
-                    
-                    
+
+
                     if (!prediction) {
                         const unit = Unit.create(
                             urnID,
@@ -129,7 +129,7 @@ const spell: Spell = {
                         addUnitTarget(unit, state, prediction);
                         VisualEffects.skyBeam(summonLocation)
                     }
-                    
+
                 } else {
                     refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
                 }
@@ -142,13 +142,13 @@ const spell: Spell = {
                         Pickup.create({ pos: summonLocation, pickupSource: portalPickupSource, logSource: 'Bounty Portal' }, underworld, prediction);
                         VisualEffects.skyBeam(summonLocation)
                     }
-                    
+
                 } else {
                     refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
                 }
 
             }
-            
+
             return state;
         },
     },

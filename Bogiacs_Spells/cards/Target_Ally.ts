@@ -1,14 +1,20 @@
-import { addTarget,  ICard } from '../../types/cards/./index';
+import type { ICard } from '../../types/cards';
 import { UnitSubType } from '../../types/types/commonTypes';
-import { Vec2 } from '../../types/jmath/Vec';
-import * as colors from '../../types/graphics/ui/colors';
-import { distance } from '../../types/jmath/math';
-import { targetSimilarId } from '../../types//cards/target_similar';
-import * as config from '../../types/config';
-import Underworld from "../../types/Underworld";
-import { CardCategory } from '../../types/types/commonTypes';
-import { CardRarity, probabilityMap } from '../../types/types/commonTypes';
-import { EffectState, Spell } from '../../types/cards/./index';
+import type { Vec2 } from '../../types/jmath/Vec';
+const targetSimilarId = "Target Similar";
+import type Underworld from "../../types/Underworld";
+import type { EffectState, Spell } from '../../types/cards';
+const {
+  commonTypes,
+  cards,
+  config,
+  math,
+  colors,
+} = globalThis.SpellmasonsAPI;
+
+const { addTarget } = cards;
+const { distance } = math;
+const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 export const targetAllyId = 'Target Ally';
 const targetsPerQuantity = 2;
@@ -38,7 +44,7 @@ const spell: Spell = {
         // Limit to the factions that are targeted
         // so if you're targeting enemies it will only target wounded enemies
         // Default to enemy if no-one is targeted for convenience
-        u.faction==faction &&
+        u.faction == faction &&
         // Filter out caster Unit since they are naturally
         // the "closest" to themselves and if they want to target
         // themselves they can by casting on themselves and wont
@@ -49,7 +55,7 @@ const spell: Spell = {
         .sort((a, b) =>
           distance(state.casterPositionAtTimeOfCast, a) - distance(state.casterPositionAtTimeOfCast, b))
         .slice(0, targetsPerQuantity * quantity);
-        
+
       if (addedTargets.length) {
         for (const target of addedTargets) {
           addTarget(target, state, underworld, prediction);

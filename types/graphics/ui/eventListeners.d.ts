@@ -33,6 +33,7 @@ interface AdminContextMenuOption {
     action: AdminAction;
     supportInMultiplayer: boolean;
     label: string;
+    isActiveClass?: string;
     domQueryContainer: string;
 }
 export declare function registerAdminContextMenuOptions(overworld: Overworld): void;

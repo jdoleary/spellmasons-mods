@@ -1,11 +1,11 @@
-import Underworld from "../../Underworld";
-import * as Unit from '../../entity/Unit';
-import * as colors from '../../graphics/ui/colors';
-import floatingText from "../../graphics/FloatingText";
-import * as Image from '../../graphics/Image';
-import * as config from '../../config';
-import { EffectState } from "../../cards";
-import { EXPLAIN_OVERFILL, explain } from "../../graphics/Explain";
+import type Underworld from "../types/Underworld";
+import type * as Unit from '../types/entity/Unit';
+import type { EffectState } from "../types/cards";
+
+const {
+  colors,
+  JImage
+} = globalThis.SpellmasonsAPI;
 
 export const healSfx = 'heal';
 const animationOptions = { loop: false, animationSpeed: 0.3 };
@@ -24,18 +24,18 @@ export async function healStaminaUnits(units: Unit.IUnit[], amount: number, sour
 
 export async function healStaminaUnit(unit: Unit.IUnit, amount: number, sourceUnit: Unit.IUnit | undefined, underworld: Underworld, prediction: boolean, state?: EffectState) {
   const units = [unit];
-    return await healStaminaUnits(units, amount, sourceUnit, underworld, prediction, state);
+  return await healStaminaUnits(units, amount, sourceUnit, underworld, prediction, state);
 }
 
 export function oneOffHealAnimation(imageHaver: any): Promise<void> {
   // The default animation for restoring mana is the
   // healing animation with a color filter on top of it
-  
-    const options = {
-      loop: animationOptions.loop,
-      animationSpeed: animationOptions.animationSpeed,
-      colorReplace: { colors: staminaReplaceColors, epsilon: 0.1 }
-    };
-    return Image.addOneOffAnimation(imageHaver, 'potionPickup', {}, options);
-  
+
+  const options = {
+    loop: animationOptions.loop,
+    animationSpeed: animationOptions.animationSpeed,
+    colorReplace: { colors: staminaReplaceColors, epsilon: 0.1 }
+  };
+  return JImage.addOneOffAnimation(imageHaver, 'potionPickup', {}, options);
+
 }

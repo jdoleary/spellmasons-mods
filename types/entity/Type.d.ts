@@ -8,6 +8,7 @@ export interface HasSpace {
     immovable: boolean;
     beingPushed: boolean;
     flaggedForRemoval?: boolean;
+    debugName?: string;
 }
 export declare function hasSpace(maybe: any): maybe is HasSpace;
 export interface HasLife {

@@ -3,7 +3,6 @@ import { Spell, addUnitTarget } from '../../types/cards/./index';
 import { getUniqueSeedString } from '../../types/jmath/rand';
 import * as Unit from '../../types/entity/Unit';
 import { allUnits } from '../../types/entity/units';
-import seedrandom from '../seedrandom';
 import { urn_explosive_id } from '../../types/entity/units/urn_explosive';
 import { urn_poison_id } from '../../types/entity/units/urn_poison';
 import { urn_ice_id } from '../../types/entity/units/urn_ice';
@@ -15,6 +14,7 @@ const {
     commonTypes,
     cards,
     VisualEffects,
+    rand,
 } = globalThis.SpellmasonsAPI;
 
 const { refundLastSpell } = cards;
@@ -42,8 +42,8 @@ const spell: Spell = {
                 y: state.castLocation.y
             }
 
-            const seed = seedrandom(`${getUniqueSeedString(underworld)} - ${Math.random()}`);
-            
+            const seed = rand.seedrandom(`${getUniqueSeedString(underworld)} - ${Math.random()}`);
+
             const choiceUrns = Math.floor(Math.random() * 3) + 1;
             let urnID: string;
 
@@ -58,8 +58,8 @@ const spell: Spell = {
 
             let sourceUnit = allUnits[urnID];
             if (sourceUnit) {
-                    
-                    
+
+
                 if (!prediction) {
                     const unit = Unit.create(
                         urnID,
@@ -79,7 +79,7 @@ const spell: Spell = {
                     addUnitTarget(unit, state, prediction);
                     VisualEffects.skyBeam(summonLocation)
                 }
-                    
+
             } else {
                 refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
             }

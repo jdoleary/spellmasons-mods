@@ -1,7 +1,13 @@
-import { CardCategory } from '../../types/types/commonTypes';
-import { CardRarity, probabilityMap } from '../../types/types/commonTypes';
-import { refundLastSpell, Spell } from '../../types/cards/./index';
-import { plusRadiusId } from '../../types/cards/plus_radius';
+import type { Spell } from '../../types/cards/./index';
+const plusRadiusId = "Plus Radius";
+
+const {
+  commonTypes,
+  cards,
+} = globalThis.SpellmasonsAPI;
+
+const { refundLastSpell } = cards;
+const { CardCategory, probabilityMap, CardRarity } = commonTypes;
 
 export const targetDistanceId = 'Distance Increase';
 const radiusBoost = 20;
@@ -10,7 +16,7 @@ const spell: Spell = {
     id: targetDistanceId,
     category: CardCategory.Blessings,
     supportQuantity: true,
-    requires:[plusRadiusId],
+    requires: [plusRadiusId],
     manaCost: 25,
     healthCost: 0,
     expenseScaling: 1,

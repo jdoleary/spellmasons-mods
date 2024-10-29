@@ -151,7 +151,7 @@ export default class Underworld {
         allowLiquid?: boolean;
         unobstructedPoint?: Vec2;
     }): Vec2 | undefined;
-    findValidSpawnInRadius(center: Vec2, prediction: boolean, extra?: {
+    DEPRECIATED_findValidSpawnInRadius(center: Vec2, prediction: boolean, extra?: {
         allowLiquid?: boolean;
         unobstructedPoint?: Vec2;
         radiusOverride?: number;

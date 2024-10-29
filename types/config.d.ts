@@ -56,3 +56,4 @@ export declare const STAT_POINTS_PER_LEVEL = 120;
 export declare const RUNES_PER_LEVEL = 6;
 export declare const getSmartTargetsChunkSize = 50;
 export declare const spawnSize = 16;
+export declare const predictionGlowStrength = 4;

@@ -42,9 +42,7 @@ export interface Events {
     onAgro?: onAgro;
     onFullTurnCycle?: onFullTurnCycle;
     onTurnStart?: onTurnStart;
-    onLevelStart?: onLevelStart;
     onTurnEnd?: onTurnEnd;
-    onLevelEnd?: onLevelEnd;
     onDrawSelected?: onDrawSelected;
     onProjectileCollision?: onProjectileCollision;
 }

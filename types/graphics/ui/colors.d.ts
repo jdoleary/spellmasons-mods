@@ -16,6 +16,7 @@ export declare const manaBrightBlue = 6724095;
 export declare const manaBlue = 5658325;
 export declare const manaDarkBlue = 2631779;
 export declare const targetingSpellGreen = 5762401;
+export declare const predictionBlue = 5731309;
 export declare const outOfRangeGrey = 11184810;
 export declare const errorRed = 16333123;
 export declare const abyss: {

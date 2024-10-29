@@ -42,14 +42,8 @@ export type onFullTurnCycle = {
 export type onTurnStart = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
-export type onLevelStart = {
-    (unit: IUnit, underworld: Underworld): void;
-};
 export type onTurnEnd = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
-};
-export type onLevelEnd = {
-    (unit: IUnit, underworld: Underworld): void;
 };
 export type onDrawSelected = {
     (unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
@@ -95,14 +89,8 @@ declare const _default: {
     onTurnStartSource: {
         [name: string]: onTurnStart;
     };
-    onLevelStartSource: {
-        [name: string]: onLevelStart;
-    };
     onTurnEndSource: {
         [name: string]: onTurnEnd;
-    };
-    onLevelEndSource: {
-        [name: string]: onLevelEnd;
     };
     onDrawSelectedSource: {
         [name: string]: onDrawSelected;

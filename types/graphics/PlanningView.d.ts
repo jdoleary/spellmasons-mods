@@ -27,7 +27,6 @@ export declare function drawUIPolyPrediction(points: Vec2[], color: number, text
 export declare function drawUIConePrediction(target: Vec2, radius: number, startArc: number, endArc: number, color: number, text?: string): void;
 export declare function drawUICirclePrediction(target: Vec2, radius: number, color: number, text?: string): void;
 export declare function drawUICircleFillPrediction(target: Vec2, radius: number, color: number, text?: string): void;
-export declare function setPredictionGraphicsLineStyle(color: number): void;
 export declare function isOutOfBounds(target: Vec2, underworld: Underworld): boolean;
 export declare function updateTooltipContent(underworld: Underworld): void;
 export declare function modifiersToText(selectedUnit: Unit.IUnit): string;

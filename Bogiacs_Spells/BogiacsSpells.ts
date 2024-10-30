@@ -19,6 +19,7 @@ const mod: Mod = {
     author: 'Bogiac',
     description: 'Adds some new spells to the game',
     screenshot: 'spellmasons-mods/Bogiacs_Spells/graphics/icons/Bogiacs_Spells_icon.png',
+    spritesheet: 'spellmasons-mods/Bogiacs_Spells/graphics/spritesheet.json',
     spells: [
         //Add or Remove spells here.
         ChaosWarp,
@@ -33,7 +34,7 @@ const mod: Mod = {
         TargetAlly,
         TargetPlayer,
         TripleSlash,
-        
+
     ],
 };
 export default mod;

@@ -68,10 +68,10 @@ export async function animateTargetAlly(newTargets: Vec2[]) {
   const animationDelay = 600; //ms
   await new Promise<void>((resolve) => {
     for (let target of newTargets) {
-      if (globalThis.predictionGraphics) {
-        globalThis.predictionGraphics.lineStyle(2, colors.targetingSpellGreen, 1.0)
+      if (globalThis.predictionGraphicsGreen) {
+        globalThis.predictionGraphicsGreen.lineStyle(2, colors.targetingSpellGreen, 1.0)
         //playSFXKey('targetAquired');
-        globalThis.predictionGraphics.drawCircle(target.x, target.y, config.COLLISION_MESH_RADIUS);
+        globalThis.predictionGraphicsGreen.drawCircle(target.x, target.y, config.COLLISION_MESH_RADIUS);
         // Show the targeting circle for a moment
         setTimeout(resolve, animationDelay);
       } else {
@@ -80,7 +80,7 @@ export async function animateTargetAlly(newTargets: Vec2[]) {
     }
   });
 
-  globalThis.predictionGraphics?.clear();
+  globalThis.predictionGraphicsGreen?.clear();
 
   return;
 }

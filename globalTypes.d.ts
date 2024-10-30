@@ -7,6 +7,8 @@ declare global {
     var mods: Mod[];
     // true if this instance is the headless server with no visuals or audio, just the game logic
     var headless: boolean;
-    // Graphics for drawing the spell effects during the dry run phase
-    var predictionGraphics: PIXI.Graphics | undefined;
+    var predictionGraphicsGreen: PIXI.Graphics | undefined;
+    var predictionGraphicsRed: PIXI.Graphics | undefined;
+    var predictionGraphicsWhite: PIXI.Graphics | undefined;
+    var predictionGraphicsBlue: PIXI.Graphics | undefined;
 }

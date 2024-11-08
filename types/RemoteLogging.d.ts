@@ -13,7 +13,7 @@ interface Event {
     message: string;
 }
 export declare function sendEventToServerHub(eventG: Partial<EventGroupMessage>, underworld: Underworld): void;
-declare enum LogLevel {
+export declare enum LogLevel {
     DEBUG = 0,
     TRACE = 1,
     LOG = 2,
@@ -37,5 +37,6 @@ export interface Log {
     l: LogLevel;
     d: number;
     e: ENV;
+    ctx?: string;
 }
 export {};

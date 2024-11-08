@@ -212,7 +212,10 @@ export default class Underworld {
     perksLeftToChoose(player: Player.IPlayer): number;
     cursesLeftToChoose(player: Player.IPlayer): number;
     upgradesLeftToChoose(player: Player.IPlayer): number;
-    upgradeRune(runeModifierId: string, player: Player.IPlayer): void;
+    upgradeRune(runeModifierId: string, player: Player.IPlayer, payload: {
+        cost: number;
+        debug_playerStatPoints?: number;
+    }): void;
     showUpgrades(): void;
     addRerollButton(player: Player.IPlayer): void;
     getRandomCoordsWithinBounds(bounds: Limits, seed?: prng): Vec2;

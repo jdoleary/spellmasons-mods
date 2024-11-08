@@ -57,6 +57,7 @@ export declare function hide(image?: IImageAnimated): void;
 interface OneOffOptions {
     doRemoveWhenPrimaryAnimationChanges?: boolean;
     keyFrame?: number;
+    skipSpyPromise?: boolean;
 }
 export declare function addOneOffAnimation(imageHaver: any, spritePath: string, oneOffOptions?: OneOffOptions, options?: PixiSpriteOptions): Promise<void>;
 export {};

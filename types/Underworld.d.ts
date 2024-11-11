@@ -106,6 +106,8 @@ export default class Underworld {
         callback: () => void;
     }[];
     _battleLog: string[];
+    serverStabilityMaxUnits: number | undefined;
+    serverStabilityMaxPickups: number | undefined;
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
     getPotentialTargets(prediction: boolean): HasSpace[];
     calculateKillsNeededForLevel(level: number): number;

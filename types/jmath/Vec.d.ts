@@ -24,6 +24,7 @@ export declare function equal(p1: Vec2, p2: Vec2): boolean;
 export declare function clone(p: Vec2): Vec2;
 export declare function round(v: Vec2): Vec2;
 export declare function invert(v: Vec2): Vec2;
+export declare function vec2ToString(v: Vec2): string;
 export declare function average_mean(vs: Vec2[]): Vec2;
 export declare function getEndpointOfMagnitudeAlongVector(pos: Vec2, angle: number, magnitude: number): Vec2;
 export declare function isBetween(testPoint: Vec2, boundingPoint: Vec2, boundingPoint2: Vec2): boolean;

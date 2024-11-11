@@ -57,3 +57,4 @@ export declare const RUNES_PER_LEVEL = 6;
 export declare const getSmartTargetsChunkSize = 50;
 export declare const spawnSize = 16;
 export declare const predictionGlowStrength = 4;
+export declare const SPACIAL_HASH_CELL_SIZE = 128;

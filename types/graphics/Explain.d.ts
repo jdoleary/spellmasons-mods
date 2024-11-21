@@ -2,6 +2,7 @@ export declare function explain(key: string, forceShow?: boolean): void;
 export declare const EXPLAIN_WALK = "How to Move";
 export declare const EXPLAIN_OVERFILL = "Mana Overfill";
 export declare const EXPLAIN_CAST = "Forging Spells";
+export declare const EXPLAIN_COMBINE = "Combine Spells";
 export declare const EXPLAIN_STACK = "Stacking Spells";
 export declare const EXPLAIN_WALK_ROPE = "Stamina";
 export declare const EXPLAIN_END_TURN = "End Turn";
@@ -38,6 +39,9 @@ export interface TutorialChecklist {
     camera: TutorialChecklistItem;
     recenterCamera: TutorialChecklistItem;
     spendUpgradePoints: TutorialChecklistItem;
+    clearWholeSpell: TutorialChecklistItem;
+    removeLastCardFromSpell: TutorialChecklistItem;
+    combineSpells: TutorialChecklistItem;
 }
 export declare const tutorialChecklist: TutorialChecklist;
 export declare function updateTutorialChecklist(): void;

@@ -33,6 +33,7 @@ export interface IPlayer {
     isSpawned: boolean;
     cardsInToolbar: string[];
     inventory: string[];
+    disabledCards: string[];
     freeSpells: string[];
     upgrades: string[];
     upgradesLeftToChoose: number;
@@ -76,5 +77,5 @@ export declare function getFactionsOf(players: {
         faction: Faction;
     };
 }[]): Faction[];
-export declare function incrementPresentedRunesForPlayer(player: IPlayer, underworld: Underworld): void;
+export declare function incrementPresentedRunesForPlayer(player: Pick<IPlayer, 'lockedRunes' | 'runePresentedIndex'>, underworld: Underworld): void;
 export {};

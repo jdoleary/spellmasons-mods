@@ -5,7 +5,6 @@ import type { Vec2 } from '../jmath/Vec';
 import Underworld from '../Underworld';
 import { HasLife, HasMana, HasSpace, HasStamina } from './Type';
 import { Modifier } from '../cards/util';
-import { StatCalamity } from '../Perk';
 import { IPickup } from './Pickup';
 export interface UnitPath {
     points: Vec2[];
@@ -76,7 +75,6 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean): IUnit;
 export declare function updateAccessibilityOutline(unit: IUnit, targeted: boolean, outOfRange?: boolean): void;
-export declare function adjustUnitStatsByUnderworldCalamity(unit: IUnit, statCalamity: StatCalamity): void;
 interface DifficultyAdjustedUnitStats {
     healthMax: number;
     health: number;

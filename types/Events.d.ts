@@ -16,7 +16,7 @@ export type onLiquid = {
     (unit: IUnit, currentlyInLiquid: boolean, amount: number, underworld: Underworld, prediction: boolean, damageDealer?: IUnit): number;
 };
 export type onKill = {
-    (unit: IUnit, killedUnit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
+    (killer: IUnit, killedUnit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 };
 export type onDeath = {
     (unit: IUnit, underworld: Underworld, prediction: boolean, sourceUnit?: IUnit): Promise<void>;

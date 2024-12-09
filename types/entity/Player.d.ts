@@ -2,7 +2,6 @@ import * as Unit from './Unit';
 import * as Cards from '../cards';
 import { Faction } from '../types/commonTypes';
 import Underworld from '../Underworld';
-import { AttributePerk } from '../Perk';
 export type IPlayerSerialized = Omit<IPlayer, "unit"> & {
     unit: {
         id: number;
@@ -37,11 +36,9 @@ export interface IPlayer {
     freeSpells: string[];
     upgrades: string[];
     upgradesLeftToChoose: number;
-    perksLeftToChoose: number;
     cardUsageCounts: CardUsage;
     lobbyReady: boolean;
     reroll: number;
-    attributePerks: AttributePerk[];
     spellState: {
         [spellId: string]: any;
     };

@@ -19,7 +19,6 @@ import { DisplayObject, TilingSprite } from 'pixi.js';
 import { HasSpace } from './entity/Type';
 import { Overworld } from './Overworld';
 import { Emitter } from 'jdoleary-fork-pixi-particle-emitter';
-import { StatCalamity } from './Perk';
 export declare enum turn_phase {
     Stalled = 0,
     PlayerTurns = 1,
@@ -90,7 +89,6 @@ export default class Underworld {
     }[];
     activeMods: string[];
     generatingLevel: boolean;
-    statCalamities: StatCalamity[];
     simulatingMovePredictions: boolean;
     allyNPCAttemptWinKillSwitch: number;
     aquirePickupQueue: {
@@ -109,6 +107,7 @@ export default class Underworld {
     serverStabilityMaxUnits: number | undefined;
     serverStabilityMaxPickups: number | undefined;
     constructor(overworld: Overworld, pie: PieClient | IHostApp, seed: string, RNGState?: SeedrandomState | boolean);
+    getAllUnits(prediction: boolean): Unit.IUnit[];
     getPotentialTargets(prediction: boolean): HasSpace[];
     calculateKillsNeededForLevel(level: number): number;
     getNumberOfEnemyKillsNeededForNextLevelUp(): number;
@@ -211,8 +210,6 @@ export default class Underworld {
     tryRestartTurnPhaseLoop(): void;
     forceUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade, free: boolean): void;
     chooseUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade): void;
-    perksLeftToChoose(player: Player.IPlayer): number;
-    cursesLeftToChoose(player: Player.IPlayer): number;
     upgradesLeftToChoose(player: Player.IPlayer): number;
     upgradeRune(runeModifierId: string, player: Player.IPlayer, payload: {
         cost: number;

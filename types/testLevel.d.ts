@@ -114,7 +114,6 @@ export declare const testLevelSave: {
         bloods: never[];
         activeMods: string[];
         generatingLevel: boolean;
-        statCalamities: never[];
         simulatingMovePredictions: boolean;
         allyNPCAttemptWinKillSwitch: number;
         aquirePickupQueue: never[];
@@ -138,10 +137,8 @@ export declare const testLevelSave: {
             cardUsageCounts: {};
             upgrades: string[];
             upgradesLeftToChoose: number;
-            perksLeftToChoose: number;
             lobbyReady: boolean;
             reroll: number;
-            attributePerks: never[];
             spellState: {};
             cursesChosen: number;
             stats: {
@@ -298,10 +295,8 @@ export declare const testLevelSave: {
         cardUsageCounts: {};
         upgrades: string[];
         upgradesLeftToChoose: number;
-        perksLeftToChoose: number;
         lobbyReady: boolean;
         reroll: number;
-        attributePerks: never[];
         spellState: {};
         cursesChosen: number;
         stats: {

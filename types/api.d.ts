@@ -40,7 +40,6 @@ import * as inLiquid from './inLiquid';
 import * as LiquidPools from './LiquidPools';
 import * as modifierSummonerSickness from './modifierSummoningSickness';
 import * as Overworld from './Overworld';
-import * as Perk from './Perk';
 import * as PlayerUtils from './PlayerUtils';
 import * as JPromise from './Promise';
 import * as storage from './storage';
@@ -96,7 +95,6 @@ declare const SpellmasonsAPI: {
     particleEmitter: typeof particleEmitter;
     Particles: typeof Particles;
     Pathfinding: typeof Pathfinding;
-    Perk: typeof Perk;
     Pickup: typeof Pickup;
     PixiUtils: typeof PixiUtils;
     PlanningView: typeof PlanningView;

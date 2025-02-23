@@ -1,2 +1,2 @@
-export declare const runeSharpTeethId = "Sharp Theeth";
+export declare const runeSharpTeethId = "Sharp Teeth";
 export default function registerSharpTeeth(): void;

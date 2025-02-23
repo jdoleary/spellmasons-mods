@@ -1,12 +1,13 @@
 import type { LevelData } from '../Underworld';
 import { MESSAGE_TYPES } from '../types/MessageTypes';
 import Underworld from '../Underworld';
-import type PieClient from '@websocketpie/client';
 import { Overworld } from '../Overworld';
 import type { Room } from '@websocketpie/client';
+import { Pie } from '../types/commonTypes';
 export interface ClientPresenceChangedArgs {
     type: string;
     clients: string[];
+    names?: string[];
     time: number;
 }
 export declare function onClientPresenceChanged(o: ClientPresenceChangedArgs, overworld: Overworld): void;
@@ -17,5 +18,5 @@ export interface IHostApp {
     soloMode: boolean;
     currentRoomInfo?: Room;
 }
-export declare function typeGuardHostApp(x: PieClient | IHostApp): x is IHostApp;
+export declare function typeGuardHostApp(x: Pie): x is IHostApp;
 export declare function getVersionInequality(clientVersion?: string, serverVersion?: string): 'equal' | 'client behind' | 'server behind' | 'malformed';

@@ -170,6 +170,7 @@ export default class Underworld {
     createLevelSyncronous(levelData: LevelData): void;
     _getLevelText(levelIndex: number): string;
     getLevelText(): string;
+    giveStartOfLevelStatPoints({ levelIndex }: LevelData): void;
     createLevel(levelData: LevelData, gameMode?: GameMode): Promise<void>;
     generateLevelDataSyncronous(levelIndex: number, gameMode?: GameMode): LevelData;
     generateLevelData(levelIndex: number): Promise<void>;

@@ -22,6 +22,8 @@ interface Stats {
 export interface IPlayer {
     name: string;
     color: number;
+    isCardmason?: boolean;
+    lockedDiscardCards: string[];
     colorMagic: number;
     endedTurn: boolean;
     clientId: string;
@@ -39,6 +41,7 @@ export interface IPlayer {
     cardUsageCounts: CardUsage;
     lobbyReady: boolean;
     reroll: number;
+    drawChargesSeed: number | undefined;
     spellState: {
         [spellId: string]: any;
     };
@@ -75,4 +78,8 @@ export declare function getFactionsOf(players: {
     };
 }[]): Faction[];
 export declare function incrementPresentedRunesForPlayer(player: Pick<IPlayer, 'lockedRunes' | 'runePresentedIndex'>, underworld: Underworld): void;
+export declare function setCardmason(player: IPlayer, isCardmason: boolean, underworld?: Underworld): void;
+export declare function syncLockedCardsAndCSS(player?: IPlayer): void;
+export declare function toggleCardLockedForDiscard(player: IPlayer | undefined, cardId: string, underworld: Underworld): void;
+export declare function discardCards(player: IPlayer, underworld: Underworld, forceDiscardAll?: boolean): void;
 export {};

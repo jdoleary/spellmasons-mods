@@ -78,7 +78,7 @@ export declare function create({ pos, pickupSource, idOverride, logSource }: {
 }, underworld: Underworld, prediction: boolean): IPickup;
 export declare function sync(pickup: IPickup): void;
 export declare function setPosition(pickup: IPickup, x: number, y: number): void;
-export type IPickupSerialized = Omit<IPickup, "image" | "effect" | "text" | "real" | "emitter"> & {
+export type IPickupSerialized = Omit<IPickup, "image" | "effect" | "text" | "real" | "emitter" | "description" | "willTrigger"> & {
     image?: Image.IImageAnimatedSerialized;
     emitter?: string;
 };

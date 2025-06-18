@@ -51,7 +51,7 @@ export declare function removeMask(image: IImageAnimated): void;
 export declare function addMask(image: IImageAnimated, path: string): void;
 export declare function setPosition(image: IImageAnimated | undefined, pos: Vec2): void;
 export declare function addSubSprite(image: IImageAnimated | undefined, imageName: string): PIXI.AnimatedSprite | PIXI.Sprite | undefined;
-export declare function removeSubSprite(image: IImageAnimated | undefined, imagePath: string): void;
+export declare function removeSubSprite(image: IImageAnimated | undefined, imagePath: string, squelchError?: boolean): void;
 export declare function show(image?: IImageAnimated): void;
 export declare function hide(image?: IImageAnimated): void;
 interface OneOffOptions {

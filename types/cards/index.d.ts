@@ -4,6 +4,7 @@ import * as Pickup from '../entity/Pickup';
 import type { Vec2 } from '../jmath/Vec';
 import { onDealDamage, onTakeDamage, onLiquid, onKill, onTooltip, onDeath, onMove, onAgro, onTurnStart, onTurnEnd, onDrawSelected, onProjectileCollision, onTeleport, onSpawn, onPickup, onFullTurnCycle } from '../Events';
 import { Subsprite } from '../Subsprites';
+import { CardCost } from './cardUtils';
 import Underworld from '../Underworld';
 import { CardCategory } from '../types/commonTypes';
 import { HasSpace } from '../entity/Type';
@@ -25,6 +26,7 @@ export interface Modifiers {
     quantityPerUpgrade?: number;
     maxUpgradeCount?: number;
     keepBetweenLevels?: boolean;
+    omitForCardmason?: boolean;
 }
 export declare function calcluateModifierCostPerUpgrade(mod: Modifiers, underworld: Underworld, player?: Player.IPlayer): number;
 export interface Events {
@@ -73,6 +75,7 @@ export interface EffectState {
     };
     initialTargetedUnitId: number | undefined;
     initialTargetedPickupId: number | undefined;
+    spellCostTally: CardCost | undefined;
 }
 export declare function refundLastSpell(state: EffectState, prediction: boolean, floatingMessage?: string): void;
 export declare function hasTargetAtPosition(position: Vec2, underworld: Underworld): boolean;
@@ -89,6 +92,7 @@ export interface ICard {
     category: CardCategory;
     manaCost: number;
     healthCost: number;
+    staminaCost?: number;
     costGrowthAlgorithm?: "nlogn" | "log" | 'exponential';
     probability: number;
     thumbnail: string;

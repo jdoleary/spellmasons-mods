@@ -72,6 +72,10 @@ export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
         removalTimeout?: number;
     };
     takingPureDamage?: boolean;
+    charges?: {
+        [spellId: string]: number;
+    };
+    chargesMaxAdditional?: number;
 };
 export declare function create(unitSourceId: string, x: number, y: number, faction: Faction, defaultImagePath: string, unitType: UnitType, unitSubType: UnitSubType, sourceUnitProps: Partial<IUnit> | undefined, underworld: Underworld, prediction?: boolean, creator?: IUnit): IUnit;
 export declare function updateAccessibilityOutline(unit: IUnit, targeted: boolean, outOfRange?: boolean): void;
@@ -144,4 +148,8 @@ export declare function getFactionsOf(units: {
     faction: Faction;
 }[]): Faction[];
 export declare function addEvent(unit: IUnit, eventId: string): void;
+export declare function countCharges(unit: IUnit): number;
+export declare function refillCharges(unit: IUnit, underworld: Underworld): void;
+export declare function drawCharges(unit: IUnit, underworld: Underworld, count?: number): void;
+export declare function getMaxCharges(unit: IUnit, underworld: Underworld): number;
 export {};

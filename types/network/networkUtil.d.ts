@@ -9,6 +9,7 @@ export interface ClientPresenceChangedArgs {
     clients: string[];
     names?: string[];
     time: number;
+    peerLobbyId?: string;
 }
 export declare function onClientPresenceChanged(o: ClientPresenceChangedArgs, overworld: Overworld): void;
 export declare function hostGiveClientGameState(clientId: string, underworld: Underworld, level: LevelData | undefined, message_type: MESSAGE_TYPES.INIT_GAME_STATE | MESSAGE_TYPES.LOAD_GAME_STATE): void;

@@ -1,4 +1,7 @@
-import SimplePeer from "simple-peer/simplepeer.min.js";
+export interface SteamPeer {
+    id: bigint;
+    connected: boolean;
+}
 export declare const MessageType: {
     Data: string;
     Rooms: string;
@@ -68,18 +71,12 @@ export default class PiePeer {
     onLatency?: (l: Latency) => void;
     useStats: boolean;
     soloMode: boolean;
-    isP2PHost?: boolean;
     promiseCBs: {
         joinRoom?: {
             resolve: (x: any) => void;
             reject: (x: any) => void;
         };
     };
-    peers: {
-        peer: SimplePeer;
-        name: string;
-        clientId: string;
-    }[];
     currentRoomInfo?: Room;
     stats: {
         latency: Latency;
@@ -100,9 +97,7 @@ export default class PiePeer {
     tryReconnect: () => void;
     disconnect(): Promise<void>;
     handleMessage(message: any): void;
-    hostBroadcastConnectedPeers(): void;
-    makeRoom(roomInfo: Room): void;
-    joinRoom(roomInfo: Room, isHosting?: boolean): Promise<Room>;
+    joinRoom(roomInfo: Room, isHosting?: boolean): Promise<any>;
     leaveRoom(): void;
     getRooms(roomInfo: any): void;
     sendData(payload: any, extras?: any): void;
@@ -113,3 +108,4 @@ export default class PiePeer {
         clients: object[];
     }): void;
 }
+export declare const piePeerSingleton: PiePeer;

@@ -4,6 +4,7 @@ import { IUnit } from '../entity/Unit';
 import Underworld from '../Underworld';
 import { IPickup } from '../entity/Pickup';
 export declare function makeAncientParticles(position: Vec2, prediction: boolean): void;
+export declare function makeNova(position: Vec2, size: number, colorStart: number, colorEnd: number, prediction: boolean): void;
 export declare function makeParticleExplosion(position: Vec2, size: number, colorStart: number, colorEnd: number, prediction: boolean): void;
 export declare function makeBloatExplosionWithParticles(position: Vec2, size: number, prediction: boolean): void;
 export declare function makeAlchemizeParticles(potion: IPickup, prediction: boolean, resolver?: () => void): void;

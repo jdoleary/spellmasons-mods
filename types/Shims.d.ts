@@ -1,1 +1,2 @@
+import "./sharedGlobals";
 export {};

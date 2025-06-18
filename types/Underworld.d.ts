@@ -211,8 +211,7 @@ export default class Underworld {
     chooseUpgrade(player: Player.IPlayer, upgrade: Upgrade.IUpgrade): void;
     upgradesLeftToChoose(player: Player.IPlayer): number;
     upgradeRune(runeModifierId: string, player: Player.IPlayer, payload: {
-        cost: number;
-        debug_playerStatPoints?: number;
+        newSP: number;
     }): void;
     showUpgrades(): void;
     addRerollButton(player: Player.IPlayer): void;
@@ -261,7 +260,7 @@ type NonFunctionPropertyNames<T> = {
     [K in keyof T]: T[K] extends Function ? never : K;
 }[keyof T];
 type UnderworldNonFunctionProperties = Exclude<NonFunctionPropertyNames<Underworld>, null | undefined>;
-export type IUnderworldSerialized = Omit<Pick<Underworld, UnderworldNonFunctionProperties>, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons"> & {
+export type IUnderworldSerialized = Omit<Pick<Underworld, UnderworldNonFunctionProperties>, "pie" | "overworld" | "prototype" | "players" | "units" | "unitsPrediction" | "pickups" | "pickupsPrediction" | "random" | "turnInterval" | "liquidSprites" | "particleFollowers" | "walls" | "pathingPolygons" | "triggerGameLoopHeadless" | "_gameLoopHeadless" | "awaitForceMoves" | "queueGameLoop" | "gameLoop" | "gameLoopForceMove" | "gameLoopUnit" | "removeEventListeners"> & {
     players: Player.IPlayerSerialized[];
     units: Unit.IUnitSerialized[];
     pickups: Pickup.IPickupSerialized[];

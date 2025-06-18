@@ -1,9 +1,10 @@
-import type * as Player from '../../entity/Player';
+import * as Player from '../../entity/Player';
 import * as Cards from '../../cards';
 import Underworld from '../../Underworld';
 import { Overworld } from '../../Overworld';
 export declare function resetInventoryContent(): void;
 export declare const elInvButton: HTMLElement;
+export declare const elDiscardAll: HTMLElement;
 export declare function tryShowStatPointsSpendable(): void;
 export declare const elCardHand: HTMLElement;
 export declare const elFloatingCardHolderLeft: HTMLElement;
@@ -34,3 +35,4 @@ export declare function getSpellThumbnailPath(path?: string): string;
 export declare function getReplacesCardText(replaces: string[], requires?: string[]): HTMLDivElement;
 export declare function updateCardBadges(underworld: Underworld): void;
 export declare function cardListToImages(cardIds: string[]): string;
+export declare function animateDrawCard(card: Cards.ICard, underworld: Underworld): void;

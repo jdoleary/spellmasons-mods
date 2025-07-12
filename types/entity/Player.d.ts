@@ -1,6 +1,6 @@
 import * as Unit from './Unit';
 import * as Cards from '../cards';
-import { Faction } from '../types/commonTypes';
+import { Faction, WizardType } from '../types/commonTypes';
 import Underworld from '../Underworld';
 export type IPlayerSerialized = Omit<IPlayer, "unit"> & {
     unit: {
@@ -22,7 +22,7 @@ interface Stats {
 export interface IPlayer {
     name: string;
     color: number;
-    isCardmason?: boolean;
+    wizardType: WizardType;
     lockedDiscardCards: string[];
     colorMagic: number;
     endedTurn: boolean;
@@ -54,6 +54,7 @@ export interface IPlayer {
         runePresentedIndexWhenLocked?: number;
     }[];
     runePresentedIndex: number;
+    gameVersion?: string;
 }
 export declare function inPortal(player: IPlayer): boolean;
 export declare function create(clientId: string, playerId: string, underworld: Underworld): IPlayer;
@@ -62,6 +63,7 @@ export declare function resetPlayerForNextLevel(player: IPlayer, underworld: Und
 export declare function updateGlobalRefToPlayerIfCurrentClient(player: IPlayer): void;
 export declare function serialize(player: IPlayer): IPlayerSerialized;
 export declare function load(player: IPlayerSerialized, index: number, underworld: Underworld, isClientPlayerSourceOfTruth: boolean): IPlayer | undefined;
+export declare function restoreWizardTypeVisuals(player: IPlayer, underworld: Underworld): void;
 export declare function setClientConnected(player: IPlayer, connected: boolean, underworld: Underworld): void;
 export declare function syncLobby(underworld: Underworld): void;
 export declare function enterPortal(player: IPlayer, underworld: Underworld): void;
@@ -78,8 +80,13 @@ export declare function getFactionsOf(players: {
     };
 }[]): Faction[];
 export declare function incrementPresentedRunesForPlayer(player: Pick<IPlayer, 'lockedRunes' | 'runePresentedIndex'>, underworld: Underworld): void;
-export declare function setCardmason(player: IPlayer, isCardmason: boolean, underworld?: Underworld): void;
+export declare function setWizardType(player: IPlayer, wizardType: WizardType | undefined | null, underworld?: Underworld): void;
 export declare function syncLockedCardsAndCSS(player?: IPlayer): void;
 export declare function toggleCardLockedForDiscard(player: IPlayer | undefined, cardId: string, underworld: Underworld): void;
-export declare function discardCards(player: IPlayer, underworld: Underworld, forceDiscardAll?: boolean): void;
+export declare function discardCards(player: IPlayer, underworld: Underworld, { forceDiscardAll, dryRun }: {
+    forceDiscardAll?: boolean;
+    dryRun?: boolean;
+}): number;
+export declare function isDeathmason(player?: IPlayer): boolean;
+export declare function isGoru(player: IPlayer): boolean;
 export {};

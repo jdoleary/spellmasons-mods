@@ -6,7 +6,7 @@ import { onDealDamage, onTakeDamage, onLiquid, onKill, onTooltip, onDeath, onMov
 import { Subsprite } from '../Subsprites';
 import { CardCost } from './cardUtils';
 import Underworld from '../Underworld';
-import { CardCategory } from '../types/commonTypes';
+import { CardCategory, WizardType } from '../types/commonTypes';
 import { HasSpace } from '../entity/Type';
 import { Overworld } from '../Overworld';
 import { Localizable } from '../localization';
@@ -26,7 +26,7 @@ export interface Modifiers {
     quantityPerUpgrade?: number;
     maxUpgradeCount?: number;
     keepBetweenLevels?: boolean;
-    omitForCardmason?: boolean;
+    omitForWizardType?: WizardType[];
 }
 export declare function calcluateModifierCostPerUpgrade(mod: Modifiers, underworld: Underworld, player?: Player.IPlayer): number;
 export interface Events {
@@ -108,6 +108,8 @@ export interface ICard {
     ignoreRange?: boolean;
     sfx?: string;
     frontload?: boolean;
+    omitForWizardType?: WizardType[];
+    soulFragmentCostOverride?: number;
 }
 export declare const allCards: {
     [cardId: string]: ICard;

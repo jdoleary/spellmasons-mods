@@ -1,13 +1,14 @@
 import { type CardCost } from './cards/cardUtils';
 import { IPlayer } from './entity/Player';
 import Underworld from './Underworld';
-import { CardCategory } from './types/commonTypes';
+import { CardCategory, WizardType } from './types/commonTypes';
 export interface IUpgrade {
     title: string;
     replaces?: string[];
     requires?: string[];
     modName?: string;
     type: 'card' | 'special' | 'mageType';
+    omitForWizardType?: WizardType[];
     cardCategory?: CardCategory;
     description: (player: IPlayer) => string;
     thumbnail: string;

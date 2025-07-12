@@ -8,6 +8,7 @@ export interface CardCost {
     manaCost: number;
     healthCost: number;
     staminaCost: number;
+    soulFragmentCost?: number;
 }
 export declare function isRune(m?: Modifiers): boolean;
 export declare function levelsUntilCardIsEnabled(cardId: string, underworld?: Underworld): number;
@@ -21,7 +22,7 @@ export declare function calculateCost(cards: ICard[], casterCardUsage: CardUsage
 export declare function _getCardsFromIds(cardIds: string[], cards: {
     [cardId: string]: ICard;
 }): ICard[];
-export declare function cardmasonCardProbabilities(cards: ICard[]): {
+export declare function deathmasonCardProbabilities(cards: ICard[]): {
     id: string;
     probability: number;
     card: ICard;

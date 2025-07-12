@@ -1,4 +1,12 @@
+import * as Unit from '../Unit';
 import { type UnitSource } from './index';
+import Underworld from '../../Underworld';
+import { IPlayer } from '../Player';
 export declare const GORU_UNIT_ID = "Goru";
+export declare const GORU_DEFAULT_IMAGE_PATH = "guruIdle";
+export declare const GORU_ATTACK_IMAGE_PATH = "guruAttack";
 declare const unit: UnitSource;
 export default unit;
+export declare function tryCollectSoul(player: IPlayer, u: Unit.IUnit, underworld: Underworld, prediction: boolean): void;
+export declare function tryCollectSouls(player: IPlayer, underworld: Underworld, prediction: boolean): void;
+export declare function getSoulDebtHealthCost(player: IPlayer | undefined, prediction: boolean): number;

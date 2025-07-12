@@ -9,14 +9,17 @@ export declare function tryShowStatPointsSpendable(): void;
 export declare const elCardHand: HTMLElement;
 export declare const elFloatingCardHolderLeft: HTMLElement;
 export declare const elFloatingCardHolderLeft2: HTMLElement;
+export declare const elFloatingCardHolderLeft3: HTMLElement;
 export declare const elFloatingCardHolderRight: HTMLElement;
 export declare const elFloatingCardHolderRight2: HTMLElement;
+export declare const elFloatingCardHolderRight3: HTMLElement;
 export declare function setupCardUIEventListeners(overworld: Overworld): void;
 export declare function clearCurrentlyShownCard(): void;
 export declare function recalcPositionForCards(player: Player.IPlayer | undefined, underworld: Underworld): void;
 export declare const openInvClass = "open-inventory";
 export declare function syncInventory(slotModifyingIndex: number | undefined, underworld: Underworld): void;
 export declare function renderBattleLog(underworld: Underworld): void;
+export declare function isRuneMaxed(runeModifierId: string, player: Player.IPlayer): boolean;
 export declare function renderRunesMenu(underworld: Underworld): void;
 export declare function toggleInventory(toolbarIndex: number | undefined, forceState: boolean | undefined, underworld: Underworld): void;
 export declare function deselectLastCard(underworld: Underworld): void;
@@ -24,7 +27,7 @@ export declare function selectCardByIndex(index: number, cardHolder: HTMLElement
 export declare function areAnyCardsSelected(): boolean;
 export declare function getSelectedCardIds(): string[];
 export declare function getSelectedCards(): Cards.ICard[];
-export declare function clearSelectedCards(underworld: Underworld): void;
+export declare function clearSelectedCards(underworld: Underworld, skipUpdateCardBadges?: boolean): void;
 export declare function cardRarityAsString(content: {
     probability: number;
 }): string;
@@ -33,6 +36,8 @@ export declare function getCardRarityColor(content: {
 }): string;
 export declare function getSpellThumbnailPath(path?: string): string;
 export declare function getReplacesCardText(replaces: string[], requires?: string[]): HTMLDivElement;
-export declare function updateCardBadges(underworld: Underworld): void;
+export declare function updateCardBadges(underworld: Underworld, skipAnimation?: boolean): void;
 export declare function cardListToImages(cardIds: string[]): string;
 export declare function animateDrawCard(card: Cards.ICard, underworld: Underworld): void;
+export declare function animateKeyPress(element: HTMLElement): void;
+export declare function createFloatingNumber(parentElement: HTMLElement, number: string, options?: {}): HTMLDivElement;

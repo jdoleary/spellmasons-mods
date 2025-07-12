@@ -244,7 +244,7 @@ export default class Underworld {
         target?: Vec2;
         cardIds: string[];
     }): void;
-    syncPlayers(players: Player.IPlayerSerialized[], isClientPlayerSourceOfTruth: boolean): void;
+    syncPlayers(syncFromPlayers: Player.IPlayerSerialized[], isClientPlayerSourceOfTruth: boolean): void;
     pickupIsIdentical(pickup: Pickup.IPickup, serialized: Pickup.IPickupSerialized): boolean;
     syncPickups(pickups: Pickup.IPickupSerialized[]): void;
     serializeForHash(): any;

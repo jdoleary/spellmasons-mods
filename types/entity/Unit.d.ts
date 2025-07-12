@@ -30,6 +30,7 @@ export declare function isUnit(maybeUnit: any): maybeUnit is IUnit;
 export type IUnit = HasSpace & HasLife & HasMana & HasStamina & {
     type: 'unit';
     id: number;
+    soulFragments: number;
     unitSourceId: string;
     real?: IUnit;
     predictionCopy?: IUnit;
@@ -106,9 +107,11 @@ interface damageArgs {
     sourceUnit?: IUnit;
     fromVec2?: Vec2;
     thinBloodLine?: boolean;
+    pureDamage?: boolean;
 }
 export declare function takeDamage(damageArgs: damageArgs, underworld: Underworld, prediction: boolean): void;
 export declare function syncPlayerHealthManaUI(underworld: Underworld): void;
+export declare function syncStaminaBar(): void;
 export declare function isBoss(unitSourceId: string): boolean;
 export declare function isRemaining(unit: IUnit, underworld: Underworld, prediction: boolean): boolean | Modifier | undefined;
 export declare function canAct(unit: IUnit): boolean;

@@ -6,6 +6,7 @@ import type PieClient from '@websocketpie/client';
 import type PiePeer from '../network/PiePeer';
 import type { IHostApp } from '../network/networkUtil';
 export type GameMode = 'tutorial' | 'hard' | 'impossible';
+export type WizardType = 'Spellmason' | 'Deathmason' | 'Goru';
 export declare enum UnitType {
     PLAYER_CONTROLLED = 0,
     AI = 1

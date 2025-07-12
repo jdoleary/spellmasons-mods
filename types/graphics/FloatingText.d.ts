@@ -11,8 +11,9 @@ interface FloatingTextInsructions {
     valpha?: number;
     aalpha?: number;
     prediction?: boolean;
+    aggregateMatcher?: RegExp;
 }
-export default function floatingText({ coords, text, container, style, keepWithinCameraBounds, valpha, aalpha, prediction, }: FloatingTextInsructions): Promise<void>;
+export default function floatingText({ coords, text, container, style, keepWithinCameraBounds, valpha, aalpha, prediction, aggregateMatcher, }: FloatingTextInsructions): Promise<void>;
 export declare const elPIXIHolder: HTMLElement;
 export declare function queueCenteredFloatingText(text: Localizable, fill?: string | number): void;
 export declare function centeredFloatingText(text: Localizable, fill?: string | number): void;

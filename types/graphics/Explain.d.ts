@@ -20,11 +20,14 @@ export declare const EXPLAIN_MINI_BOSSES = "miniboss";
 export declare const EXPLAIN_PING = "Pinging";
 export declare const EXPLAIN_BOOKMARKS = "Bookmarks";
 export declare const EXPLAIN_UPGRADE_BOOKMARK = "Upgrade Points";
-export declare const EXPLAIN_CARDMASON_CARDS = "Cardmason Basics";
-export declare const EXPLAIN_CARDMASON_LOCK = "Cardmason Locking Cards";
-export declare const EXPLAIN_CARDMASON_REDRAW = "Cardmason Redraw";
+export declare const EXPLAIN_DEATHMASON_CARDS = "Deathmason Basics";
+export declare const EXPLAIN_DEATHMASON_LOCK = "Deathmason Locking Cards";
+export declare const EXPLAIN_DEATHMASON_REDRAW = "Deathmason Redraw";
+export declare const EXPLAIN_GORU = "Goru Basics";
+export declare const EXPLAIN_SOUL_DEBT = "Soul Debt";
 export declare const autoExplains: string[];
-export declare const autoExplainsCardmason: string[];
+export declare const autoExplainsDeathmason: string[];
+export declare const autoExplainGoru: string[];
 export declare function autoExplain(): void;
 export declare function setTutorialVisiblity(visible: boolean): void;
 interface TutorialChecklistItem {

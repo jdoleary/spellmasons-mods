@@ -13,9 +13,9 @@ export declare function wrappedEmitter(config: particles.EmitterConfigV3, contai
 } | undefined;
 export declare function simpleEmitter(position: Vec2, config: particles.EmitterConfigV3, resolver?: () => void, container?: ParticleContainer): JEmitter | undefined;
 interface Trail {
-    lerp: number;
     position: Vec2;
-    moveFn: (lerpValue: number) => Vec2;
+    velocity: Vec2;
+    target: Vec2;
     emitter: particles.Emitter;
     resolver: () => void;
 }
@@ -33,4 +33,18 @@ export declare function createHardCircleParticleTexture(): import("pixi.js").Tex
 export declare function auraEmitter(position: Vec2, size: number, prediction: boolean): JEmitter | undefined;
 export declare function moveStreakEmitter(position: Vec2, prediction: boolean): JEmitter | undefined;
 export declare function cleanUpEmitters(onlyTurnScopedEmitters: boolean): void;
+interface FloatingParticle {
+    position: Vec2;
+    velocity: Vec2;
+    center: Vec2;
+    time: number;
+    floatSpeed: number;
+    swirlSpeed: number;
+    floatAmplitude: number;
+    swirlRadius: number;
+    emitter: particles.Emitter;
+}
+export declare function removeFloatingParticlesFor(target: Vec2): Vec2[];
+export declare function createFloatingParticleSystem(center: Vec2, count?: number): void;
+export declare function cleanUpFloatingParticle(p: FloatingParticle): void;
 export {};

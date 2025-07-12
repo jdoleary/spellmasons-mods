@@ -95,7 +95,7 @@ export default class PiePeer {
     connectSolo(): Promise<void>;
     onClose: () => void;
     tryReconnect: () => void;
-    disconnect(): Promise<void>;
+    disconnect(disconnectReason: string): Promise<void>;
     handleMessage(message: any): void;
     joinRoom(roomInfo: Room, isHosting?: boolean): Promise<any>;
     leaveRoom(): void;

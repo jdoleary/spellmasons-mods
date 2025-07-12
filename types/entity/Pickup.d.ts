@@ -1,6 +1,6 @@
 import type * as PIXI from 'pixi.js';
 import * as Image from '../graphics/Image';
-import type * as Player from './Player';
+import * as Player from './Player';
 import { IUnit } from './Unit';
 import { Vec2 } from '../jmath/Vec';
 import Underworld from '../Underworld';
@@ -15,7 +15,7 @@ export declare const HEALTH_POTION = "Health Potion";
 export declare const MANA_POTION = "Mana Potion";
 export declare const STAMINA_POTION = "Stamina Potion";
 export declare const RECALL_POINT = "Recall";
-type IPickupDescription = (pickup: IPickup) => Localizable;
+type IPickupDescription = (pickup: IPickup, underworld: Underworld) => Localizable;
 type IPickupEffect = ({ unit, player, pickup, prediction }: {
     unit?: IUnit;
     player?: Player.IPlayer;
@@ -90,6 +90,7 @@ export declare function tryTriggerPickup(pickup: IPickup, unit: IUnit, underworl
 export declare const spike_damage = 30;
 export declare const PICKUP_SPIKES_NAME = "Trap";
 export declare const PORTAL_PURPLE_NAME = "Portal";
+export declare const PORTAL_YELLOW_NAME = "Yellow Portal";
 export declare const pickups: IPickupSource[];
 export declare function setPower(pickup: IPickup, newPower: number): void;
 export declare function givePlayerUpgrade(p: Player.IPlayer, underworld: Underworld): void;

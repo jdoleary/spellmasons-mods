@@ -59,6 +59,7 @@ export interface IPlayer {
 export declare function inPortal(player: IPlayer): boolean;
 export declare function create(clientId: string, playerId: string, underworld: Underworld): IPlayer;
 export declare function setPlayerRobeColor(player: IPlayer, color: number | string, colorMagic?: number | string): void;
+export declare function initializeWizardStatsForLevelStart(player: IPlayer, underworld: Underworld): void;
 export declare function resetPlayerForNextLevel(player: IPlayer, underworld: Underworld): void;
 export declare function updateGlobalRefToPlayerIfCurrentClient(player: IPlayer): void;
 export declare function serialize(player: IPlayer): IPlayerSerialized;

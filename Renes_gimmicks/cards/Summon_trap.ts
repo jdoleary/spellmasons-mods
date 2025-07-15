@@ -35,7 +35,7 @@ const spell: Spell = {
       }
       // Ensure you're not summoning it on top of a unit already
       for(let unit of underworld.units){
-            if (math.distance(unit, summonLocation) < config.COLLISION_MESH_RADIUS) {
+            if (unit.alive && math.distance(unit, summonLocation) < config.COLLISION_MESH_RADIUS) {
               refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
               return state;
             }

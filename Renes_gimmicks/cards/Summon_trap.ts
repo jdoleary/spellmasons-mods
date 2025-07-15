@@ -5,7 +5,10 @@ const {
   commonTypes,
   cards,
   VisualEffects,
+  config,
+  math,
 } = globalThis.SpellmasonsAPI;
+
 
 const { refundLastSpell } = cards;
 const { playDefaultSpellSFX } = cardUtils;
@@ -17,9 +20,9 @@ const spell: Spell = {
     id: cardId,
     category: CardCategory.Damage,
     supportQuantity: false,
-    manaCost: 40,
+    manaCost: 10,
     healthCost: 0,
-    expenseScaling: 1.5,
+    expenseScaling: 1,
     probability: probabilityMap[CardRarity.UNCOMMON],
     thumbnail: 'spellmasons-mods/Renes_gimmicks/graphics/icons/SummonTrap.png',
     sfx: 'hurt',
@@ -29,6 +32,13 @@ const spell: Spell = {
       const summonLocation = {
         x: state.castLocation.x,
         y: state.castLocation.y
+      }
+      // Ensure you're not summoning it on top of a unit already
+      for(let unit of underworld.units){
+            if (math.distance(unit, summonLocation) < config.COLLISION_MESH_RADIUS) {
+              refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
+              return state;
+            }
       }
       if (underworld.isCoordOnWallTile(summonLocation)) {
         if (prediction) {

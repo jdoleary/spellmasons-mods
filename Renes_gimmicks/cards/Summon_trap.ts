@@ -19,7 +19,7 @@ const spell: Spell = {
   card: {
     id: cardId,
     category: CardCategory.Damage,
-    supportQuantity: false,
+    supportQuantity: true,
     manaCost: 10,
     healthCost: 0,
     expenseScaling: 1,
@@ -28,7 +28,7 @@ const spell: Spell = {
     sfx: 'hurt',
     description: [`Summons a trap that does 30 damage when stepped on`],
     allowNonUnitTarget: true,
-    effect: async (state, card, _quantity, underworld, prediction) => {
+    effect: async (state, card, quantity, underworld, prediction) => {
       const summonLocation = {
         x: state.castLocation.x,
         y: state.castLocation.y
@@ -54,9 +54,15 @@ const spell: Spell = {
       //const index = Pickup.pickups.findIndex((p) => p.name === Pickup.PICKUP_SPIKES_NAME);
       if (!prediction) {
         VisualEffects.skyBeam(summonLocation)
-        underworld.spawnPickup(index, summonLocation, prediction);
+        const pickup = underworld.spawnPickup(index, summonLocation, prediction);
+        if(pickup){
+          pickup.power = quantity;
+        }
       } else {
-        underworld.spawnPickup(index, summonLocation, prediction);
+        const pickup = underworld.spawnPickup(index, summonLocation, prediction);
+        if(pickup){
+          pickup.power = quantity;
+        }
 
       }
       return state;

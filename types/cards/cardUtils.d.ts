@@ -4,6 +4,7 @@ import { Vec2 } from "../jmath/Vec";
 import * as Image from '../graphics/Image';
 import { Container } from "pixi.js";
 import Underworld from "../Underworld";
+import { IUnit } from "../entity/Unit";
 export interface CardCost {
     manaCost: number;
     healthCost: number;
@@ -22,7 +23,7 @@ export declare function calculateCost(cards: ICard[], casterCardUsage: CardUsage
 export declare function _getCardsFromIds(cardIds: string[], cards: {
     [cardId: string]: ICard;
 }): ICard[];
-export declare function deathmasonCardProbabilities(cards: ICard[]): {
+export declare function deathmasonCardProbabilities(cards: ICard[], unit: IUnit): {
     id: string;
     probability: number;
     card: ICard;

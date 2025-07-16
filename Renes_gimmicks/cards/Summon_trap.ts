@@ -7,6 +7,7 @@ const {
   VisualEffects,
   config,
   math,
+  Pickup,
 } = globalThis.SpellmasonsAPI;
 
 
@@ -56,12 +57,12 @@ const spell: Spell = {
         VisualEffects.skyBeam(summonLocation)
         const pickup = underworld.spawnPickup(index, summonLocation, prediction);
         if(pickup){
-          pickup.power = quantity;
+          Pickup.setPower(pickup,quantity);
         }
       } else {
         const pickup = underworld.spawnPickup(index, summonLocation, prediction);
         if(pickup){
-          pickup.power = quantity;
+          Pickup.setPower(pickup,quantity);
         }
 
       }

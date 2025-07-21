@@ -189,6 +189,7 @@ export default class Underworld {
     isGameOver(): boolean;
     clearGameOverModal(): void;
     doGameOver(): void;
+    restart(): void;
     updateGameOverModal(): void;
     hasCompletedTurn(player: Player.IPlayer): boolean;
     handleNextHotseatPlayer(): Promise<void>;

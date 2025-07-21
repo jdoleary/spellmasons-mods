@@ -186,7 +186,6 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/Burninig_rage.png</key>
-            <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/Caltrops.png</key>
             <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/Sadism.png</key>
             <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/SummonTrap.png</key>
             <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampBIte1.png</key>
@@ -197,6 +196,7 @@
             <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampBite6.png</key>
             <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampBite7.png</key>
             <key type="filename">../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampireBite.png</key>
+            <key type="filename">icons/Caltrops.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -215,7 +215,6 @@
         <key>fileList</key>
         <array>
             <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/Burninig_rage.png</filename>
-            <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/Caltrops.png</filename>
             <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/Sadism.png</filename>
             <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/SummonTrap.png</filename>
             <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampBIte1.png</filename>
@@ -226,6 +225,7 @@
             <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampBite6.png</filename>
             <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampBite7.png</filename>
             <filename>../../../Golems/public/spellmasons-mods/Renes_gimmicks/graphics/icons/VampireBite.png</filename>
+            <filename>icons/Caltrops.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

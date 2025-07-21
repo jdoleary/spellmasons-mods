@@ -138,6 +138,7 @@ export declare function endTurnForUnits(units: IUnit[], underworld: Underworld, 
 export declare function runTurnStartEvents(unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 export declare function runTurnEndEvents(unit: IUnit, underworld: Underworld, prediction: boolean): Promise<void>;
 export declare function runPickupEvents(unit: IUnit, pickup: IPickup, underworld: Underworld, prediction: boolean): Promise<void>;
+export declare function getSoulFragmentsForMiniboss(nonMinibossSoulFragments: number): number;
 export declare function makeMiniboss(unit: IUnit, underworld: Underworld): void;
 export declare function copyForPredictionUnit(u: IUnit, underworld: Underworld): IUnit;
 export declare function setPlayerAttributeMax(unit: IUnit, attribute: 'manaMax' | 'healthMax' | 'staminaMax', newValue: number): void;

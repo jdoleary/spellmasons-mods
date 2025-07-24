@@ -10,26 +10,20 @@ const {
   cards,
   JImage,
   forcePushTowards,
-  explode
 } = globalThis.SpellmasonsAPI
-const {CardCategory, CardRarity, probabilityMap} = commonTypes;
+const {CardCategory, CardRarity, probabilityMap, Faction, UnitSubType, UnitType} = commonTypes;
 const {takeDamage} = Unit;
 const { containerProjectiles } = PixiUtils;
 const { makeForceMoveProjectile } = moveWithCollision;
-const { animateSpell, playDefaultSpellSFX } = cardUtils;
+const { playDefaultSpellSFX } = cardUtils;
 const { refundLastSpell } = cards;
 import type { Spell } from '../../types/cards';
 import type Image from '../../types/graphics/Image';
 import type { HasSpace } from '../../types/entity/Type';
 import { pillarId } from './raise_pillar';
 import type { IUnit } from '../../types/entity/Unit';
-import freeze from '../../types/cards/freeze';
-import poison from '../../types/cards/poison';
 
 const id = 'earth_push';
-const baseExplosionRadius = 140;
-const freezeCardId = 'freeze';
-const poisonCardId = 'poison';
 const defaultPushDistance =140;
 const spell: Spell = {
   card: {
@@ -71,7 +65,7 @@ const spell: Spell = {
                 if (!prediction) {
                     image = JImage.create(casterPositionAtTimeOfCast, 'pillar', containerProjectiles)
                     if (image) {
-                        image.sprite.rotation = Math.atan2(velocity.y, velocity.x);
+                        image.sprite.rotation = Math.atan2(velocity.y, -velocity.x);
                     }
                 }
                 const pushedObject: HasSpace = {
@@ -106,34 +100,34 @@ const spell: Spell = {
                 let image: Image.IImageAnimated | undefined;
                 const startPoint = casterPositionAtTimeOfCast;
                 const velocity = math.similarTriangles(target.x - startPoint.x, target.y - casterPositionAtTimeOfCast.y, math.distance(startPoint, target), config.ARROW_PROJECTILE_SPEED)
-                if (!prediction) {
-                    image = JImage.create(casterPositionAtTimeOfCast, urn.unitSourceId, containerProjectiles)
+                if (!prediction && urn.image) {
+                    image = JImage.load(JImage.serialize(urn.image),containerProjectiles)
                     if (image) {
                         image.sprite.rotation = Math.atan2(velocity.y, velocity.x);
                     }
                 }
                 const pushedObject: HasSpace = {
-                    x: casterPositionAtTimeOfCast.x,
-                    y: casterPositionAtTimeOfCast.y,
-                    radius: 1,
-                    inLiquid: false,
-                    image,
-                    immovable: false,
-                    beingPushed: false,
-                    debugName: urn.unitSourceId
-                    }
+                  x: casterPositionAtTimeOfCast.x,
+                  y: casterPositionAtTimeOfCast.y,
+                  radius: 1,
+                  inLiquid: false,
+                  image,
+                  immovable: false,
+                  beingPushed: false,
+                  debugName: urn.unitSourceId
+                }
                 Unit.cleanup(urn);
-                    makeForceMoveProjectile({
-                    sourceUnit: state.casterUnit,
-                    pushedObject,
-                    startPoint,
-                    velocity,
-                    piercesRemaining: 0,
-                    bouncesRemaining: 0,
-                    collidingUnitIds: [state.casterUnit.id],
-                    collideFnKey,
-                    state,
-                    }, underworld, prediction);
+                makeForceMoveProjectile({
+                  sourceUnit: state.casterUnit,
+                  pushedObject,
+                  startPoint,
+                  velocity,
+                  piercesRemaining: 0,
+                  bouncesRemaining: 0,
+                  collidingUnitIds: [state.casterUnit.id],
+                  collideFnKey,
+                  state,
+                }, underworld, prediction);
             }
             
         }
@@ -153,37 +147,9 @@ const spell: Spell = {
                     fromVec2: projectile.startPoint,
                     thinBloodLine: true,
                 }, underworld, prediction);
-            } else if (projectile.pushedObject.debugName === 'Ice Urn') {
-                const units = explode.explode(unit, baseExplosionRadius, 0, 0,
-                    unit,
-                    underworld, prediction,
-                    0x002c6e, 0x59deff);
-                
-                      // Urn adds freeze to each unit in the explosion radius
-                    units.filter(u => u.alive)
-                    .forEach(u => {
-                        Unit.addModifier(u, freezeCardId, underworld, prediction, 1);
-                    });
-            } else if (projectile.pushedObject.debugName === 'Explosive Urn') {
-                const units = explode.explode(unit, baseExplosionRadius, 80, defaultPushDistance,
-                    unit,
-                    underworld, prediction,
-                    0x002c6e, 0x59deff);
-            } else if (projectile.pushedObject.debugName === 'Toxic Urn') {
-                const units = explode.explode(unit, baseExplosionRadius, 0, 0,
-                    unit,
-                    underworld, prediction,
-                    0x002c6e, 0x59deff);
-                units.filter(u => u.alive)
-                        .forEach(u => {
-                          if (!prediction) {
-                            animateSpell(u, 'spellPoison');
-                          }
-                          // The source of the poison is considered to be the unit that killed the urn
-                          // Poison modifier takes in a sourceUnit ID, so convert here
-                          Unit.addModifier(u, poisonCardId, underworld, prediction, 20, { sourceUnitId: projectile.sourceUnit?.id });
-                        });
-                      // Urn adds freeze to each unit in the explosion radius
+            } else if (projectile.pushedObject.debugName && projectile.pushedObject.debugName.includes('Urn')) {
+              const urn = Unit.create(projectile.pushedObject.debugName, projectile.pushedObject.x, projectile.pushedObject.y, Faction.ALLY, 'urn_ice', UnitType.AI, UnitSubType.DOODAD, undefined, underworld, prediction, projectile.sourceUnit);
+              takeDamage({unit:urn, amount:urn.health,sourceUnit:projectile.sourceUnit},underworld, prediction)
             }
         }
     }

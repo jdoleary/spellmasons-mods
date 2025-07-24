@@ -56,19 +56,12 @@ const spell: Spell = {
             // Width doubles up to 4 casts, capping at 8x multiplier: 1 > 2 > 4 > 8
             const width = baseWidth * Math.pow(2, Math.min(quantity, 4)) / 2;
 
+            const targets = getCurrentTargets(state);
             // Note: This loop must NOT be a for..of and it must cache the length because it
             // mutates state.targetedUnits as it iterates.  Otherwise it will continue to loop as it grows
-            let targets: Vec2[] = getCurrentTargets(state);
-            targets = defaultTargetsForAllowNonUnitTargetTargetingSpell(targets, state.castLocation, card);
-            const length = targets.length;
             const animateColumns = [];
-            const location = state.casterUnit;
             let promises = [];
-            for (let i = 0; i < length; i++) {
-            
-            }
-            for (let i = 0; i < length; i++) {
-                    const target = targets[i];
+            for (let target of targets) {
                     if (!target) {
                       continue;
                     }

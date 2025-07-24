@@ -59,9 +59,6 @@ const spell: Spell = {
 
             // Note: This loop must NOT be a for..of and it must cache the length because it
             // mutates state.targetedUnits as it iterates.  Otherwise it will continue to loop as it grows
-            let targets: Vec2[] = getCurrentTargets(state);
-            targets = defaultTargetsForAllowNonUnitTargetTargetingSpell(targets, state.castLocation, card);
-            const length = targets.length;      
       const projectAngle = getAngleBetweenVec2s(state.casterUnit, state.castLocation);
       const startAngle = projectAngle + adjustedAngle / 2;
       const endAngle = projectAngle - adjustedAngle / 2;

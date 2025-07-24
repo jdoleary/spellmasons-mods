@@ -76,7 +76,6 @@ const spell: Spell = {
 
         // Stomp does damage * quantity and pushback = base stomp radius
         targetStompExplode(state.casterUnit, radius, 0, stompRadius, underworld, prediction, state);
-        await underworld.awaitForceMoves(prediction);
       }
 
       return state;

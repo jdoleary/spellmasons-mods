@@ -42,58 +42,51 @@ const spell: Spell = {
     effect: async (state, card, quantity, underworld, prediction) => {
       const unitId = 'pillar';
       const sourceUnit = allUnits[unitId];
-      let targets: Vec2[] = getCurrentTargets(state);
-      targets = defaultTargetsForAllowNonUnitTargetTargetingSpell(targets, state.castLocation, card);
-      targets.push(state.castLocation); // Ensure the cast location is always included
-      const length = targets.length;
-      for (let i = 0; i < length; i++) {
-        const target = targets[i];
-        if (sourceUnit && target) {
-          const summonLocation = {
-            x: target.x,
-            y: target.y
-          }
-          if (underworld.isCoordOnWallTile(summonLocation)) {
-            if (prediction) {
-              const WARNING = "Invalid Summon Location";
-              addWarningAtMouse(WARNING);
-            } else {
-              refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
-            }
-            return state;
-          }
-          playDefaultSpellSFX(card, prediction);
-          const unit = Unit.create(
-            sourceUnit.id,
-            summonLocation.x,
-            summonLocation.y,
-            Faction.ALLY,
-            sourceUnit.info.image,
-            UnitType.AI,
-            sourceUnit.info.subtype,
-            {
-              ...sourceUnit.unitProps,
-              healthMax: (sourceUnit.unitProps.healthMax || config.UNIT_BASE_HEALTH) * quantity,
-              health: (sourceUnit.unitProps.health || config.UNIT_BASE_HEALTH) * quantity,
-              damage: (sourceUnit.unitProps.damage || 0) * quantity,
-              strength: quantity
-            },
-            underworld,
-            prediction,
-            state.casterUnit
-          );
-          if (prediction) {
-            drawUICirclePrediction(unit, 32, 0xffffff);
-          }
-          pillarExplode(unit, 32, 10, underworld, prediction, state);
-          if (!prediction) {
-            // Animate effect of unit spawning from the sky
-            skyBeam(unit);
-          }
-        } else {
-          console.error(`Source unit ${unitId} is missing`);
+      if (sourceUnit) {
+        const summonLocation = {
+          x: state.castLocation.x,
+          y: state.castLocation.y
         }
-    }
+        if (underworld.isCoordOnWallTile(summonLocation)) {
+          if (prediction) {
+            const WARNING = "Invalid Summon Location";
+            addWarningAtMouse(WARNING);
+          } else {
+            refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
+          }
+          return state;
+        }
+        playDefaultSpellSFX(card, prediction);
+        const unit = Unit.create(
+          sourceUnit.id,
+          summonLocation.x,
+          summonLocation.y,
+          Faction.ALLY,
+          sourceUnit.info.image,
+          UnitType.AI,
+          sourceUnit.info.subtype,
+          {
+            ...sourceUnit.unitProps,
+            healthMax: (sourceUnit.unitProps.healthMax || config.UNIT_BASE_HEALTH) * quantity,
+            health: (sourceUnit.unitProps.health || config.UNIT_BASE_HEALTH) * quantity,
+            damage: (sourceUnit.unitProps.damage || 0) * quantity,
+            strength: quantity
+          },
+          underworld,
+          prediction,
+          state.casterUnit
+        );
+        if (prediction) {
+          drawUICirclePrediction(unit, 32, 0xffffff);
+        }
+        pillarExplode(unit, 32, 10, underworld, prediction, state);
+        if (!prediction) {
+          // Animate effect of unit spawning from the sky
+          skyBeam(unit);
+        }
+      } else {
+        console.error(`Source unit ${unitId} is missing`);
+      }
       return state;
     },
   },

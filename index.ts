@@ -5,13 +5,15 @@ import Wodes_Grimoire from './Wodes_Grimoire/Index';
 import Renes_Gimmicks from './Renes_gimmicks/Index';
 import DaiNekoIchis_TomeOfSpells from './DaiNekoIchis_TomeOfSpells/Index';
 import BogiacsSpells from './Bogiacs_Spells/BogiacsSpells';
+import Doom_Scroll from './The_Doom_Scroll/Doom_Scroll';
 
 const mods: commonTypes.Mod[] = [
     UndeadBlade,
     Wodes_Grimoire,
     Renes_Gimmicks,
     DaiNekoIchis_TomeOfSpells,
-    BogiacsSpells
+    BogiacsSpells,
+    Doom_Scroll
 ];
 globalThis.mods = globalThis.mods !== undefined ? [...globalThis.mods, ...mods] : mods;
 console.log('Mods: Add mods', globalThis.mods);

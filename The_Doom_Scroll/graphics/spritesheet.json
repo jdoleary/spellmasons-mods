@@ -16,7 +16,15 @@
 	"spriteSourceSize": {"x":10,"y":0,"w":43,"h":64},
 	"sourceSize": {"w":64,"h":64}
 },
-"pillar.png":
+"pillar_0.png":
+{
+	"frame": {"x":1,"y":199,"w":42,"h":74},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":15,"w":42,"h":74},
+	"sourceSize": {"w":64,"h":89}
+},
+"pillar_1.png":
 {
 	"frame": {"x":1,"y":199,"w":42,"h":74},
 	"rotated": true,
@@ -153,7 +161,8 @@
 	"sourceSize": {"w":64,"h":64}
 }},
 "animations": {
-	"pillarDeath": ["pillarDeath_1.png","pillarDeath_2.png","pillarDeath_3.png","pillarDeath_4.png"]
+	"pillarDeath": ["pillarDeath_1.png","pillarDeath_2.png","pillarDeath_3.png","pillarDeath_4.png"],
+	"pillar": ["pillar_0.png","pillar_1.png"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",

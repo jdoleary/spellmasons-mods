@@ -1,0 +1,167 @@
+{"frames": {
+
+"Explosive Urn.png":
+{
+	"frame": {"x":219,"y":199,"w":43,"h":62},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":43,"h":62},
+	"sourceSize": {"w":64,"h":64}
+},
+"Ice Urn.png":
+{
+	"frame": {"x":153,"y":199,"w":43,"h":64},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":43,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"pillar.png":
+{
+	"frame": {"x":1,"y":199,"w":42,"h":74},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":15,"w":42,"h":74},
+	"sourceSize": {"w":64,"h":89}
+},
+"pillarDeath_1.png":
+{
+	"frame": {"x":77,"y":199,"w":42,"h":74},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":15,"w":42,"h":74},
+	"sourceSize": {"w":64,"h":89}
+},
+"pillarDeath_2.png":
+{
+	"frame": {"x":265,"y":1,"w":42,"h":60},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":29,"w":42,"h":60},
+	"sourceSize": {"w":64,"h":89}
+},
+"pillarDeath_3.png":
+{
+	"frame": {"x":265,"y":63,"w":42,"h":48},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":41,"w":42,"h":48},
+	"sourceSize": {"w":64,"h":89}
+},
+"pillarDeath_4.png":
+{
+	"frame": {"x":265,"y":113,"w":42,"h":36},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":53,"w":42,"h":36},
+	"sourceSize": {"w":64,"h":89}
+},
+"spellIconAssimilate.png":
+{
+	"frame": {"x":1,"y":1,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconBloodArrow.png":
+{
+	"frame": {"x":1,"y":67,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconBloodThorn.png":
+{
+	"frame": {"x":1,"y":133,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconEarthPush.png":
+{
+	"frame": {"x":67,"y":1,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconRaise_Pillar.png":
+{
+	"frame": {"x":67,"y":67,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconRaise_Wall.png":
+{
+	"frame": {"x":67,"y":133,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconSunlight.png":
+{
+	"frame": {"x":133,"y":1,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconTargetPillar.png":
+{
+	"frame": {"x":133,"y":67,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconTargetStomp.png":
+{
+	"frame": {"x":133,"y":133,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconWind_Explosion.png":
+{
+	"frame": {"x":199,"y":1,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"spellIconWind_Tunnel.png":
+{
+	"frame": {"x":199,"y":67,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"Toxic Urn.png":
+{
+	"frame": {"x":199,"y":133,"w":44,"h":64},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":0,"w":44,"h":64},
+	"sourceSize": {"w":64,"h":64}
+}},
+"animations": {
+	"pillarDeath": ["pillarDeath_1.png","pillarDeath_2.png","pillarDeath_3.png","pillarDeath_4.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "spritesheet.png",
+	"format": "RGBA8888",
+	"size": {"w":308,"h":243},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:eb261103ea2340c906a7168fe00b17ae:efab087bbfa4220e6e132064e1986aed:729adc6043343cfda41c447ce8f464d6$"
+}
+}

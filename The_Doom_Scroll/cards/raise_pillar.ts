@@ -31,7 +31,7 @@ const spell: Spell = {
     id,
     category: CardCategory.Soul,
     sfx: 'summonDecoy',
-    supportQuantity: true,
+    supportQuantity: false,
     manaCost: 20,
     healthCost: 0,
     expenseScaling: 2,

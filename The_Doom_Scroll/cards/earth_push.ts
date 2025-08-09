@@ -77,8 +77,6 @@ const spell: Spell = {
                     immovable: false,
                     beingPushed: false,
                     debugName: 'pillar_proj',
-                    // @ts-ignore: For scaling damage on collision
-                    strength: pillar.strength,
                     }
                 Unit.cleanup(pillar);
                     makeForceMoveProjectile({
@@ -117,8 +115,6 @@ const spell: Spell = {
                   immovable: false,
                   beingPushed: false,
                   debugName: urn.unitSourceId,
-                    // @ts-ignore: For scaling damage on collision
-                  strength: urn.strength,
                 }
                 Unit.cleanup(urn);
                 makeForceMoveProjectile({
@@ -146,8 +142,7 @@ const spell: Spell = {
             if (projectile.pushedObject.debugName === 'pillar_proj') {
                 takeDamage({
                     unit: unit as IUnit,
-                    // @ts-ignore: For scaling damage on collision
-                    amount: 60*(projectile.pushedObject.strength || 1),
+                    amount: 60,
                     sourceUnit: projectile.sourceUnit,
                     fromVec2: projectile.startPoint,
                     thinBloodLine: true,

@@ -65,7 +65,7 @@ const spell: Spell = {
                 if (!prediction) {
                     image = JImage.create(casterPositionAtTimeOfCast, 'pillar', containerProjectiles)
                     if (image) {
-                        image.sprite.rotation = Math.atan2(velocity.y, -velocity.x);
+                        image.sprite.rotation = Math.PI/6;//Math.atan2(velocity.y, -velocity.x);
                     }
                 }
                 const pushedObject: HasSpace = {
@@ -76,7 +76,9 @@ const spell: Spell = {
                     image,
                     immovable: false,
                     beingPushed: false,
-                    debugName: 'pillar_proj'
+                    debugName: 'pillar_proj',
+                    // @ts-ignore: For scaling damage on collision
+                    strength: pillar.strength,
                     }
                 Unit.cleanup(pillar);
                     makeForceMoveProjectile({
@@ -114,7 +116,9 @@ const spell: Spell = {
                   image,
                   immovable: false,
                   beingPushed: false,
-                  debugName: urn.unitSourceId
+                  debugName: urn.unitSourceId,
+                    // @ts-ignore: For scaling damage on collision
+                  strength: urn.strength,
                 }
                 Unit.cleanup(urn);
                 makeForceMoveProjectile({
@@ -142,7 +146,8 @@ const spell: Spell = {
             if (projectile.pushedObject.debugName === 'pillar_proj') {
                 takeDamage({
                     unit: unit as IUnit,
-                    amount: 60,
+                    // @ts-ignore: For scaling damage on collision
+                    amount: 60*(projectile.pushedObject.strength || 1),
                     sourceUnit: projectile.sourceUnit,
                     fromVec2: projectile.startPoint,
                     thinBloodLine: true,
@@ -150,6 +155,10 @@ const spell: Spell = {
             } else if (projectile.pushedObject.debugName && projectile.pushedObject.debugName.includes('Urn')) {
               const urn = Unit.create(projectile.pushedObject.debugName, projectile.pushedObject.x, projectile.pushedObject.y, Faction.ALLY, 'urn_ice', UnitType.AI, UnitSubType.DOODAD, undefined, underworld, prediction, projectile.sourceUnit);
               takeDamage({unit:urn, amount:urn.health,sourceUnit:projectile.sourceUnit},underworld, prediction)
+              // Ensure it explodes even if player is unable to deal damage to it (e.g. Bloodletting)
+              if(urn.health > 0){
+                takeDamage({unit:urn, amount:urn.health},underworld, prediction)
+              }
             }
         }
     }

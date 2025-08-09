@@ -21,72 +21,68 @@ import type { Spell } from '../../types/cards';
 import type { IUnit } from '../../types/entity/Unit';
 import type { Vec2 } from '../../types/jmath/Vec';
 import type Underworld from '../../types/Underworld';
+import { ALTAR_UNIT_ID } from '../entity/altar';
 
 
 
-const id = 'raise_pillar';
-export { id as pillarId };
+const id = 'Raise Altar';
 const spell: Spell = {
   card: {
     id,
     category: CardCategory.Soul,
     sfx: 'summonDecoy',
     supportQuantity: true,
-    manaCost: 20,
+    manaCost: 35,
     healthCost: 0,
     expenseScaling: 2,
     probability: probabilityMap[CardRarity.COMMON],
     thumbnail: 'spellmasons-mods/The_Doom_Scroll/graphics/spellIconRaise_Pillar.png',
-    description: 'Raise a pillar at the target location, dealing 10 damage to nearby enemies and pushing them away.',
+    description: 'Raise a mana conducive Altar at the target location, acting as a target for future spells cast',
     allowNonUnitTarget: true,
     effect: async (state, card, quantity, underworld, prediction) => {
-      const unitId = 'pillar';
+      const unitId = ALTAR_UNIT_ID; 
       const sourceUnit = allUnits[unitId];
       if (sourceUnit) {
-        const currentTargets = getCurrentTargets(state)
-        const newPillarLocations = currentTargets.length ? currentTargets : [state.castLocation]
-        for(let target of newPillarLocations){
-          const summonLocation = {
-            x: target.x,
-            y: target.y
-          }
-          if (underworld.isCoordOnWallTile(summonLocation)) {
-            if (prediction) {
-              const WARNING = "Invalid Summon Location";
-              addWarningAtMouse(WARNING);
-            } else {
-              refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
-            }
-            return state;
-          }
-          playDefaultSpellSFX(card, prediction);
-          const unit = Unit.create(
-            sourceUnit.id,
-            summonLocation.x,
-            summonLocation.y,
-            Faction.ALLY,
-            sourceUnit.info.image,
-            UnitType.AI,
-            sourceUnit.info.subtype,
-            {
-              ...sourceUnit.unitProps,
-              healthMax: (sourceUnit.unitProps.healthMax || config.UNIT_BASE_HEALTH) * quantity,
-              health: (sourceUnit.unitProps.health || config.UNIT_BASE_HEALTH) * quantity,
-              damage: (sourceUnit.unitProps.damage || 0) * quantity,
-              strength: quantity
-            },
-            underworld,
-            prediction,
-            state.casterUnit
-          );
+        const summonLocation = {
+          x: state.castLocation.x,
+          y: state.castLocation.y
+        }
+        if (underworld.isCoordOnWallTile(summonLocation)) {
           if (prediction) {
-            drawUICirclePrediction(unit, 32, 0xffffff);
+            const WARNING = "Invalid Summon Location";
+            addWarningAtMouse(WARNING);
+          } else {
+            refundLastSpell(state, prediction, 'Invalid summon location, mana refunded.')
           }
-          pillarExplode(unit, 32, 10, underworld, prediction, state);
-          if (!prediction) {
-            // Animate effect of unit spawning from the sky
-            skyBeam(unit);
-          }
+          return state;
+        }
+        playDefaultSpellSFX(card, prediction);
+        const unit = Unit.create(
+          sourceUnit.id,
+          summonLocation.x,
+          summonLocation.y,
+          Faction.ALLY,
+          sourceUnit.info.image,
+          UnitType.AI,
+          sourceUnit.info.subtype,
+          {
+            ...sourceUnit.unitProps,
+            healthMax: (sourceUnit.unitProps.healthMax || config.UNIT_BASE_HEALTH) * quantity,
+            health: (sourceUnit.unitProps.health || config.UNIT_BASE_HEALTH) * quantity,
+            damage: (sourceUnit.unitProps.damage || 0) * quantity,
+            strength: quantity
+          },
+          underworld,
+          prediction,
+          state.casterUnit
+        );
+        if (prediction) {
+          drawUICirclePrediction(unit, 32, 0xffffff);
+        }
+        pillarExplode(unit, 32, 10, underworld, prediction, state);
+        if (!prediction) {
+          // Animate effect of unit spawning from the sky
+          skyBeam(unit);
         }
       } else {
         console.error(`Source unit ${unitId} is missing`);

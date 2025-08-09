@@ -31,7 +31,7 @@ const spell: Spell = {
       let targets: Vec2[] = getCurrentTargets(state);
       targets = targets.length ? targets : [state.castLocation];
       const potentialTargets = underworld.getPotentialTargets(prediction)
-        .filter(t => isUnit(t) && t.unitSourceId === 'pillar');
+        .filter(t => isUnit(t) && t.unitSourceId === 'pillar' && t.alive);
 
 
       const newTargets = potentialTargets;

@@ -28,7 +28,7 @@ import type Underworld from '../../types/Underworld';
 import { pillarId } from './raise_pillar';
 
 
-const id = 'raise_wall';
+const id = 'Raise Wall';
 export { id as raiseWallId };
 const range = 250;
 const baseWidth = 48;

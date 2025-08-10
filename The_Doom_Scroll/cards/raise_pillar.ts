@@ -24,7 +24,7 @@ import type Underworld from '../../types/Underworld';
 
 
 
-const id = 'raise_pillar';
+const id = 'Raise Pillar';
 export { id as pillarId };
 const spell: Spell = {
   card: {
@@ -96,7 +96,9 @@ const spell: Spell = {
   },
 };
 async function pillarExplode(caster: IUnit, radius: number, damage: number, underworld: Underworld, prediction: boolean, state: any) {
-  const units = underworld.getUnitsWithinDistanceOfTarget(caster, radius, prediction).filter(u => u.id != caster.id).filter(u => u.unitSourceId != 'pillar');
+  const units = underworld.getUnitsWithinDistanceOfTarget(caster, radius, prediction)
+    .filter(u => u.id != caster.id)
+    .filter(u => u.unitSourceId != 'pillar');
   units.forEach(u => {
     // Deal damage to units
     takeDamage({

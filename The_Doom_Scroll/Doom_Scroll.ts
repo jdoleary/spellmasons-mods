@@ -13,8 +13,7 @@ import target_stomp from './cards/target_stomp';
 import wind_explosion from './cards/wind_explosion';
 import wind_tunnel from './cards/wind_tunnel';
 import pillar from "./entity/pillar";
-import altar from "./entity/altar";
-console.log('jtest', pillar)
+import altar, { modifierRemoveOnDeath } from "./entity/altar";
 ///<reference path="..globalTypes.d.ts"/>
 const mod: Mod = {
     modName: 'The Doom Scroll',
@@ -40,6 +39,7 @@ const mod: Mod = {
         pillar,
         altar,
     ],
+    events: [modifierRemoveOnDeath],
     spritesheet: 'spellmasons-mods/The_Doom_Scroll/graphics/spritesheet.json'
 };
 export default mod;

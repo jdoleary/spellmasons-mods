@@ -3,11 +3,17 @@ import type { IUnit } from './entity/Unit';
 import Underworld from './Underworld';
 import { IPickup } from './entity/Pickup';
 import { ForceMoveProjectile } from './jmath/moveWithCollision';
+import { CardCost } from './cards/cardUtils';
+import type { IPlayer } from './entity/Player';
+import { ICard } from './cards';
 export type onDealDamage = {
     (damageDealer: IUnit, amount: number, underworld: Underworld, prediction: boolean, damageReciever?: IUnit): number;
 };
 export type onTooltip = {
     (unit: IUnit, underworld: Underworld): void;
+};
+export type onCostCalculation = {
+    (caster: IPlayer, card: ICard, timesUsedSoFar: number, cardCost: CardCost): CardCost;
 };
 export type onTakeDamage = {
     (unit: IUnit, amount: number, underworld: Underworld, prediction: boolean, damageDealer?: IUnit): number;
@@ -73,6 +79,9 @@ declare const _default: {
     };
     onTooltipSource: {
         [name: string]: onTooltip;
+    };
+    onCostCalculationSource: {
+        [name: string]: onCostCalculation;
     };
     onDeathSource: {
         [name: string]: onDeath;

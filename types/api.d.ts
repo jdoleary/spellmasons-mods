@@ -80,6 +80,7 @@ declare const SpellmasonsAPI: {
     forcePushAwayFrom: typeof forcePushAwayFrom;
     forcePushToDestination: typeof forcePushToDestination;
     EffectsHeal: typeof EffectsHeal;
+    handmadeMaps: import("./MapsHandmade").HandmadeMap[];
     ImmediateModeSprites: typeof ImmediateModeSprites;
     inLiquid: typeof inLiquid;
     JAudio: typeof JAudio;

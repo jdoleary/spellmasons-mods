@@ -60,6 +60,7 @@ export default class Underworld {
     processedMessageCount: number;
     cardDropsDropped: number;
     enemiesKilled: number;
+    events: string[];
     forceMove: ForceMove[];
     forceMovePrediction: ForceMove[];
     forceMovePromise: Promise<void> | undefined;
@@ -105,6 +106,7 @@ export default class Underworld {
     serverStabilityMaxUnits: number | undefined;
     serverStabilityMaxPickups: number | undefined;
     constructor(overworld: Overworld, pie: Pie, seed: string, RNGState?: SeedrandomState | boolean);
+    addEvent(eventId: string): void;
     getAllUnits(prediction: boolean): Unit.IUnit[];
     getPotentialTargets(prediction: boolean): HasSpace[];
     calculateKillsNeededForLevel(level: number): number;
@@ -175,6 +177,7 @@ export default class Underworld {
     generateLevelDataSyncronous(levelIndex: number, gameMode?: GameMode): LevelData;
     generateLevelData(levelIndex: number): Promise<void>;
     checkPickupCollisions(unit: Unit.IUnit, prediction: boolean): void;
+    isCoordOnVoidTile(coord: Vec2): boolean;
     isCoordOnWallTile(coord: Vec2): boolean;
     getMousePos(): Vec2;
     getRemainingPlayerUnits(): Unit.IUnit[];

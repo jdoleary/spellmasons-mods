@@ -55,6 +55,7 @@ export interface IPlayer {
     }[];
     runePresentedIndex: number;
     gameVersion?: string;
+    skippedCards: number;
 }
 export declare function inPortal(player: IPlayer): boolean;
 export declare function create(clientId: string, playerId: string, underworld: Underworld): IPlayer;
